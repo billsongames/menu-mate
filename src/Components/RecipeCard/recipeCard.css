@@ -1,0 +1,21 @@
+.recipe-ingredients-list {
+}
+
+.recipe-card-image{
+  width: 12em
+}
+
+.recipe-card-ingredients-list-entry{
+    display: flex;
+    flex-direction: row;
+}
+
+.recipe-card-ingredients-list-entry-measure{
+    width: 6em;
+    text-align: left;
+}
+
+.recipe-card-ingredients-list-entry-ingredient{
+    text-align: left;
+    width: 10em
+}
