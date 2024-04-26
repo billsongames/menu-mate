@@ -6,10 +6,12 @@ import RecipeSelection from './Components/RecipeSelection/RecipeSelection';
 
 function App() {
 
+  const id=52827
+
   return (
     <div className="App">
       <main>
-        <RecipeCard />
+        <RecipeSelection id={id} />
       </main>
     </div>
   );
