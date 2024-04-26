@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import range from 'lodash/range'
+import axios from "axios";
 
 import ToAddToShoppingList from "../ToAddToShoppingList/ToAddToShoppingList";
 
@@ -7,9 +7,28 @@ import { test_recipe } from "../../data/recipes"
 
 import "./recipeCard.css"
 
-const RecipeCard = ( {recipe} ) => {
+const RecipeCard = ( {mealID} ) => {
 
-/*   const recipe = test_recipe.meals[0] */
+  const [recipe, setRecipe] = useState([])
+
+  const mealIDQuery = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+
+  useEffect(() => {
+    async function getRecipe() {
+
+      axios
+        .get(mealIDQuery)
+        .then((response)=> {
+          console.log(response.data.meals[0])
+          setRecipe(response.data.meals[0])
+        })
+        .catch ((error) => {
+          console.log(error)
+      })
+    }
+
+    getRecipe()
+  }, [mealIDQuery])
 
   const [toAddtoList, setToAddtoList] = useState([])
 

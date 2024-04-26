@@ -7,27 +7,33 @@ import { test_recipe } from "../../data/recipes"
 
 import "./recipeSelection.css"
 
-const RecipeSelection = ({id}) => {
+const RecipeSelection = () => {
 
     const testMode = false
 
-    const [recipe, setRecipe] = useState([])
+    const [apiResponse, setApiResponse] = useState([])
+
+    const [mealID, setMealID] = useState("52827")
+    const [ingredientFilter, setIngredientFilter] = useState("chicken_breast")
+
     const [recipeSelected, setRecipeSelected] = useState(null)
-    const apiQuery = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+
+    const mealIDQuery = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+    const ingredientFilterQuery = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredientFilter}`
 
     useEffect(() => {
       async function getRecipe() {
 
         if (testMode) {
           console.log("test mode")
-          setRecipe(test_recipe.meals)          
+          setApiResponse(test_recipe.meals[0])          
 
         } else {
           axios
-            .get(apiQuery)
+            .get(ingredientFilterQuery)
             .then((response)=> {
-              console.log(response.data.meals[0])
-              setRecipe(response.data.meals[0])
+              console.log(response.data.meals)
+              setApiResponse(response.data.meals)
             })
             .catch ((error) => {
               console.log(error)
@@ -39,7 +45,7 @@ const RecipeSelection = ({id}) => {
 
     const handleRecipeClick = (event) => {
       event.preventDefault()
-      setRecipeSelected(recipe)
+      setRecipeSelected(event.target.dataset.recipeid)
     }
 
 
@@ -51,16 +57,29 @@ const RecipeSelection = ({id}) => {
 
     return (
       <section>
-        Recipe Selection
-        <figure onClick = {handleRecipeClick}>
+        <h2>
+          Recipe Selection
+        </h2>
+        {apiResponse.map((recipe) => (
+          <div key={recipe.idMeal}>
+            {recipe.strMeal}
+            <img src={recipe.strMealThumb} className="recipe-card-image" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}/>
+          </div>  
+          ))}
+
+
+
+{/*         <figure onClick = {handleRecipeClick}>
           <img className="recipe-card-image" src={recipe.strMealThumb} data-recipeid={recipe.idMeal}/>
           <figcaption>{recipe.strMeal}</figcaption>
           
           
-        </figure>
+        </figure> */}
         {recipeSelected !== null
-        ? <RecipeCard recipe={recipeSelected} />
+        ? <RecipeCard mealID={recipeSelected} />
         : <></>
+
+        
       }
 
 
@@ -70,11 +89,6 @@ const RecipeSelection = ({id}) => {
     )
 }
 
-RecipeSelection.defaultProps = {
-  recipe: [
-    {"strMeal": "Massaman Beef curry tester",
-    "strMealThumb": "https://www.themealdb.com/images/media/meals/tvttqv1504640475.jpg",}
-  ]
-}
+
 
 export default RecipeSelection
