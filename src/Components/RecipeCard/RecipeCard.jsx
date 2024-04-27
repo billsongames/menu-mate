@@ -3,8 +3,6 @@ import axios from "axios";
 
 import ToAddToShoppingList from "../ToAddToShoppingList/ToAddToShoppingList";
 
-import { test_recipe } from "../../data/recipes"
-
 import "./recipeCard.css"
 
 const RecipeCard = ( {mealID} ) => {
@@ -53,7 +51,7 @@ const RecipeCard = ( {mealID} ) => {
       </h2>
       <img className="recipe-card-image" src={recipe.strMealThumb} />
       <form id="ingredientSelector">
-        {recipe.strIngredient1 !== null
+        {recipe.strIngredient1 !== null && recipe.strIngredient1.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -71,7 +69,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient2 !== null
+        {recipe.strIngredient2 !== null && recipe.strIngredient2.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -89,7 +87,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient3 !== null
+        {recipe.strIngredient3 !== null && recipe.strIngredient3.length > 0 
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -107,7 +105,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient4 !== null
+        {recipe.strIngredient4 !== null && recipe.strIngredient4.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -125,7 +123,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient5 !== null
+        {recipe.strIngredient5 !== null && recipe.strIngredient5.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -143,7 +141,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient6 !== null
+        {recipe.strIngredient6 !== null && recipe.strIngredient6.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -161,7 +159,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient7 !== null
+        {recipe.strIngredient7 !== null && recipe.strIngredient7.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -179,7 +177,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient8 !== null
+        {recipe.strIngredient8 !== null && recipe.strIngredient8.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -197,7 +195,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient9 !== null
+        {recipe.strIngredient9 !== null && recipe.strIngredient9.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -215,7 +213,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient10 !== null
+        {recipe.strIngredient10 !== null && recipe.strIngredient10.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -233,7 +231,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient11 !== null
+        {recipe.strIngredient11 !== null && recipe.strIngredient11.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -251,7 +249,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient12 !== null
+        {recipe.strIngredient12 !== null && recipe.strIngredient12.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -269,7 +267,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient13 !== null
+        {recipe.strIngredient13 !== null && recipe.strIngredient13.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -287,7 +285,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient14 !== null
+        {recipe.strIngredient14 !== null && recipe.strIngredient14.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -305,7 +303,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient15 !== null
+        {recipe.strIngredient15 !== null && recipe.strIngredient15.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -323,7 +321,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient16 !== null
+        {recipe.strIngredient16 !== null && recipe.strIngredient16.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -341,7 +339,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient17 !== null
+        {recipe.strIngredient17 !== null && recipe.strIngredient17.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -359,7 +357,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient18 !== null
+        {recipe.strIngredient18 !== null && recipe.strIngredient18.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -377,7 +375,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient19 !== null
+        {recipe.strIngredient19 !== null && recipe.strIngredient19.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">
@@ -395,7 +393,7 @@ const RecipeCard = ( {mealID} ) => {
         </ul>
         : <></>
         }
-        {recipe.strIngredient20 !== null
+        {recipe.strIngredient20 !== null && recipe.strIngredient20.length > 0
         ?
         <ul>
           <li className="recipe-card-ingredients-list-entry">

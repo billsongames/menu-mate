@@ -1,0 +1,10 @@
+.recipe-selection-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.recipe-selection-meal-image{
+  cursor: pointer;
+  width: 12em
+}

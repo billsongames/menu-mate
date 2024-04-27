@@ -14,7 +14,7 @@ const RecipeSelection = () => {
     const [apiResponse, setApiResponse] = useState([])
 
     const [mealID, setMealID] = useState("52827")
-    const [ingredientFilter, setIngredientFilter] = useState("chicken_breast")
+    const [ingredientFilter, setIngredientFilter] = useState("beef")
 
     const [recipeSelected, setRecipeSelected] = useState(null)
 
@@ -46,6 +46,7 @@ const RecipeSelection = () => {
     const handleRecipeClick = (event) => {
       event.preventDefault()
       setRecipeSelected(event.target.dataset.recipeid)
+      console.log(recipeSelected)
     }
 
 
@@ -57,15 +58,18 @@ const RecipeSelection = () => {
 
     return (
       <section>
-        <h2>
+        <h1>
           Recipe Selection
-        </h2>
-        {apiResponse.map((recipe) => (
-          <div key={recipe.idMeal}>
-            {recipe.strMeal}
-            <img src={recipe.strMealThumb} className="recipe-card-image" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}/>
-          </div>  
+        </h1>
+        <div className="recipe-selection-container">
+          {apiResponse.map((recipe) => (
+            <figure key={recipe.idMeal}>
+              <img src={recipe.strMealThumb} className="recipe-selection-meal-image" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}/>
+              <figcaption>{recipe.strMeal}</figcaption>
+            </figure>
           ))}
+        </div>
+
 
 
 
