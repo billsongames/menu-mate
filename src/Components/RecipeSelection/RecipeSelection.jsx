@@ -1,5 +1,15 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+
+import axios from "axios";
 
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -14,6 +24,7 @@ const RecipeSelection = () => {
     const [apiResponse, setApiResponse] = useState([])
 
     const [mealID, setMealID] = useState("52827")
+
     const [ingredientFilter, setIngredientFilter] = useState("beef")
 
     const [recipeSelected, setRecipeSelected] = useState(null)
@@ -23,22 +34,15 @@ const RecipeSelection = () => {
 
     useEffect(() => {
       async function getRecipe() {
-
-        if (testMode) {
-          console.log("test mode")
-          setApiResponse(test_recipe.meals[0])          
-
-        } else {
-          axios
-            .get(ingredientFilterQuery)
-            .then((response)=> {
-              console.log(response.data.meals)
-              setApiResponse(response.data.meals)
-            })
-            .catch ((error) => {
-              console.log(error)
+        axios
+          .get(ingredientFilterQuery)
+          .then((response)=> {
+            setApiResponse(response.data.meals)
           })
-        }} 
+          .catch ((error) => {
+            console.log(error)
+          })
+        }
 
       getRecipe()
     }, [])
@@ -46,27 +50,37 @@ const RecipeSelection = () => {
     const handleRecipeClick = (event) => {
       event.preventDefault()
       setRecipeSelected(event.target.dataset.recipeid)
-      console.log(recipeSelected)
     }
-
-
-
-
-
-
 
 
     return (
       <section>
         <h1>
           Recipe Selection
+
         </h1>
         <div className="recipe-selection-container">
           {apiResponse.map((recipe) => (
-            <figure key={recipe.idMeal}>
-              <img src={recipe.strMealThumb} className="recipe-selection-meal-image" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}/>
-              <figcaption>{recipe.strMeal}</figcaption>
-            </figure>
+
+            <Card sx= {{ maxWidth: 300, minWidth: 300 }} className="recipe-selection-card" data-recipeid={recipe.idMeal} >
+              <CardMedia
+                className="recipe-selection-card-link"
+                component="img"
+                alt={recipe.strMeal}
+                height="200"
+                image={recipe.strMealThumb}
+                data-recipeid={recipe.idMeal}
+                onClick={handleRecipeClick}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div" className="recipe-selection-card-link" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}>
+                  {recipe.strMeal}   
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" data-recipeid={recipe.idMeal} onClick={handleRecipeClick}>View details</Button>
+              </CardActions>
+            </Card>
           ))}
         </div>
 
