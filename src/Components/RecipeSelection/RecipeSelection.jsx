@@ -26,7 +26,7 @@ const RecipeSelection = () => {
   const appID = "abcaf8c1"
   const appKey = "db566e9563b42a54b321337c2df2d0c6"
 
-  const [recipeSearchText, setRecipeSearchText] = useState("beef")
+  const [recipeSearchText, setRecipeSearchText] = useState("random")
   const [recipeList, setRecipeList] = useState([])
 
   const [recipeChoiceLink, setRecipeChoiceLink] = useState(null)
@@ -56,7 +56,6 @@ const RecipeSelection = () => {
     event.preventDefault()
     setRecipeList(await recipeSearch(recipeSearchText))
   }
-
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
@@ -109,7 +108,7 @@ const RecipeSelection = () => {
               onClick={handleOpenRecipeCard}
             />
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div" className="recipe-selection-card-link" data-recipeid={recipe.id} onClick={handleOpenRecipeCard}>
+              <Typography gutterBottom variant="h6" component="div" className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
                 {recipe.recipe.label}
               </Typography>
             </CardContent>
