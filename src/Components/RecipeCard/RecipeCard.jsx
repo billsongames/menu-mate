@@ -59,21 +59,22 @@ const RecipeCard = ( {mealID} ) => {
   }
 
   return (
-    <Card sx= {{ maxWidth: 300 }}>
+    <Card>
       <CardMedia
         component="img"
         alt={recipe.strMeal}
-        height="200"
         image={recipe.strMealThumb}
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography id="modal-modal-title" gutterBottom variant="h6" component="div">
           {recipe.strMeal}
+          {recipe.strInstructions}
         </Typography>
+
       </CardContent>
-      <CardActions>
+{/*       <CardActions>
         <Button size="small">View details</Button>
-      </CardActions>  
+      </CardActions>  */} 
       <Stack direction="row" spacing={1} color="primary">
         <Chip sx={{ fontSize: 16 }} label={recipe.strArea} />
         <Chip sx={{ fontSize: 16 }} label={recipe.strCategory} />
