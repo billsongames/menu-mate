@@ -17,19 +17,23 @@ import axios from "axios";
 
 import "./recipeSelection.css"
 
+import { recipeSearch } from "../../api/requests";
+import { recipeLookUp } from "../../api/requests";
+
+
 const RecipeSelection = () => {
 
   const appID = "abcaf8c1"
   const appKey = "db566e9563b42a54b321337c2df2d0c6"
 
-  const [recipeFilter, setRecipeFilter] = useState("beef")
+  const [recipeSearchText, setRecipeSearchText] = useState("beef")
   const [recipeList, setRecipeList] = useState([])
 
   const [recipeChoiceLink, setRecipeChoiceLink] = useState(null)
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
 
-  const recipeFilterQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeFilter}&app_id=${appID}&app_key=${appKey}`
-  const recipeChoiceQuery = `https://api.edamam.com/api/recipes/v2/${recipeChoiceLink}?type=public&app_id=abcaf8c1&app_key=db566e9563b42a54b321337c2df2d0c6`
+  const recipeSearchQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchText}&app_id=${appID}&app_key=${appKey}`
+
 
   const [open, setOpen] = useState(false)
 
@@ -37,48 +41,26 @@ const RecipeSelection = () => {
   useEffect(() => {
     async function getRecipeList() {
       axios
-      .get(recipeFilterQuery)
-      .then((response) => {
-        console.log(response)
-
-        setRecipeList(response.data.hits)
-      })
-      .catch((error) => {
-        console.log(error)
-      })   
+        .get(recipeSearchQuery)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
     getRecipeList()
-  }, [])  
-  
+  }, [])
 
-
-
-  useEffect(() => {
-    async function getRecipeChoice() {
-      axios
-        .get(recipeChoiceQuery)
-        .then((response)=> {
-          setRecipeChoiceDetails(response.data.recipe)
-        })
-        .catch ((error) => {
-          console.log(error)
-      })
-    }
-
-    getRecipeChoice()
-  }, [recipeChoiceLink])
-
-
-
-
-
-
-
-
-  const handleOpenRecipeCard = (event) => {
+  const handleRecipeSearchSubmit = async (event) => {
     event.preventDefault()
-    setRecipeChoiceLink((event.target.dataset.recipelink).slice(51))
-    console.log(event.target.dataset.recipelink)
+    setRecipeList(await recipeSearch(recipeSearchText))
+  }
+
+
+  const handleOpenRecipeCard = async (event) => {
+    event.preventDefault()
+    setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
     setOpen(true);
   }
 
@@ -102,6 +84,12 @@ const RecipeSelection = () => {
         Recipe Selection
 
       </h1>
+      <div>
+        <form onSubmit={handleRecipeSearchSubmit}>
+          <input type="text" placeholder="Search recipes..." onChange={(event) => setRecipeSearchText(event.target.value)}></input>
+          <Button onClick={handleRecipeSearchSubmit}>Search</Button>
+        </form>
+      </div>
       <div className="recipe-selection-container">
         {recipeList.map((recipe) => (
 
@@ -145,7 +133,7 @@ const RecipeSelection = () => {
             <DialogContent>
               <img src={recipeChoiceDetails.images.REGULAR.url} width="100%" />
               <DialogContentText>
-                hello
+                {(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
