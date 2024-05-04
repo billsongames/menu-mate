@@ -1,17 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Chip } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
+import Typography from '@mui/material/Typography';
+
+import { FaGlobe } from "react-icons/fa6";
+import { GiMeal } from "react-icons/gi";
 
 import axios from "axios";
 
@@ -36,7 +40,6 @@ const RecipeSelection = () => {
 
 
   const [open, setOpen] = useState(false)
-
 
   useEffect(() => {
     async function getRecipeList() {
@@ -81,7 +84,6 @@ const RecipeSelection = () => {
     <section>
       <h1>
         Recipe Selection
-
       </h1>
       <div>
         <form onSubmit={handleRecipeSearchSubmit}>
@@ -94,8 +96,12 @@ const RecipeSelection = () => {
 
           <Card
             key={recipe.recipe.uri}
-            sx={{ maxWidth: 300, minWidth: 300 }}
-            className="recipe-selection-card"
+            sx={{
+              margin: "1em",
+              maxWidth: "18em",
+              minWidth: "18em",
+              height: "24em"
+            }}
             data-recipelink={recipe.recipe.uri}
           >
             <CardMedia
@@ -112,7 +118,15 @@ const RecipeSelection = () => {
                 {recipe.recipe.label}
               </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "right",
+                alignItems: "end",
+              }}
+            
+            >
               <Button size="small" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>View details</Button>
             </CardActions>
           </Card>
@@ -122,6 +136,9 @@ const RecipeSelection = () => {
           ?
           <Dialog
             open={open}
+            fullWidth={true}
+            maxWidth="sm"
+
             onClose={handleCloseRecipeCard}
             scroll="paper"
             aria-labelledby="scroll-dialog-title"
@@ -130,10 +147,18 @@ const RecipeSelection = () => {
 
             <DialogTitle id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
             <DialogContent>
+              
               <img src={recipeChoiceDetails.images.REGULAR.url} width="100%" />
-              <DialogContentText>
-                {(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)}
-              </DialogContentText>
+              <div className="recipe-dialog-details">
+                <FaGlobe className="recipe-dialog-icon" />
+                <Chip label={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+              </div>
+              <div className="recipe-dialog-details">
+                <GiMeal className="recipe-dialog-icon" />
+                {recipeChoiceDetails.dietLabels.map((label) => (
+                  <Chip key={label} label={label} sx={{marginRight: "0.5em"}} />
+                ))}
+              </div>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseRecipeCard}>CLOSE</Button>
@@ -145,6 +170,7 @@ const RecipeSelection = () => {
           : <></>
         }
       </div>
+      <div id="edamam-badge" data-color="white"></div>
 
     </section>
   )

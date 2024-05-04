@@ -7,10 +7,29 @@
 
 .recipe-selection-card{
   margin: 1em;
-  padding: 1em
+  max-width: 300px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 
 .recipe-selection-card-link{
   cursor: pointer;
+}
 
+.recipe-dialog-details{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  padding: 0.5em
+}
+
+.recipe-dialog-icon{
+  padding: 0 0.5em 0 0
+}
+
+.recipe-dialog-chip{
+  padding: 0 0.5em 0 0
 }
