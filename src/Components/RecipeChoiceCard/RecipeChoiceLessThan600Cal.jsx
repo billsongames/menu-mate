@@ -6,7 +6,7 @@ import { IoIosTimer } from "react-icons/io";
 
 import "./recipeChoiceCard.css"
 
-const RecipeChoiceUnder600Cal = ({calorieCount}) => {
+const RecipeChoiceLessThan600Cal = ({calorieCount}) => {
   const calories = Number(calorieCount)
 
   if (calories < 600) {
@@ -24,4 +24,4 @@ const RecipeChoiceUnder600Cal = ({calorieCount}) => {
   }
 }
 
-export default RecipeChoiceUnder600Cal
+export default RecipeChoiceLessThan600Cal

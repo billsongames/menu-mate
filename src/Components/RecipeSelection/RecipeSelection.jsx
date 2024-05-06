@@ -29,7 +29,7 @@ import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
-import RecipeChoiceUnder600Cal from "../RecipeChoiceCard/RecipeChoiceUnder600Cal"
+import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
 
 const RecipeSelection = () => {
 
@@ -159,7 +159,7 @@ const RecipeSelection = () => {
               <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
               <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
               <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
-              <RecipeChoiceUnder600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+              <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseRecipeCard}>CLOSE</Button>
