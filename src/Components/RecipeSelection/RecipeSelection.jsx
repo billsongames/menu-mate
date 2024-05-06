@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Chip } from "@mui/material";
+import Chip from '@mui/material/Chip';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -14,8 +13,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography';
 
-import { FaGlobe } from "react-icons/fa6";
-import { GiMeal } from "react-icons/gi";
+
+
+
 
 import axios from "axios";
 
@@ -24,13 +24,19 @@ import "./recipeSelection.css"
 import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
 
+import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
+import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
+import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
+import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
+import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
+import RecipeChoiceUnder600Cal from "../RecipeChoiceCard/RecipeChoiceUnder600Cal"
 
 const RecipeSelection = () => {
 
   const appID = "abcaf8c1"
   const appKey = "db566e9563b42a54b321337c2df2d0c6"
 
-  const [recipeSearchText, setRecipeSearchText] = useState("random")
+  const [recipeSearchText, setRecipeSearchText] = useState("lamb")
   const [recipeList, setRecipeList] = useState([])
 
   const [recipeChoiceLink, setRecipeChoiceLink] = useState(null)
@@ -146,27 +152,20 @@ const RecipeSelection = () => {
           >
 
             <DialogTitle id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
-            <DialogContent>
-              
+            <DialogContent>              
               <img src={recipeChoiceDetails.images.REGULAR.url} width="100%" />
-              <div className="recipe-dialog-details">
-                <FaGlobe className="recipe-dialog-icon" />
-                <Chip label={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
-              </div>
-              <div className="recipe-dialog-details">
-                <GiMeal className="recipe-dialog-icon" />
-                {recipeChoiceDetails.dietLabels.map((label) => (
-                  <Chip key={label} label={label} sx={{marginRight: "0.5em"}} />
-                ))}
-              </div>
+              <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+              <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} />
+              <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
+              <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
+              <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+              <RecipeChoiceUnder600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseRecipeCard}>CLOSE</Button>
             </DialogActions>
 
           </Dialog>
-
-
           : <></>
         }
       </div>

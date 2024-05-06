@@ -18,18 +18,3 @@
   cursor: pointer;
 }
 
-.recipe-dialog-details{
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  padding: 0.5em
-}
-
-.recipe-dialog-icon{
-  padding: 0 0.5em 0 0
-}
-
-.recipe-dialog-chip{
-  padding: 0 0.5em 0 0
-}
