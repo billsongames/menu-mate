@@ -149,7 +149,7 @@ const RecipeSelection = () => {
 
             <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
             <DialogContent>
-              <img src={recipeChoiceDetails.images.REGULAR.url} width="100%" />
+              <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-choice-image"/>
               <div className="recipe-dialog-details-row">
                 <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
                 <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />

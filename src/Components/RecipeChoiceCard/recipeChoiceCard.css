@@ -2,7 +2,8 @@
 }
 
 .recipe-card-image{
-  width: 12em
+  width: 100%;
+  object-fit: contain;
 }
 
 .recipe-dialog-details-row{
