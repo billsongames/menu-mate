@@ -5,6 +5,11 @@
   width: 12em
 }
 
+.recipe-dialog-details-row{
+  display: grid;
+  grid-template-columns: repeat(3, 33.3%);
+}
+
 .recipe-dialog-details{
   display: flex;
   flex-direction: row;
@@ -21,7 +26,7 @@
   padding: 0 0.5em 0 0
 }
 
-.recipe-card-ingredients-list-entry{
+/* .recipe-card-ingredients-list-entry{
     display: flex;
     flex-direction: row;
 }
@@ -36,5 +41,5 @@
   padding: 0 1em;
   width: 10em;
   text-align: left;
-}
+} */
 

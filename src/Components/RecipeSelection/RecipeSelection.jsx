@@ -100,8 +100,8 @@ const RecipeSelection = () => {
             key={recipe.recipe.uri}
             sx={{
               margin: "1em",
-              maxWidth: "18em",
-              minWidth: "18em",
+              maxWidth: "24em",
+              minWidth: "24em",
               height: "24em"
             }}
             data-recipelink={recipe.recipe.uri}
@@ -116,7 +116,7 @@ const RecipeSelection = () => {
               onClick={handleOpenRecipeCard}
             />
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div" className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
+              <Typography variant="h6" gutterBottom className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
                 {recipe.recipe.label}
               </Typography>
             </CardContent>
@@ -147,14 +147,17 @@ const RecipeSelection = () => {
             aria-describedby="scroll-dialog-description"
           >
 
-            <DialogTitle id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
-            <DialogContent>              
+            <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+            <DialogContent>
               <img src={recipeChoiceDetails.images.REGULAR.url} width="100%" />
-              <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+              <div className="recipe-dialog-details-row">
+                <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+                <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+                <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
+              </div>
+              
               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} />
-              <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
-              <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
-              <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+              <RecipeChoiceServings servings={recipeChoiceDetails.yield} />              
               <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
             </DialogContent>
             <DialogActions>
@@ -165,8 +168,6 @@ const RecipeSelection = () => {
           : <></>
         }
       </div>
-      <div id="edamam-badge" data-color="white"></div>
-
     </section>
   )
 }

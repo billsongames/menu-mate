@@ -2,14 +2,15 @@ import React from "react";
 
 import { Chip } from "@mui/material";
 
-import { IoIosTimer } from "react-icons/io";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 import "./recipeChoiceCard.css"
 
 const RecipeChoiceCalorieCount = ({calorieCount}) => {
   return(
     <div className="recipe-dialog-details">
-      {calorieCount} calories per serving
+      <BarChartIcon className="recipe-dialog-icon" />
+      <Chip label =  {`${calorieCount} calories`} />
     </div>
   )
 }

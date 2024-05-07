@@ -7,8 +7,6 @@
 
 .recipe-selection-card{
   margin: 1em;
-  max-width: 300px;
-  min-width: 300px;
   display: flex;
   flex-direction: column;
   align-content: space-between;
@@ -16,5 +14,6 @@
 
 .recipe-selection-card-link{
   cursor: pointer;
+  text-align: left;
 }
 

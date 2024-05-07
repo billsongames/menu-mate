@@ -2,19 +2,25 @@ import React from "react";
 
 import { Chip } from "@mui/material";
 
-import { GiMeal } from "react-icons/gi";
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 import "./recipeChoiceCard.css"
 
 const RecipeChoiceDietLabels = ({dietLabels}) => {
-  return(
-    <div className="recipe-dialog-details">
-      <GiMeal className="recipe-dialog-icon" />
-      {dietLabels.map((label) => (
-        <Chip key={label} label={label} sx={{marginRight: "0.5em"}} />
-        ))}
-  </div>
-  )
+  if (dietLabels.length > 0) {
+    return(
+      <div className="recipe-dialog-details">
+        <RestaurantIcon className="recipe-dialog-icon" />
+        {dietLabels.map((label) => (
+          <Chip key={label} label={label} sx={{marginRight: "0.5em"}} />
+          ))}
+    </div>
+    )
+  } else {
+    return(
+      <></>     
+    )
+  }
 }
 
 export default RecipeChoiceDietLabels

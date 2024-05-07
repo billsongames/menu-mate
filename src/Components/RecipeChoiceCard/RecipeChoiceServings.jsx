@@ -2,14 +2,14 @@ import React from "react";
 
 import { Chip } from "@mui/material";
 
-import { BsPeopleFill } from "react-icons/bs";
+import PeopleIcon from '@mui/icons-material/People';
 
 import "./recipeChoiceCard.css"
 
 const RecipeChoiceServings = ({servings}) => {
   return(
     <div className="recipe-dialog-details">
-      <BsPeopleFill className="recipe-dialog-icon" />
+      <PeopleIcon className="recipe-dialog-icon" />
       <Chip label={`Serves ${servings}`} />
     </div>
   )
