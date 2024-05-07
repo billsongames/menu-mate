@@ -13,10 +13,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography';
 
-
-
-
-
 import axios from "axios";
 
 import "./recipeSelection.css"
@@ -33,8 +29,8 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 
 const RecipeSelection = () => {
 
-  const appID = "abcaf8c1"
-  const appKey = "db566e9563b42a54b321337c2df2d0c6"
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
 
   const [recipeSearchText, setRecipeSearchText] = useState("lamb")
   const [recipeList, setRecipeList] = useState([])
