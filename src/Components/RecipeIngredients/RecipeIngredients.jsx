@@ -1,55 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
-import ToAddToShoppingList from "../ToAddToShoppingList/ToAddToShoppingList";
+const RecipeIngredients = ( {recipe} ) => {
 
-import "./recipeCard.css"
-
-const RecipeCard = ( {mealID} ) => {
-
-  const [recipe, setRecipe] = useState([])
-
-  const mealIDQuery = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
-
-  useEffect(() => {
-    async function getRecipe() {
-
-      axios
-        .get(mealIDQuery)
-        .then((response)=> {
-          console.log(response.data.meals[0])
-          setRecipe(response.data.meals[0])
-        })
-        .catch ((error) => {
-          console.log(error)
-      })
-    }
-
-    getRecipe()
-  }, [mealIDQuery])
-
-  const [toAddtoList, setToAddtoList] = useState([])
-
-  const handleIngredientToggle = () => {
-    const form = document.getElementById("ingredientSelector")
-    const inputs = form.getElementsByTagName("input")
-    let ingredientsArray =[]
-    
-
-    for (var i=0, max=inputs.length; i < max; i += 1) {
-      if (inputs[i].type === "checkbox" && inputs[i].checked) {
-        ingredientsArray.push(inputs[i].value)
-      }
-    setToAddtoList(ingredientsArray)  
-    }
-  }
-
-  return (
+  return(
     <section>
-      <h2>
-        {recipe.strMeal}
-      </h2>
-      <img className="recipe-card-image" src={recipe.strMealThumb} />
+      Recipe Ingredients
+
       <form id="ingredientSelector">
         {recipe.strIngredient1 !== null && recipe.strIngredient1.length > 0
         ?
@@ -414,12 +370,8 @@ const RecipeCard = ( {mealID} ) => {
 
     
       </form>
-
-      <ToAddToShoppingList toAddtoList={toAddtoList} />
-
     </section>
-
   )
 }
 
-export default RecipeCard
+export default RecipeIngredients

@@ -1,0 +1,18 @@
+import React from "react";
+
+import { Chip } from "@mui/material";
+
+import PeopleIcon from '@mui/icons-material/People';
+
+import "./recipeChoiceCard.css"
+
+const RecipeChoiceServings = ({servings}) => {
+  return(
+    <div className="recipe-dialog-details">
+      <PeopleIcon className="recipe-dialog-icon" />
+      <Chip label={`Serves ${servings}`} />
+    </div>
+  )
+}
+
+export default RecipeChoiceServings
