@@ -13,6 +13,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography';
 
+
+
 import axios from "axios";
 
 import "./recipeSelection.css"
@@ -26,6 +28,8 @@ import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
 import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
+import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
+import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 const RecipeSelection = () => {
 
@@ -48,7 +52,7 @@ const RecipeSelection = () => {
       axios
         .get(recipeSearchQuery)
         .then((response) => {
-          setRecipeList(response.data.hits)
+          setRecipeList(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0))
         })
         .catch((error) => {
           console.log(error)
@@ -140,29 +144,35 @@ const RecipeSelection = () => {
             open={open}
             fullWidth={true}
             maxWidth="sm"
-
+            height="400px"
             onClose={handleCloseRecipeCard}
             scroll="paper"
             aria-labelledby="scroll-dialog-title"
             aria-describedby="scroll-dialog-description"
+            PaperProps={{ sx : {height: "80%"} }}
           >
 
             <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
             <DialogContent>
-              <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-choice-image"/>
-              <div className="recipe-dialog-details-row">
-                <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
-                <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
-                <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
+              <div className="recipe-dialog-image-info-container">
+                <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-choice-image"/>
+                <div className="recipe-dialog-info-container">
+                    <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+                    <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+                    <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
+                    <RecipeChoiceServings servings={recipeChoiceDetails.yield} />              
+                </div>
               </div>
-              
               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} />
-              <RecipeChoiceServings servings={recipeChoiceDetails.yield} />              
               <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+              <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines}/>
+              <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseRecipeCard}>CLOSE</Button>
             </DialogActions>
+
+
 
           </Dialog>
           : <></>

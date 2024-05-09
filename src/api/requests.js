@@ -15,7 +15,7 @@ export const recipeSearch = (recipeSearchText) => {
       .get(recipeFilterQuery)
       .then((response) => {
         console.log(response.data.hits)
-        return(response.data.hits)
+        return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0))
       })
       .catch((error) => {
         console.log(error)

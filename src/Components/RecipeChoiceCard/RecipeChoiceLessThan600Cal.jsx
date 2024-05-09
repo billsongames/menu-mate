@@ -11,13 +11,13 @@ const RecipeChoiceLessThan600Cal = ({calorieCount}) => {
 
   if (calories < 600) {
     return(
-      <div className="recipe-dialog-details">
+      <div className="recipe-dialog-info-row">
         Less than 600 calories
       </div>
     )
   } else {
     return(
-      <div className="recipe-dialog-details">
+      <div className="recipe-dialog-info-row">
         Lard
       </div>
     )

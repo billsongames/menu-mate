@@ -8,7 +8,7 @@ import "./recipeChoiceCard.css"
 
 const RecipeChoiceCookingTime = ({time}) => {
   return(
-    <div className="recipe-dialog-details">
+    <div className="recipe-dialog-info-row">
       <TimerIcon className="recipe-dialog-icon" />
       <Chip label={`${time} minutes`} />
     </div>
