@@ -9,7 +9,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const RecipeChoiceIngredients = ( {ingredients} ) => {
   return(
-    <div>
+    <div className="recipe-choice-accordion">
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
@@ -19,11 +19,13 @@ const RecipeChoiceIngredients = ( {ingredients} ) => {
           <Typography>Ingredients</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {ingredients.map((ingredient) => (
-          <div className="recipe-dialog-info-row">
-            {ingredient}
-          </div>
-          ))}
+          <ul>
+            {ingredients.map((ingredient) => (
+            <li className="recipe-choice-ingredient-row">
+              {ingredient}
+            </li>
+            ))}
+          </ul>
         </AccordionDetails>
       </Accordion>
     </div>

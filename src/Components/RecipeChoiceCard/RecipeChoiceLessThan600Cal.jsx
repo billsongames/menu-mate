@@ -1,8 +1,7 @@
 import React from "react";
 
+import GppGoodIcon from '@mui/icons-material/GppGood';
 import { Chip } from "@mui/material";
-
-import { IoIosTimer } from "react-icons/io";
 
 import "./recipeChoiceCard.css"
 
@@ -12,13 +11,13 @@ const RecipeChoiceLessThan600Cal = ({calorieCount}) => {
   if (calories < 600) {
     return(
       <div className="recipe-dialog-info-row">
-        Less than 600 calories
+        <GppGoodIcon className="recipe-dialog-icon" />
+        <Chip label="Less than 600 calories" />
       </div>
     )
   } else {
     return(
       <div className="recipe-dialog-info-row">
-        Lard
       </div>
     )
   }

@@ -6,18 +6,33 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Divider from '@mui/material/Divider';
 
 const RecipeChoiceNutrients = ( {nutrients} ) => {
 
-  const nutrient_info = Object.entries(nutrients).forEach(([key, value]) => {
-    <div className="recipe-dialog-info-row">
-      {value}
-    </div>
-  })
+  const accordion_jsx =[]
+
+  for (const [key, value] of Object.entries(nutrients)) {
+    accordion_jsx.push(
+      <React.Fragment>
+        <div className="recipe-choice-nutrient-row">
+          <div>
+            {value.label}
+          </div>
+          <div>
+            {`${Math.round(value.quantity)}${value.unit}`}
+          </div>
+        </div>
+        <Divider />        
+      </React.Fragment>
+    )
+  }
+
+
 
 
   return(
-    <div>
+    <div className="recipe-choice-accordion">
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
@@ -27,7 +42,7 @@ const RecipeChoiceNutrients = ( {nutrients} ) => {
           <Typography>Nutrients</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {nutrient_info}
+            {accordion_jsx}
         </AccordionDetails>
       </Accordion>
     </div>

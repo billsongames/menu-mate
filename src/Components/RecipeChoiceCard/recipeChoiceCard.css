@@ -4,6 +4,7 @@
 .recipe-card-image{
   width: 100%;
   object-fit: contain;
+  border: 2px solid;
 }
 
 .recipe-dialog-image-info-container{
@@ -31,6 +32,20 @@
 
 .recipe-dialog-chip{
   padding: 0 0.5em 0 0
+}
+
+.recipe-choice-ingredient-row{
+  padding: 0.5em 0
+}
+
+.recipe-choice-nutrient-row{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 0.5em 0
+}
+
+.recipe-choice-accordion{
+  padding: 1em 0 0 0
 }
 
 /* .recipe-card-ingredients-list-entry{

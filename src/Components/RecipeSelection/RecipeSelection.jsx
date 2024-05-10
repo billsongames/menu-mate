@@ -160,11 +160,11 @@ const RecipeSelection = () => {
                     <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
                     <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
                     <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
-                    <RecipeChoiceServings servings={recipeChoiceDetails.yield} />              
+                    <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
+                    <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
                 </div>
               </div>
-              <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} />
-              <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+{/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
               <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines}/>
               <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
             </DialogContent>
