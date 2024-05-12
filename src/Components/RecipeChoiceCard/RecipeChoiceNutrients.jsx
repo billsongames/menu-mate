@@ -1,20 +1,18 @@
 import React from "react";
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Divider from '@mui/material/Divider';
 
 const RecipeChoiceNutrients = ( {nutrients} ) => {
 
-  const accordion_jsx =[]
+  const list_jsx =[]
 
   for (const [key, value] of Object.entries(nutrients)) {
-    accordion_jsx.push(
-      <React.Fragment>
+    list_jsx.push(
+      <React.Fragment key = {value.label}>
         <div className="recipe-choice-nutrient-row">
           <div>
             {value.label}
@@ -22,9 +20,12 @@ const RecipeChoiceNutrients = ( {nutrients} ) => {
           <div>
             {`${Math.round(value.quantity)}${value.unit}`}
           </div>
-        </div>
-        <Divider />        
-      </React.Fragment>
+        </div>  
+        <Divider />
+
+
+
+      </React.Fragment>          
     )
   }
 
@@ -32,19 +33,9 @@ const RecipeChoiceNutrients = ( {nutrients} ) => {
 
 
   return(
-    <div className="recipe-choice-accordion">
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Typography>Nutrients</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            {accordion_jsx}
-        </AccordionDetails>
-      </Accordion>
+    <div className="recipe-choice-ingredient-nutrients-container">
+      <Typography>Nutrients</Typography>
+      {list_jsx}
     </div>
   )
 }

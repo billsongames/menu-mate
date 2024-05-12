@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,6 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 
@@ -18,6 +20,7 @@ import Typography from '@mui/material/Typography';
 import axios from "axios";
 
 import "./recipeSelection.css"
+import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
@@ -28,6 +31,7 @@ import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
 import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
+import RecipeChoiceAccordionContainer from "../RecipeChoiceCard/RecipeChoiceAccordionContainer";
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
@@ -72,7 +76,7 @@ const RecipeSelection = () => {
     setOpen(true);
   }
 
-  const handleCloseRecipeCard = () => setOpen(false)
+  const handleCloseRecipeChoiceCard = () => setOpen(false)
 
   const descriptionElementRef = useRef(null)
 
@@ -93,7 +97,11 @@ const RecipeSelection = () => {
       </h1>
       <div>
         <form onSubmit={handleRecipeSearchSubmit}>
-          <input type="text" placeholder="Search recipes..." onChange={(event) => setRecipeSearchText(event.target.value)}></input>
+          <input 
+            type="text"
+            placeholder="Search recipes..."
+            onChange={(event) => setRecipeSearchText(event.target.value)}>
+          </input>
           <Button onClick={handleRecipeSearchSubmit}>Search</Button>
         </form>
       </div>
@@ -145,7 +153,7 @@ const RecipeSelection = () => {
             fullWidth={true}
             maxWidth="sm"
             height="400px"
-            onClose={handleCloseRecipeCard}
+            onClose={handleCloseRecipeChoiceCard}
             scroll="paper"
             aria-labelledby="scroll-dialog-title"
             aria-describedby="scroll-dialog-description"
@@ -155,7 +163,7 @@ const RecipeSelection = () => {
             <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
             <DialogContent>
               <div className="recipe-dialog-image-info-container">
-                <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-choice-image"/>
+                <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image"/>
                 <div className="recipe-dialog-info-container">
                     <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
                     <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
@@ -165,11 +173,14 @@ const RecipeSelection = () => {
                 </div>
               </div>
 {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
-              <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines}/>
-              <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
+              <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
+              <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} /> 
+
+
+              
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseRecipeCard}>CLOSE</Button>
+              <Button onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
             </DialogActions>
 
 
