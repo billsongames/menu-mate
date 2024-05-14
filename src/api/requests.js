@@ -5,7 +5,7 @@ export const recipeSearch = (recipeSearchText) => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const recipeFilterQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchText}&app_id=${appID}&app_key=${appKey}`
+  const recipeFilterQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchText}&time=1%2B&app_id=${appID}&app_key=${appKey}`
   
   if (!recipeSearchText) {
     return Promise.resolve([])
@@ -15,7 +15,8 @@ export const recipeSearch = (recipeSearchText) => {
       .get(recipeFilterQuery)
       .then((response) => {
         console.log(response.data.hits)
-        return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0))
+        return(response.data.hits)
+/*         return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0)) */
       })
       .catch((error) => {
         console.log(error)
@@ -44,6 +45,36 @@ export const recipeLookUp = (recipeChoiceLink) => {
       .catch((error) => {
         console.log(error)
       })
-
   }  
+}
+
+export const regionLookUp = (region) => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
+  
+
+}
+
+export const quickPrepSearch = (time) => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
+  const quickPrepQuery = `https://api.edamam.com/api/recipes/v2/?type=public&time=1-${time}&app_id=${appID}&app_key=${appKey}`
+
+  if (!time) {
+    return Promise.resolve([])
+  
+  } else {
+    return axios
+      .get(quickPrepQuery)
+      .then((response) => {
+        return(response.data.hits)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }

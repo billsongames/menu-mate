@@ -24,6 +24,7 @@ import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
+import { quickPrepSearch } from "../../api/requests";
 
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
@@ -70,6 +71,14 @@ const RecipeSelection = () => {
     setRecipeList(await recipeSearch(recipeSearchText))
   }
 
+  const handleQuickPrepSearchSubmit = async (event) => {
+    event.preventDefault()
+    setRecipeList(await quickPrepSearch(30))
+  }
+
+
+
+
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
@@ -104,6 +113,7 @@ const RecipeSelection = () => {
           </input>
           <Button onClick={handleRecipeSearchSubmit}>Search</Button>
         </form>
+        <Button onClick={handleQuickPrepSearchSubmit}>Ready in 30 minutes or less</Button>
       </div>
       <div className="recipe-selection-container">
         {recipeList.map((recipe) => (
