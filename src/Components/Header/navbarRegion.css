@@ -1,0 +1,11 @@
+.region-button{
+  margin: 0.5em;
+  width: 10em;
+  height: 3em;
+  border-radius: 100px;
+  cursor: pointer
+}
+
+.region-button:hover{
+  background-color: greenyellow
+}

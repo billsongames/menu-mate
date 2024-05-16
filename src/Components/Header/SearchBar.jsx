@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Button from '@mui/material/Button';
 
+import "./searchBar.css"
+
 const SearchBar = ( {onSearchSubmit} ) => {
 
   const [searchText, setSearchText] = useState("")
@@ -16,7 +18,7 @@ const SearchBar = ( {onSearchSubmit} ) => {
   }
 
   return(
-    <div>
+    <div className="searchbar">
     <form onSubmit={handleSubmit}>
       <input 
         type="text"

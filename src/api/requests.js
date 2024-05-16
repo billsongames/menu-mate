@@ -48,14 +48,7 @@ export const recipeLookUp = (recipeChoiceLink) => {
   }  
 }
 
-export const regionLookUp = (region) => {
 
-  const appID = process.env.REACT_APP_APPID
-  const appKey = process.env.REACT_APP_APPKEY
-
-  
-
-}
 
 export const quickPrepSearch = (time) => {
 
