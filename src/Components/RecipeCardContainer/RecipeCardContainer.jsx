@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography';
 
 import axios from "axios";
 
-import "./recipeSelection.css"
+import "./recipeCardContainer.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
@@ -36,37 +36,27 @@ import RecipeChoiceAccordionContainer from "../RecipeChoiceCard/RecipeChoiceAcco
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const RecipeSelection = () => {
+const RecipeCardContainer = ( {recipeSearchQuery} ) => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const [recipeSearchText, setRecipeSearchText] = useState("lamb")
+  const [searchText, setSearchText] = useState("")
   const [recipeList, setRecipeList] = useState([])
 
   const [recipeChoiceLink, setRecipeChoiceLink] = useState(null)
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
 
-  const recipeSearchQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchText}&app_id=${appID}&app_key=${appKey}`
+  /* const recipeSearchQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchQuery}&time=1%2B&app_id=${appID}&app_key=${appKey}` */
 
 
   const [open, setOpen] = useState(false)
 
-  useEffect(() => {
-    async function getRecipeList() {
-      axios
-        .get(recipeSearchQuery)
-        .then((response) => {
-          setRecipeList(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0))
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-    getRecipeList()
-  }, [])
+  const handleSearchInput = (event) => {
+    setSearchText(event.target.value)
+  }
 
-  const handleRecipeSearchSubmit = async (event) => {
+/*   const handleRecipeSearchSubmit = async (event) => {
     event.preventDefault()
     setRecipeList(await recipeSearch(recipeSearchText))
   }
@@ -74,10 +64,7 @@ const RecipeSelection = () => {
   const handleQuickPrepSearchSubmit = async (event) => {
     event.preventDefault()
     setRecipeList(await quickPrepSearch(30))
-  }
-
-
-
+  } */
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
@@ -98,24 +85,31 @@ const RecipeSelection = () => {
     }
   }, [open])
 
+  useEffect(() => {
+    async function getRecipeList() {
+      axios
+        .get(`https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchQuery}&time=1%2B&app_id=${appID}&app_key=${appKey}`)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getRecipeList()
+  }, [recipeSearchQuery])
+
 
   return (
     <section>
       <h1>
         Recipe Selection
       </h1>
-      <div>
-        <form onSubmit={handleRecipeSearchSubmit}>
-          <input 
-            type="text"
-            placeholder="Search recipes..."
-            onChange={(event) => setRecipeSearchText(event.target.value)}>
-          </input>
-          <Button onClick={handleRecipeSearchSubmit}>Search</Button>
-        </form>
-        <Button onClick={handleQuickPrepSearchSubmit}>Ready in 30 minutes or less</Button>
-      </div>
+
+      {recipeList.length>0
+      ?
       <div className="recipe-selection-container">
+
         {recipeList.map((recipe) => (
 
           <Card
@@ -199,10 +193,13 @@ const RecipeSelection = () => {
           : <></>
         }
       </div>
+      :
+      <>Waiting...</>
+      }
     </section>
   )
 }
 
 
 
-export default RecipeSelection
+export default RecipeCardContainer

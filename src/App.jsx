@@ -1,18 +1,37 @@
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+
+import SearchBar from './Components/Header/SearchBar';
+import NavBarRegion from './Components/Header/NavBarRegion';
+import RecipeCardContainer from './Components/RecipeCardContainer/RecipeCardContainer';
+
+import { setRef } from "@mui/material";
+
+import { recipeSearch } from "./api/requests";
+import { recipeLookUp } from "./api/requests";
+import { quickPrepSearch } from "./api/requests";
+
 import './App.css';
 
-import Test from './Components/Test/Test';
+const App = () => {
 
-import RecipeSelection from './Components/RecipeSelection/RecipeSelection';
+  const [recipeSearchQuery, setRecipeSearchQuery] = useState("random")
 
-function App() {
+  const handleSearchRequest = (searchQuery) => {
+    setRecipeSearchQuery(searchQuery)
+  }
+  
 
-  const id=52827
+
+
+
+
 
   return (
     <div className="App">
-      <main>
-        <RecipeSelection />
-      </main>
+      <SearchBar onSearchSubmit = {handleSearchRequest} />
+
+      <RecipeCardContainer recipeSearchQuery={recipeSearchQuery}/>
     </div>
   );
 }
