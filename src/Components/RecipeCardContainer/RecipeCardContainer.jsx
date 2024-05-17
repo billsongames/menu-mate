@@ -34,7 +34,7 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const RecipeCardContainer = ( {searchURL} ) => {
+const RecipeCardContainer = ( {searchURL, recipeType} ) => {
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
@@ -82,7 +82,10 @@ const RecipeCardContainer = ( {searchURL} ) => {
     <section>
       {recipeList.length>0
       ?
+      <div>
+      <Typography variant="h5">{recipeType} recipes</Typography>
       <div className="recipe-selection-container">
+        
 
         {recipeList.map((recipe) => (
 
@@ -123,6 +126,7 @@ const RecipeCardContainer = ( {searchURL} ) => {
             </CardActions>
           </Card>
         ))}
+        </div>
 
         {recipeChoiceDetails != null
           ?
