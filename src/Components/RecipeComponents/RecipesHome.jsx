@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 
 import axios from "axios";
 
-import "./recipeCardContainer.css"
+import "./recipeComponents.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
@@ -34,7 +34,7 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const VegetarianContainer = () => {
+const RecipesHome = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -44,7 +44,7 @@ const VegetarianContainer = () => {
 
 
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian`
+  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&random=true`
 
   const [open, setOpen] = useState(false)
 
@@ -87,7 +87,7 @@ const VegetarianContainer = () => {
 
   return (
     <section>
-      <Typography variant="h5">Vegetarian Recipes</Typography>
+      <Typography variant="h5">Recipes, recipes, recipes...</Typography>
       {recipeList.length>0
       ?
       <div className="recipe-selection-container">
@@ -186,4 +186,4 @@ const VegetarianContainer = () => {
 
 
 
-export default VegetarianContainer
+export default RecipesHome

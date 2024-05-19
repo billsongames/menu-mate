@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 
 import axios from "axios";
 
-import "./recipeCardContainer.css"
+import "./recipeComponents.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
@@ -34,10 +34,17 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const RecipeCardContainer = ( {searchURL, recipeType} ) => {
+const RecipesVegetarian = () => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
+
+
+
+  const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian`
 
   const [open, setOpen] = useState(false)
 
@@ -75,17 +82,15 @@ const RecipeCardContainer = ( {searchURL, recipeType} ) => {
     }
     getRecipeList()
     
-  }, [searchURL])
+  }, [])
 
 
   return (
     <section>
+      <Typography variant="h5">Vegetarian Recipes</Typography>
       {recipeList.length>0
       ?
-      <div>
-      <Typography variant="h5">{recipeType} recipes</Typography>
       <div className="recipe-selection-container">
-        
 
         {recipeList.map((recipe) => (
 
@@ -126,7 +131,6 @@ const RecipeCardContainer = ( {searchURL, recipeType} ) => {
             </CardActions>
           </Card>
         ))}
-        </div>
 
         {recipeChoiceDetails != null
           ?
@@ -182,4 +186,4 @@ const RecipeCardContainer = ( {searchURL, recipeType} ) => {
 
 
 
-export default RecipeCardContainer
+export default RecipesVegetarian

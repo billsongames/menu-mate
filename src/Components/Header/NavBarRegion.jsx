@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import { Typography } from "@mui/material";
 
@@ -38,7 +39,9 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
     <nav className="region-button-container">
       <Typography variant="h5">Recipes by region</Typography>
       {regions.map((region) => (
-        <button className="region-button" key={region} data-region={region} onClick={handleSubmit}>{region}</button>
+        <Link to={`${region.replace(/ /gi, "-").toLowerCase()}`} key={region} onClick={handleSubmit}>
+          <button className="region-button" data-region={region}>{region}</button>
+      </Link>
       ))}
     </nav>
   )

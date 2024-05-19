@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 
 import axios from "axios";
 
-import "./recipeCardContainer.css"
+import "./recipeComponents.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
 import { recipeSearch } from "../../api/requests";
@@ -34,7 +34,7 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const LessThan600CaloriesContainer = () => {
+const RecipesLessThan600Calories = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -186,4 +186,4 @@ const LessThan600CaloriesContainer = () => {
 
 
 
-export default LessThan600CaloriesContainer
+export default RecipesLessThan600Calories
