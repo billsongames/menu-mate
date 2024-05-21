@@ -18,7 +18,7 @@ const SearchBar = ( {onSearchSubmit} ) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onSearchSubmit(searchText)
-    navigate(`ingredient/${searchText}`)
+/*     navigate(`../recipes/ingredient/${searchText}`) */
   }
 
   return(

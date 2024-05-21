@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import SearchBar from "../Header/SearchBar";
 import NavBarRegion from "../Header/NavBarRegion";
@@ -8,9 +9,7 @@ import RecipesVegetarian from "../RecipeComponents/RecipesVegetarian";
 import RecipesByRegion from "../RecipeComponents/RecipesByRegion";
 import RecipesByIngredient from "../RecipeComponents/RecipesByIngredient";
 
-const RecipesContainer = ( {queryType} ) => {
-
-  console.log(queryType)
+const RecipesContainer = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -21,33 +20,23 @@ const RecipesContainer = ( {queryType} ) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [regionQuery, setRegionQuery] = useState("")
 
+  const [queryType, setQueryType] = useState("default")
+
   const handleSearchRequest = (searchQuery) => {
     if (searchQuery) {
+      setQueryType("ingredient")
       setSearchQuery(searchQuery)
-    } else {
-      setSearchQuery(sessionStorage.getItem("searchQuery"))
+      setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${searchQuery}`)
     }
-    setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${searchQuery}`)
   }
-  
+
   const handleRegionRequest = (regionQuery) => {
     if (regionQuery) {
+      setQueryType("region")
       setRegionQuery(regionQuery)
-    } else {
-      setRegionQuery(sessionStorage.getItem("regionQuery"))
+      setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${regionQuery}`)
     }
-    setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${regionQuery}`)
   }
-
-  useEffect(() => {
-    sessionStorage.setItem("regionQuery", `${regionQuery}`)
-  },[regionQuery])
-
-  useEffect(() => {
-    sessionStorage.setItem("searchQuery", `${searchQuery}`)
-  },[searchQuery])
-
-
 
   const renderJSX = () =>{
 

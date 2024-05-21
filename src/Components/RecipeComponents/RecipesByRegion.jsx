@@ -117,7 +117,7 @@ const RecipesByRegion = ({searchURL, region}) => {
       {recipeList.length>0
       ?
       <div>
-      <Typography variant="h5">{region} reg recipes</Typography>
+      <Typography variant="h5">{region} recipes</Typography>
       
       <div className="recipe-selection-container">
         
