@@ -42,13 +42,9 @@ const App = () => {
     <TopBar />
     <Routes>
       <Route path ="/" element={<Home />} />
-      <Route path = "recipes" element = {<RecipesContainer queryType={"default"}/>} />      
-      <Route path= "recipes/ingredient/*" element = {<RecipesContainer queryType = "ingredient" />} />
-      <Route path= "recipes/*" element= {<RecipesContainer queryType = "region" />} />
-          
-
-
-
+      <Route path = "recipes" element = {<RecipesContainer />} />      
+      {/* <Route path= "recipes/ingredient/*" element = {<RecipesContainer queryType = "ingredient" />} />
+      <Route path= "recipes/*" element= {<RecipesContainer queryType = "region" />} /> */}
     </Routes>
 
   {/*       <RecipeCardContainer searchURL={searchURL} recipeType={recipeType[0].toUpperCase() + recipeType.slice(1)}/> */}

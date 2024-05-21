@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { useLocation } from "react-router-dom";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -40,6 +41,8 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 const RecipesByIngredient = ({searchURL, ingredient}) => {
 
+  const location = useLocation()
+
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
@@ -58,6 +61,8 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
 
   const descriptionElementRef = useRef(null)
 
+
+
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef
@@ -68,12 +73,13 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
   }, [open])
 
   useEffect(() => {
+
     setRecipeList([])
     async function getRecipeList() {
       axios
         .get(searchURL)
         .then((response) => {
-          console.log(response.data)
+/*           console.log(response.data) */
           setRecipeList(response.data.hits)
         })
         .catch((error) => {
@@ -81,6 +87,7 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
         })
     }
     getRecipeList()
+    console.log(searchURL)
     
   }, [searchURL])
 
@@ -118,7 +125,7 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
       {recipeList.length>0
       ?
       <div>
-      <Typography variant="h5">{ingredient} ing recipes</Typography>
+      <Typography variant="h5">{`${ingredient} recipes`}</Typography>
       
       <div className="recipe-selection-container">
         
