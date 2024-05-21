@@ -40,9 +40,6 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 const RecipesByRegion = ({searchURL, region}) => {
 
-  const appID = process.env.REACT_APP_APPID
-  const appKey = process.env.REACT_APP_APPKEY
-
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
 

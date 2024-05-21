@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useLocation } from "react-router-dom";
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -26,9 +24,6 @@ import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
 import { quickPrepSearch } from "../../api/requests";
 
-import SearchBar from "../Header/SearchBar";
-import NavBarRegion from "../Header/NavBarRegion";
-
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
@@ -40,11 +35,6 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 
 const RecipesByIngredient = ({searchURL, ingredient}) => {
-
-  const location = useLocation()
-
-  const appID = process.env.REACT_APP_APPID
-  const appKey = process.env.REACT_APP_APPKEY
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
@@ -125,7 +115,7 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
       {recipeList.length>0
       ?
       <div>
-      <Typography variant="h5">{`${ingredient} recipes`}</Typography>
+      <Typography variant="h5">{ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} recipes</Typography>
       
       <div className="recipe-selection-container">
         

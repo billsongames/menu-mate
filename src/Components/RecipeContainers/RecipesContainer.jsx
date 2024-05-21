@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 import SearchBar from "../Header/SearchBar";
 import NavBarRegion from "../Header/NavBarRegion";
@@ -38,10 +37,10 @@ const RecipesContainer = () => {
     }
   }
 
-  const renderJSX = () =>{
+  const renderJSX = () => {
 
     if (queryType === "default") {
-      return(
+      return (
         <React.Fragment>
           <SearchBar onSearchSubmit={handleSearchRequest} />
           <NavBarRegion onRegionSubmit={handleRegionRequest} />
@@ -50,19 +49,20 @@ const RecipesContainer = () => {
         </React.Fragment>
       )
     } else if (queryType === "region") {
-      return(
+      return (
         <React.Fragment>
           <SearchBar onSearchSubmit={handleSearchRequest} />
           <NavBarRegion onRegionSubmit={handleRegionRequest} />
           <RecipesByRegion searchURL={searchURL} region={regionQuery} />
-      </React.Fragment>
+        </React.Fragment>
       )
     } else if (queryType === "ingredient") {
-      return(
+      return (
         <React.Fragment>
           <SearchBar onSearchSubmit={handleSearchRequest} />
+          <NavBarRegion onRegionSubmit={handleRegionRequest} />
           <RecipesByIngredient searchURL={searchURL} ingredient={searchQuery} />
-      </React.Fragment>
+        </React.Fragment>
       )
 
     }
@@ -72,7 +72,7 @@ const RecipesContainer = () => {
 
 
 
-  return(
+  return (
     renderJSX()
   )
 }

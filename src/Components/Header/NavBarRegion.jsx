@@ -34,7 +34,7 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onRegionSubmit(event.target.dataset.region)
-/*     navigate(`${(event.target.dataset.region).replace(/ /gi, "-").toLowerCase()}`) */
+/*     navigate("../recipes/recipes-by-region") */
   }  
 
 
