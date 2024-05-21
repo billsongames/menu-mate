@@ -6,8 +6,11 @@ import RecipesHome from "../RecipeComponents/RecipesHome";
 import RecipesVegetarian from "../RecipeComponents/RecipesVegetarian";
 
 import RecipesByRegion from "../RecipeComponents/RecipesByRegion";
+import RecipesByIngredient from "../RecipeComponents/RecipesByIngredient";
 
-const RecipesContainer = () => {
+const RecipesContainer = ( {queryType} ) => {
+
+  console.log(queryType)
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -16,19 +19,64 @@ const RecipesContainer = () => {
   const [searchURL, setSearchURL] = useState("")
 
   const [searchQuery, setSearchQuery] = useState("")
-
   const [regionQuery, setRegionQuery] = useState("")
 
   const handleSearchRequest = (searchQuery) => {
-    setSearchQuery(searchQuery)
-    setRegionQuery("")
+    if (searchQuery) {
+      setSearchQuery(searchQuery)
+    } else {
+      setSearchQuery(sessionStorage.getItem("searchQuery"))
+    }
     setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${searchQuery}`)
   }
   
   const handleRegionRequest = (regionQuery) => {
-    setRegionQuery(regionQuery)
-    setSearchQuery("")
+    if (regionQuery) {
+      setRegionQuery(regionQuery)
+    } else {
+      setRegionQuery(sessionStorage.getItem("regionQuery"))
+    }
     setSearchURL(`https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${regionQuery}`)
+  }
+
+  useEffect(() => {
+    sessionStorage.setItem("regionQuery", `${regionQuery}`)
+  },[regionQuery])
+
+  useEffect(() => {
+    sessionStorage.setItem("searchQuery", `${searchQuery}`)
+  },[searchQuery])
+
+
+
+  const renderJSX = () =>{
+
+    if (queryType === "default") {
+      return(
+        <React.Fragment>
+          <SearchBar onSearchSubmit={handleSearchRequest} />
+          <NavBarRegion onRegionSubmit={handleRegionRequest} />
+          <RecipesHome />
+          <RecipesVegetarian />
+        </React.Fragment>
+      )
+    } else if (queryType === "region") {
+      return(
+        <React.Fragment>
+          <SearchBar onSearchSubmit={handleSearchRequest} />
+          <NavBarRegion onRegionSubmit={handleRegionRequest} />
+          <RecipesByRegion searchURL={searchURL} region={regionQuery} />
+      </React.Fragment>
+      )
+    } else if (queryType === "ingredient") {
+      return(
+        <React.Fragment>
+          <SearchBar onSearchSubmit={handleSearchRequest} />
+          <RecipesByIngredient searchURL={searchURL} ingredient={searchQuery} />
+      </React.Fragment>
+      )
+
+    }
   }
 
 
@@ -36,22 +84,7 @@ const RecipesContainer = () => {
 
 
   return(
-    <div>
-      <SearchBar onSearchSubmit={handleSearchRequest} />
-      <NavBarRegion onRegionSubmit={handleRegionRequest} />
-
-      {regionQuery
-      ?
-      <RecipesByRegion searchURL={searchURL} region={regionQuery} />
-      :
-      <>
-        <RecipesHome />
-        <RecipesVegetarian />
-      </>
-      }
-      
-
-    </div>
+    renderJSX()
   )
 }
 

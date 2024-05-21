@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
 import "./searchBar.css"
 
 const SearchBar = ( {onSearchSubmit} ) => {
+
+  const navigate = useNavigate()
 
   const [searchText, setSearchText] = useState("")
 
@@ -15,6 +18,7 @@ const SearchBar = ( {onSearchSubmit} ) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onSearchSubmit(searchText)
+    navigate(`ingredient/${searchText}`)
   }
 
   return(
@@ -28,7 +32,7 @@ const SearchBar = ( {onSearchSubmit} ) => {
       </input>
       <Button type="submit">Search</Button>
     </form>
-{/*     <Button onClick={onQuickPrepSearchSubmit}>Ready in 30 minutes or less</Button> */}
+
   </div>
   )
 }

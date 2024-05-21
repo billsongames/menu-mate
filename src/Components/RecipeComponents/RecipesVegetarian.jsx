@@ -73,7 +73,6 @@ const RecipesVegetarian = () => {
       axios
         .get(searchURL)
         .then((response) => {
-          console.log(response.data)
           setRecipeList(response.data.hits)
         })
         .catch((error) => {

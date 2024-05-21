@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography } from "@mui/material";
 
@@ -7,6 +7,8 @@ import "./navbarRegion.css"
 
 
 const NavBarRegion = ( {onRegionSubmit} ) => {
+
+  const navigate = useNavigate()
 
   const regions=[
     "American",
@@ -32,6 +34,7 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onRegionSubmit(event.target.dataset.region)
+    navigate(`${(event.target.dataset.region).replace(/ /gi, "-").toLowerCase()}`)
   }  
 
 
@@ -39,9 +42,7 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
     <nav className="region-button-container">
       <Typography variant="h5">Recipes by region</Typography>
       {regions.map((region) => (
-        <Link to={`${region.replace(/ /gi, "-").toLowerCase()}`} key={region} onClick={handleSubmit}>
-          <button className="region-button" data-region={region}>{region}</button>
-      </Link>
+        <button key={region} className="region-button" data-region={region} onClick={handleSubmit}>{region}</button>
       ))}
     </nav>
   )

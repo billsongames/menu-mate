@@ -25,6 +25,9 @@ import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
 import { quickPrepSearch } from "../../api/requests";
 
+import SearchBar from "../Header/SearchBar";
+import NavBarRegion from "../Header/NavBarRegion";
+
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
@@ -33,6 +36,7 @@ import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCou
 import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
+
 
 const RecipesHome = () => {
 
@@ -73,7 +77,6 @@ const RecipesHome = () => {
       axios
         .get(searchURL)
         .then((response) => {
-          console.log(response.data)
           setRecipeList(response.data.hits)
         })
         .catch((error) => {

@@ -39,17 +39,17 @@ const App = () => {
   return (
     <div className="App">
     <BrowserRouter>
-
-        <TopBar />
-        <Routes>
-          <Route path ="/" element={<Home />} />
-          <Route path = "recipes" element = {<RecipesContainer />} />
-          <Route path= "recipes/*" element= {<RecipesByRegion />} />
+    <TopBar />
+    <Routes>
+      <Route path ="/" element={<Home />} />
+      <Route path = "recipes" element = {<RecipesContainer queryType={"default"}/>} />      
+      <Route path= "recipes/ingredient/*" element = {<RecipesContainer queryType = "ingredient" />} />
+      <Route path= "recipes/*" element= {<RecipesContainer queryType = "region" />} />
           
 
 
 
-        </Routes>
+    </Routes>
 
   {/*       <RecipeCardContainer searchURL={searchURL} recipeType={recipeType[0].toUpperCase() + recipeType.slice(1)}/> */}
   {/*       <LessThan600CaloriesContainer />

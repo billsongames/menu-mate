@@ -40,6 +40,9 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 const RecipesByRegion = ({searchURL, region}) => {
 
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
 
@@ -70,7 +73,6 @@ const RecipesByRegion = ({searchURL, region}) => {
       axios
         .get(searchURL)
         .then((response) => {
-          console.log(response.data)
           setRecipeList(response.data.hits)
         })
         .catch((error) => {
@@ -115,7 +117,7 @@ const RecipesByRegion = ({searchURL, region}) => {
       {recipeList.length>0
       ?
       <div>
-      <Typography variant="h5">{region} recipes</Typography>
+      <Typography variant="h5">{region} reg recipes</Typography>
       
       <div className="recipe-selection-container">
         

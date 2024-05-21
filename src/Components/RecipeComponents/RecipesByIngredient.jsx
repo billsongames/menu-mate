@@ -25,6 +25,9 @@ import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
 import { quickPrepSearch } from "../../api/requests";
 
+import SearchBar from "../Header/SearchBar";
+import NavBarRegion from "../Header/NavBarRegion";
+
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
@@ -34,17 +37,14 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
-const RecipesLessThan600Calories = () => {
+
+const RecipesByIngredient = ({searchURL, ingredient}) => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
-
-
-
-  const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&calories=600`
 
   const [open, setOpen] = useState(false)
 
@@ -73,6 +73,7 @@ const RecipesLessThan600Calories = () => {
       axios
         .get(searchURL)
         .then((response) => {
+          console.log(response.data)
           setRecipeList(response.data.hits)
         })
         .catch((error) => {
@@ -81,15 +82,46 @@ const RecipesLessThan600Calories = () => {
     }
     getRecipeList()
     
-  }, [])
+  }, [searchURL])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   return (
     <section>
-      <Typography variant="h5">Less than 600 calories</Typography>
       {recipeList.length>0
       ?
+      <div>
+      <Typography variant="h5">{ingredient} ing recipes</Typography>
+      
       <div className="recipe-selection-container">
+        
 
         {recipeList.map((recipe) => (
 
@@ -130,6 +162,7 @@ const RecipesLessThan600Calories = () => {
             </CardActions>
           </Card>
         ))}
+        </div>
 
         {recipeChoiceDetails != null
           ?
@@ -185,4 +218,4 @@ const RecipesLessThan600Calories = () => {
 
 
 
-export default RecipesLessThan600Calories
+export default RecipesByIngredient
