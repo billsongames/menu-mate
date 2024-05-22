@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom"; 
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -34,7 +35,14 @@ import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 
-const RecipesByIngredient = ({searchURL, ingredient}) => {
+const RecipesByIngredient = () => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
+  const { ingredient } = useParams()
+
+  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}`
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
@@ -50,8 +58,6 @@ const RecipesByIngredient = ({searchURL, ingredient}) => {
   const handleCloseRecipeChoiceCard = () => setOpen(false)
 
   const descriptionElementRef = useRef(null)
-
-
 
   useEffect(() => {
     if (open) {

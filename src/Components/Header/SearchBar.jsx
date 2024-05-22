@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
 import "./searchBar.css"
 
 const SearchBar = ({ onSearchSubmit }) => {
-
-  const navigate = useNavigate()
 
   const [searchText, setSearchText] = useState("")
 
@@ -23,14 +21,16 @@ const SearchBar = ({ onSearchSubmit }) => {
 
   return (
     <div className="searchbar">
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           placeholder="Search recipes..."
           value={searchText}
           onChange={handleSearchInput}>
         </input>
-        <Button type="submit">Search</Button>
+        <Link to={`../recipes/ingredient/${searchText}`}>
+          <Button type="submit">Search</Button>
+        </Link>  
       </form>
 
     </div>

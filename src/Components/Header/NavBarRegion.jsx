@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Typography } from "@mui/material";
 
@@ -8,7 +8,7 @@ import "./navbarRegion.css"
 
 const NavBarRegion = ( {onRegionSubmit} ) => {
 
-  const navigate = useNavigate()
+/*   const navigate = useNavigate() */
 
   const regions=[
     "American",
@@ -42,7 +42,10 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
     <nav className="region-button-container">
       <Typography variant="h5">Recipes by region</Typography>
       {regions.map((region) => (
-        <button key={region} className="region-button" data-region={region} onClick={handleSubmit}>{region}</button>
+        <Link to={`../recipes/region/${region}`} key={region} >
+          <button className="region-button" data-region={region}>{region}</button>
+        </Link>
+          
       ))}
     </nav>
   )

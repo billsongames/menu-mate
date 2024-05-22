@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom"; 
 
+import axios from "axios";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,19 +16,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography';
 
-
-
-import axios from "axios";
-
 import "./recipeComponents.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
-import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
-import { quickPrepSearch } from "../../api/requests";
-
-import SearchBar from "../Header/SearchBar";
-import NavBarRegion from "../Header/NavBarRegion";
 
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
@@ -38,7 +31,14 @@ import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 
 
-const RecipesByRegion = ({searchURL, region}) => {
+const RecipesByRegion = () => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
+  const { region } = useParams()
+
+  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}`
 
   const [recipeList, setRecipeList] = useState({})
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
@@ -64,7 +64,7 @@ const RecipesByRegion = ({searchURL, region}) => {
     }
   }, [open])
 
-  useEffect(() => {
+    useEffect(() => {
     setRecipeList([])
     async function getRecipeList() {
       axios

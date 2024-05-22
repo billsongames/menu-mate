@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const recipeSearch = (recipeSearchText) => {
+export const recipeByIngredientSearch = (recipeSearchText) => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -13,6 +13,30 @@ export const recipeSearch = (recipeSearchText) => {
   } else {
     return axios
       .get(recipeFilterQuery)
+      .then((response) => {
+        console.log(response.data.hits)
+        return(response.data.hits)
+/*         return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0)) */
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
+
+export const recipesByRegionSearch = (regionQuery) => {
+
+  const appID = process.env.REACT_APP_APPID
+  const appKey = process.env.REACT_APP_APPKEY
+
+  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${regionQuery}`
+  
+  if (!regionQuery) {
+    return Promise.resolve([])
+
+  } else {
+    return axios
+      .get(searchURL)
       .then((response) => {
         console.log(response.data.hits)
         return(response.data.hits)
