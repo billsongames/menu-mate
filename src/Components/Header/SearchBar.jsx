@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import Box from '@mui/material/Box';
+import Input from '@mui/material/Input';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
+import SearchIcon from '@mui/icons-material/Search';
 
 import "./searchBar.css"
 
 const SearchBar = ({ onSearchSubmit }) => {
+
+  const navigate = useNavigate()
 
   const [searchText, setSearchText] = useState("")
 
@@ -15,23 +22,36 @@ const SearchBar = ({ onSearchSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSearchSubmit(searchText)
-    /*     navigate("../recipes/recipes-by-ingredient") */
+/*     onSearchSubmit(searchText) */
+    navigate(`../recipes/ingredient/${searchText}`)
   }
 
   return (
     <div className="searchbar">
-      <form>
-        <input
-          type="text"
-          placeholder="Search recipes..."
-          value={searchText}
-          onChange={handleSearchInput}>
-        </input>
-        <Link to={`../recipes/ingredient/${searchText}`}>
-          <Button type="submit">Search</Button>
-        </Link>  
-      </form>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          variant="outlined"
+          placeholder="Search recipe ingredients..."
+          onInput={event => setSearchText(event.target.value)}
+          autoComplete="off"
+        />
+        <Button onClick={handleSubmit}>
+          <SearchIcon />
+        </Button>
+      </Box>  
+
+
+
+
+
+
+
+
+
+
 
     </div>
   )
