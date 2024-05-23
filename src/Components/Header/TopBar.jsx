@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
-/* import Link from '@mui/material/Link'; */
+import Divider from '@mui/material/Divider';
 
 const TopBar = () => {
 
@@ -22,7 +21,12 @@ const TopBar = () => {
 
   return (
     <div>
-    <Stack direction="row" spacing={2}>
+    <Stack
+      direction="row"
+      spacing={2}
+      divider={<Divider orientation="vertical" flexItem />}
+    >
+
       <Button href="../">HOME</Button>
       <Button
         id="basic-button"
