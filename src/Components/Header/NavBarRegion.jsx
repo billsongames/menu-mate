@@ -1,16 +1,16 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { Typography } from "@mui/material";
 
 import "./navbarRegion.css"
 
 
-const NavBarRegion = ( {onRegionSubmit} ) => {
+const NavBarRegion = () => {
 
-/*   const navigate = useNavigate() */
+  const navigate = useNavigate()
 
-  const regions=[
+  const regions = [
     "American",
     "Asian",
     "British",
@@ -31,21 +31,17 @@ const NavBarRegion = ( {onRegionSubmit} ) => {
     "South East Asian"
   ]
 
-  const handleSubmit = (event) => {
+  const handleClick = (event) => {
     event.preventDefault()
-    onRegionSubmit(event.target.dataset.region)
-/*     navigate("../recipes/recipes-by-region") */
-  }  
+    navigate(`../recipes/region/${event.target.dataset.region}`)
+  }
 
 
-  return(
+  return (
     <nav className="region-button-container">
       <Typography variant="h5">Recipes by region</Typography>
       {regions.map((region) => (
-        <Link to={`../recipes/region/${region}`} key={region} >
-          <button className="region-button" data-region={region}>{region}</button>
-        </Link>
-          
+        <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
       ))}
     </nav>
   )

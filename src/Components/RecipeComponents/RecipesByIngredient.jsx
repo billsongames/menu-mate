@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,16 +16,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle'
 import Typography from '@mui/material/Typography';
 
-
-
-import axios from "axios";
-
 import "./recipeComponents.css"
 import "../RecipeChoiceCard/recipeChoiceCard.css"
 
-import { recipeSearch } from "../../api/requests";
 import { recipeLookUp } from "../../api/requests";
-import { quickPrepSearch } from "../../api/requests";
 
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
@@ -41,6 +37,7 @@ const RecipesByIngredient = () => {
   const appKey = process.env.REACT_APP_APPKEY
 
   const { ingredient } = useParams()
+  const [ingredientHeading, setIngredientHeading] = useState(null)
 
   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}`
 
@@ -75,17 +72,15 @@ const RecipesByIngredient = () => {
       axios
         .get(searchURL)
         .then((response) => {
-/*           console.log(response.data) */
           setRecipeList(response.data.hits)
+          setIngredientHeading(ingredient)
         })
         .catch((error) => {
           console.log(error)
         })
     }
     getRecipeList()
-    console.log(searchURL)
-    
-  }, [searchURL])
+  }, [ingredient])
 
 
 
@@ -121,7 +116,7 @@ const RecipesByIngredient = () => {
       {recipeList.length>0
       ?
       <div>
-      <Typography variant="h5">{ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} recipes</Typography>
+      <Typography variant="h5">{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
       
       <div className="recipe-selection-container">
         
