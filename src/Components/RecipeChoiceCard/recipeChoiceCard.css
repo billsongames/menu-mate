@@ -1,31 +1,63 @@
-.recipe-ingredients-list {
-}
-
-.recipe-card-image{
+.recipe-dialog-image {
   width: 100%;
   object-fit: contain;
+  border: 1px solid;
 }
 
-.recipe-dialog-details-row{
+.recipe-dialog-image-info-container {
   display: grid;
-  grid-template-columns: repeat(3, 33.3%);
+  grid-template-columns: repeat(2, 50%);
 }
 
-.recipe-dialog-details{
+.recipe-dialog-info-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em
+}
+
+.recipe-dialog-info-row {
   display: flex;
   flex-direction: row;
-  justify-content: left;
   align-items: center;
-  padding: 0.5em
+  justify-items: center;
+  padding: 0.25em 0;
 }
 
-.recipe-dialog-icon{
+.recipe-dialog-icon {
   padding: 0 0.5em 0 0
 }
 
-.recipe-dialog-chip{
+.recipe-dialog-chip {
   padding: 0 0.5em 0 0
 }
+
+/* ACCORDION ######################################*/
+
+.recipe-choice-ingredient-nutrients-container {
+  padding: 1em 0 1em 0;
+}
+
+.recipe-choice-ingredient-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  padding: 0.5em 0
+}
+
+.recipe-choice-ingredient-image {
+  width: 2em;
+  padding: 0 1em 0 0
+}
+
+.recipe-choice-nutrient-row {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 0.5em 0
+}
+
+
 
 /* .recipe-card-ingredients-list-entry{
     display: flex;
@@ -43,4 +75,3 @@
   width: 10em;
   text-align: left;
 } */
-

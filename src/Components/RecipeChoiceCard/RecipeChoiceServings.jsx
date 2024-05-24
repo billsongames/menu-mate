@@ -6,9 +6,9 @@ import PeopleIcon from '@mui/icons-material/People';
 
 import "./recipeChoiceCard.css"
 
-const RecipeChoiceServings = ({servings}) => {
-  return(
-    <div className="recipe-dialog-details">
+const RecipeChoiceServings = ({ servings }) => {
+  return (
+    <div className="recipe-dialog-info-row">
       <PeopleIcon className="recipe-dialog-icon" />
       <Chip label={`Serves ${servings}`} />
     </div>
