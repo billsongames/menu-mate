@@ -13,22 +13,21 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle'
+import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
-import "./recipeComponents.css"
-import "../RecipeChoiceCard/recipeChoiceCard.css"
+import "../RecipeChoiceCard/recipeChoiceCard.css";
+import "./recipeComponents.css";
 
 import { recipeLookUp } from "../../api/requests";
 
-import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
-import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
-import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
-import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
-import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
+import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
+import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
+import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
+import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 
 
 const RecipesByRegion = () => {

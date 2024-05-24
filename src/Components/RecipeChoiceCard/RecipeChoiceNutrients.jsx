@@ -1,18 +1,15 @@
 import React from "react";
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
-const RecipeChoiceNutrients = ( {nutrients} ) => {
+const RecipeChoiceNutrients = ({ nutrients }) => {
 
-  const list_jsx =[]
+  const list_jsx = []
 
   for (const [key, value] of Object.entries(nutrients)) {
     list_jsx.push(
-      <React.Fragment key = {value.label}>
+      <React.Fragment key={value.label}>
         <div className="recipe-choice-nutrient-row">
           <div>
             {value.label}
@@ -20,19 +17,19 @@ const RecipeChoiceNutrients = ( {nutrients} ) => {
           <div>
             {`${Math.round(value.quantity)}${value.unit}`}
           </div>
-        </div>  
+        </div>
         <Divider />
 
 
 
-      </React.Fragment>          
+      </React.Fragment>
     )
   }
 
 
 
 
-  return(
+  return (
     <div className="recipe-choice-ingredient-nutrients-container">
       <Typography>Nutrients</Typography>
       {list_jsx}

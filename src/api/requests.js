@@ -6,7 +6,7 @@ export const recipeByIngredientSearch = (recipeSearchText) => {
   const appKey = process.env.REACT_APP_APPKEY
 
   const recipeFilterQuery = `https://api.edamam.com/api/recipes/v2?type=public&q=${recipeSearchText}&time=1%2B&app_id=${appID}&app_key=${appKey}`
-  
+
   if (!recipeSearchText) {
     return Promise.resolve([])
 
@@ -15,8 +15,7 @@ export const recipeByIngredientSearch = (recipeSearchText) => {
       .get(recipeFilterQuery)
       .then((response) => {
         console.log(response.data.hits)
-        return(response.data.hits)
-/*         return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0)) */
+        return (response.data.hits)
       })
       .catch((error) => {
         console.log(error)
@@ -30,7 +29,7 @@ export const recipesByRegionSearch = (regionQuery) => {
   const appKey = process.env.REACT_APP_APPKEY
 
   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${regionQuery}`
-  
+
   if (!regionQuery) {
     return Promise.resolve([])
 
@@ -39,8 +38,7 @@ export const recipesByRegionSearch = (regionQuery) => {
       .get(searchURL)
       .then((response) => {
         console.log(response.data.hits)
-        return(response.data.hits)
-/*         return(response.data.hits.filter(recipe => recipe.recipe.totalTime > 0)) */
+        return (response.data.hits)
       })
       .catch((error) => {
         console.log(error)
@@ -64,12 +62,12 @@ export const recipeLookUp = (recipeChoiceLink) => {
       .get(recipeChoiceQuery)
       .then((response) => {
         console.log(response.data.recipe)
-        return(response.data.recipe)
+        return (response.data.recipe)
       })
       .catch((error) => {
         console.log(error)
       })
-  }  
+  }
 }
 
 
@@ -83,12 +81,12 @@ export const quickPrepSearch = (time) => {
 
   if (!time) {
     return Promise.resolve([])
-  
+
   } else {
     return axios
       .get(quickPrepQuery)
       .then((response) => {
-        return(response.data.hits)
+        return (response.data.hits)
       })
       .catch((error) => {
         console.log(error)

@@ -1,19 +1,18 @@
-.recipe-selection-container{
+.recipe-selection-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
 }
 
-.recipe-selection-card{
+.recipe-selection-card {
   margin: 1em;
   display: flex;
   flex-direction: column;
   align-content: space-between;
 }
 
-.recipe-selection-card-link{
+.recipe-selection-card-link {
   cursor: pointer;
   text-align: left;
 }
-

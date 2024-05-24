@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography } from "@mui/material";
 
-import "./navbarRegion.css"
+import "./navbarRegion.css";
 
 
 const NavBarRegion = () => {

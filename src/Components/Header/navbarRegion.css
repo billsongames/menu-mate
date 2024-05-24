@@ -1,4 +1,4 @@
-.region-button{
+.region-button {
   margin: 0.5em;
   width: 10em;
   height: 3em;
@@ -6,6 +6,6 @@
   cursor: pointer
 }
 
-.region-button:hover{
+.region-button:hover {
   background-color: greenyellow
 }

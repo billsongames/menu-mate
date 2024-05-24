@@ -13,22 +13,21 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle'
+import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
-import "./recipeComponents.css"
-import "../RecipeChoiceCard/recipeChoiceCard.css"
+import "../RecipeChoiceCard/recipeChoiceCard.css";
+import "./recipeComponents.css";
 
 import { recipeLookUp } from "../../api/requests";
 
-import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
-import RecipeChoiceDietLabels from "../RecipeChoiceCard/RecipeChoiceDietLabels";
-import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
-import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
-import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal"
+import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
+import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal";
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
+import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
+import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 
 
 const RecipesByIngredient = () => {
@@ -113,102 +112,102 @@ const RecipesByIngredient = () => {
 
   return (
     <section>
-      {recipeList.length>0
-      ?
-      <div>
-      <Typography variant="h5">{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
-      
-      <div className="recipe-selection-container">
-        
+      {recipeList.length > 0
+        ?
+        <div>
+          <Typography variant="h5">{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
 
-        {recipeList.map((recipe) => (
+          <div className="recipe-selection-container">
 
-          <Card
-            key={recipe.recipe.uri}
-            sx={{
-              margin: "1em",
-              maxWidth: "24em",
-              minWidth: "24em",
-              height: "24em"
-            }}
-            data-recipelink={recipe.recipe.uri}
-          >
-            <CardMedia
-              className="recipe-selection-card-link"
-              component="img"
-              alt={recipe.recipe.label}
-              height="200"
-              image={recipe.recipe.images.REGULAR.url}
-              data-recipelink={recipe.recipe.uri}
-              onClick={handleOpenRecipeCard}
-            />
-            <CardContent>
-              <Typography variant="h6" gutterBottom className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
-                {recipe.recipe.label}
-              </Typography>
-            </CardContent>
-            <CardActions
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "right",
-                alignItems: "end",
-              }}
-            
+
+            {recipeList.map((recipe) => (
+
+              <Card
+                key={recipe.recipe.uri}
+                sx={{
+                  margin: "1em",
+                  maxWidth: "24em",
+                  minWidth: "24em",
+                  height: "24em"
+                }}
+                data-recipelink={recipe.recipe.uri}
+              >
+                <CardMedia
+                  className="recipe-selection-card-link"
+                  component="img"
+                  alt={recipe.recipe.label}
+                  height="200"
+                  image={recipe.recipe.images.REGULAR.url}
+                  data-recipelink={recipe.recipe.uri}
+                  onClick={handleOpenRecipeCard}
+                />
+                <CardContent>
+                  <Typography variant="h6" gutterBottom className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
+                    {recipe.recipe.label}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "right",
+                    alignItems: "end",
+                  }}
+
+                >
+                  <Button size="small" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>View details</Button>
+                </CardActions>
+              </Card>
+            ))}
+          </div>
+
+          {recipeChoiceDetails != null
+            ?
+            <Dialog
+              open={open}
+              fullWidth={true}
+              maxWidth="sm"
+              height="400px"
+              onClose={handleCloseRecipeChoiceCard}
+              scroll="paper"
+              aria-labelledby="scroll-dialog-title"
+              aria-describedby="scroll-dialog-description"
+              PaperProps={{ sx: { height: "80%" } }}
             >
-              <Button size="small" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>View details</Button>
-            </CardActions>
-          </Card>
-        ))}
-        </div>
 
-        {recipeChoiceDetails != null
-          ?
-          <Dialog
-            open={open}
-            fullWidth={true}
-            maxWidth="sm"
-            height="400px"
-            onClose={handleCloseRecipeChoiceCard}
-            scroll="paper"
-            aria-labelledby="scroll-dialog-title"
-            aria-describedby="scroll-dialog-description"
-            PaperProps={{ sx : {height: "80%"} }}
-          >
-
-            <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
-            <DialogContent>
-              <div className="recipe-dialog-image-info-container">
-                <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image"/>
-                <div className="recipe-dialog-info-container">
+              <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+              <DialogContent>
+                <div className="recipe-dialog-image-info-container">
+                  <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image" />
+                  <div className="recipe-dialog-info-container">
                     <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
-                    <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+                    <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
                     <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
                     <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
-                    <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity)/(recipeChoiceDetails.yield))} />
+                    <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
+                  </div>
                 </div>
-              </div>
-{/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
-              <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
-              <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} /> 
-
-
-              
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
-            </DialogActions>
+                {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
+                <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
+                <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
 
 
 
-          </Dialog>
-          : <></>
-        }
-      </div>
-      :
-      <Box sx={{ margin: 'auto' }}>
-        <CircularProgress />
-      </Box>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
+              </DialogActions>
+
+
+
+            </Dialog>
+            : <></>
+          }
+        </div>
+        :
+        <Box sx={{ margin: 'auto' }}>
+          <CircularProgress />
+        </Box>
       }
     </section>
   )

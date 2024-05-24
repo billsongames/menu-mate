@@ -6,11 +6,11 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 
 import "./recipeChoiceCard.css"
 
-const RecipeChoiceCalorieCount = ({calorieCount}) => {
-  return(
+const RecipeChoiceCalorieCount = ({ calorieCount }) => {
+  return (
     <div className="recipe-dialog-info-row">
       <BarChartIcon className="recipe-dialog-icon" />
-      <Chip label =  {`${calorieCount} calories`} />
+      <Chip label={`${calorieCount} calories`} />
     </div>
   )
 }
