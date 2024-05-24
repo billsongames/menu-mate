@@ -1,6 +1,5 @@
 .topbar-container {
   background-color: burlywood;
-  height: 48px;
   display: flex;
   flex-direction: row;
   justify-items: left;
