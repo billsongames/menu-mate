@@ -22,13 +22,15 @@ const SearchBar = ({ onSearchSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    /*     onSearchSubmit(searchText) */
-    navigate(`../recipes/ingredient/${searchText}`)
+    if (searchText) {
+      navigate(`/recipes/ingredient/${searchText}`)
+    }
+    
   }
 
   const handleMouseEnter = () => {
     const element = document.getElementById("searchbar-wrapper")
-    element.style.borderColor = "burlywood"
+    element.style.borderColor = "#8FBA74"
   }
 
   const handleMouseLeave = () => {
@@ -37,28 +39,24 @@ const SearchBar = ({ onSearchSubmit }) => {
   }
 
   return (
-    <div>
       <form
         id="searchbar-wrapper"
         onSubmit={handleSubmit}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onFocus={handleMouseEnter}
-        
-        >
-      <input
-        type="text"
-        placeholder="Search recipes..."
-        value={searchText}
-        onChange={handleSearchInput}
-
-        
-      />
-      <SearchIcon onClick={handleSubmit}/>
+      >
+        <input
+          type="text"
+          placeholder="Search recipes..."
+          value={searchText}
+          onChange={handleSearchInput}
+        />
+        <SearchIcon className="searchbar-icon" onClick={handleSubmit} />
       </form>
 
-      
-    </div>
+
+
   )
 }
 

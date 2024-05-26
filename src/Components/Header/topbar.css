@@ -1,12 +1,16 @@
 .topbar-container {
-  background-color: burlywood;
   display: flex;
   flex-direction: row;
   justify-items: left;
   align-items: center;
+  position:sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
 }
 
 .topbar-logo {
   padding: 0 1em 0 0.5em;
   height: 40px
 }
+

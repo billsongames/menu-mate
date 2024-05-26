@@ -10,9 +10,22 @@ import Stack from '@mui/material/Stack';
 
 import "./topbar.css"
 
-import logo from "../../assets/logo/menumate-logo-256x64-light.png"
+import logo from "../../assets/logo/menumate-logo-256x64-dark.png"
 
 const TopBar = () => {
+
+  const buttonSX = {
+    color: "black",
+    ":hover": {
+      bgcolor: "#8FBA74"
+    }
+  }
+
+  const menuItemSX = {
+    ":hover": {
+      bgcolor: "#8FBA74"
+    }
+  }
 
   const [anchorElement, setAnchorElement] = useState(null)
   const open = Boolean(anchorElement)
@@ -28,7 +41,7 @@ const TopBar = () => {
   return (
     <div className="topbar-container">
       <div>
-        <Button href = "../">
+        <Button href = "/" sx={buttonSX}>
           <img className="topbar-logo" src={logo} />
         </Button>
       </div>
@@ -46,6 +59,7 @@ const TopBar = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
+            sx={buttonSX}
           >
             RECIPES
           </Button>
@@ -59,16 +73,16 @@ const TopBar = () => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Recipe Search</Button>
+          <MenuItem sx={menuItemSX} onClick={handleClose}>
+            <Button href="/recipes" sx={buttonSX}>Recipe Search</Button>
           </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Vegetarian Recipes</Button>
+          <MenuItem sx={menuItemSX} onClick={handleClose}>
+            <Button href="/recipes/vegetarian" sx={buttonSX}>Vegetarian Recipes</Button>
           </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Less than 600 Calories</Button>
+          <MenuItem sx={menuItemSX} onClick={handleClose}>
+            <Button href="/recipes/less-than-600-calories" sx={buttonSX}>Less than 600 Calories</Button>
           </MenuItem>
         </Menu>
       </div>

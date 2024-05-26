@@ -1,18 +1,7 @@
-#searchbar-wrapper{
+#searchbar-wrapper {
   box-sizing: border-box;
   margin: 1em auto;
   border: 2px solid;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-  height: 32px;
-  align-items: center;
-}
-
-.searchbar-wrapper-focus{
-  margin: 1em auto;
-  border: 4px solid;
   border-radius: 4px;
   display: flex;
   flex-direction: row;
@@ -27,11 +16,20 @@
   padding: 0 1em;
 }
 
-#searchbar-wrapper>input:focus{
-  outline:none
+#searchbar-wrapper>input:focus {
+  outline: none
 }
 
-#searchbar-wrapper>button{
+/* #searchbar-wrapper>button{
   background-color: transparent;
-  border: 0
+  border: 0;
+  transition-duration: 1s;
+} */
+
+.searchbar-icon {
+  transition-duration: 1s;
+}
+
+.searchbar-icon:hover {
+  scale: 1.4
 }
