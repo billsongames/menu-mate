@@ -3,18 +3,16 @@ import React from "react";
 import NavBarRegion from "../Header/NavBarRegion";
 import SearchBar from "../Header/SearchBar";
 import RecipesHome from "../RecipeComponents/RecipesHome";
-import RecipesVegetarian from "../RecipeComponents/RecipesVegetarian";
 
-const RecipesDefaultContainer = () => {
+const RecipesHomeContainer = () => {
 
   return (
     <React.Fragment>
       <SearchBar />
       <NavBarRegion />
       <RecipesHome />
-      <RecipesVegetarian />
-  </React.Fragment>
+    </React.Fragment>
   )
 }
 
-export default RecipesDefaultContainer
+export default RecipesHomeContainer
