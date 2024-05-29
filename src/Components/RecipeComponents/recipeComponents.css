@@ -15,4 +15,13 @@
 .recipe-selection-card-link {
   cursor: pointer;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.recipe-selection-details-container{
+  height: 24em;
+  display: grid;
+  grid-template-rows: 50% 40% 10%;
 }
