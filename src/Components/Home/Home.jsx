@@ -33,9 +33,9 @@ const Home = () => {
       <div>
         <img src={imageData[1].img} className="home-image" />
         <div id="home-text">
-          <div>Add the recipes</div>
+          <div>Add some recipes</div>
           <div>Finish the menu</div>
-          <div>Remove the stress</div>
+          <div>Create a shopping list</div>
         </div>
       </div>
 
