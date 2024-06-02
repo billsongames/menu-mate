@@ -34,8 +34,8 @@ const Home = () => {
         <img src={imageData[1].img} className="home-image" />
         <div id="home-text">
           <div>Add some recipes</div>
-          <div>Finish the menu</div>
-          <div>Create a shopping list</div>
+          <div>Create the menu</div>
+{/*           <div>Make a shopping list</div> */}
         </div>
       </div>
 
