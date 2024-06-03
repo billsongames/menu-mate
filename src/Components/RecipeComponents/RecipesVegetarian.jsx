@@ -28,6 +28,8 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 
+import ProgressDisplay from "./ProgressDisplay";
+
 const RecipesVegetarian = () => {
 
   const appID = process.env.REACT_APP_APPID
@@ -181,7 +183,7 @@ const RecipesVegetarian = () => {
         </div>
         :
         <Box sx={{ margin: 'auto' }}>
-          <CircularProgress />
+          <ProgressDisplay />
         </Box>
       }
     </section>

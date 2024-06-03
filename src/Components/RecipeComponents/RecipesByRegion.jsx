@@ -29,6 +29,8 @@ import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 
+import ProgressDisplay from "./ProgressDisplay";
+
 
 const RecipesByRegion = () => {
 
@@ -222,7 +224,7 @@ const RecipesByRegion = () => {
         </div>
         :
         <Box sx={{ margin: 'auto' }}>
-          <CircularProgress />
+          <ProgressDisplay />
         </Box>
       }
     </section>

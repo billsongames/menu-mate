@@ -3,11 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -21,6 +19,8 @@ import "./recipeComponents.css";
 
 import { recipeLookUp } from "../../api/requests";
 
+import RecipeCard from "./RecipeCard";
+
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
 import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
@@ -28,6 +28,8 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
+
+import ProgressDisplay from "./ProgressDisplay";
 
 
 const RecipesHome = () => {
@@ -188,7 +190,7 @@ const RecipesHome = () => {
         </div>
         :
         <Box sx={{ margin: 'auto' }}>
-          <CircularProgress />
+          <ProgressDisplay />
         </Box>
       }
     </section>
