@@ -33,7 +33,7 @@ const NavBarRegion = () => {
 
   const handleClick = (event) => {
     event.preventDefault()
-    navigate(`../recipes/region/${event.target.dataset.region}`)
+    navigate(`/recipes/region/${event.target.dataset.region}`)
   }
 
 

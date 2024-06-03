@@ -14,6 +14,31 @@ import logo from "../../assets/logo/menumate-logo-256x64-light.png"
 
 const TopBar = () => {
 
+  const buttonSX = {
+    color: "white",
+    fontWeight: "bold",
+    ":hover": {
+      textDecoration: "underline",
+    }
+  }
+
+  const menuItemSX = {
+        ":hover": {
+      bgcolor: "white"
+    }
+  }
+
+  const menubuttonSX = {
+    color: "black",
+    fontWeight: "bold",
+    ":hover": {
+      bgcolor: "white",
+      textDecoration: "underline",
+    },
+    
+
+  }
+
   const [anchorElement, setAnchorElement] = useState(null)
   const open = Boolean(anchorElement)
 
@@ -28,7 +53,7 @@ const TopBar = () => {
   return (
     <div className="topbar-container">
       <div>
-        <Button href = "../">
+        <Button href = "/" sx={buttonSX}>
           <img className="topbar-logo" src={logo} />
         </Button>
       </div>
@@ -46,6 +71,8 @@ const TopBar = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
+            sx={buttonSX}
+            disableRipple={true} 
           >
             RECIPES
           </Button>
@@ -59,16 +86,16 @@ const TopBar = () => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Recipe Search</Button>
+          <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+            <Button href="/recipes" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
           </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Vegetarian Recipes</Button>
+          <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+            <Button href="/recipes/vegetarian" disableRipple={true} sx={menubuttonSX}>Vegetarian Recipes</Button>
           </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Button href="recipes">Less than 600 Calories</Button>
+          <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+            <Button href="/recipes/less-than-600-calories" disableRipple={true} sx={menubuttonSX}>Less than 600 Calories</Button>
           </MenuItem>
         </Menu>
       </div>

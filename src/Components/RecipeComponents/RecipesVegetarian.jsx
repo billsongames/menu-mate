@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import axios from "axios";
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -13,8 +15,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
-import axios from "axios";
-
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
 
@@ -27,6 +27,8 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
+
+import ProgressDisplay from "./ProgressDisplay";
 
 const RecipesVegetarian = () => {
 
@@ -94,31 +96,48 @@ const RecipesVegetarian = () => {
               }}
               data-recipelink={recipe.recipe.uri}
             >
-              <CardMedia
-                className="recipe-selection-card-link"
-                component="img"
-                alt={recipe.recipe.label}
-                height="200"
-                image={recipe.recipe.images.REGULAR.url}
-                data-recipelink={recipe.recipe.uri}
-                onClick={handleOpenRecipeCard}
-              />
-              <CardContent>
-                <Typography variant="h6" gutterBottom className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
-                  {recipe.recipe.label}
-                </Typography>
-              </CardContent>
-              <CardActions
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "right",
-                  alignItems: "end",
-                }}
+              <div className="recipe-selection-details-container">
+                <CardMedia
+                  sx={{
+                    cursor: "pointer"
+                  }}
+                  component="img"
+                  alt={recipe.recipe.label}
+                  height="200"
+                  image={recipe.recipe.images.REGULAR.url}
+                  data-recipelink={recipe.recipe.uri}
+                  onClick={handleOpenRecipeCard}
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    sx={{
+                      textAlign: "left",
+                      cursor: "pointer"
+                    }}
+                    data-recipelink={recipe.recipe.uri}
+                    onClick={handleOpenRecipeCard}
+                  >
+                    {recipe.recipe.label}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    justifyContent: "end"
+                  }}
 
-              >
-                <Button size="small" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>View details</Button>
-              </CardActions>
+                >
+                  <Button
+                    size="small"
+                    data-recipelink={recipe.recipe.uri}
+                    onClick={handleOpenRecipeCard}
+                  >
+                    View details
+                  </Button>
+                </CardActions>
+              </div>
             </Card>
           ))}
 
@@ -164,7 +183,7 @@ const RecipesVegetarian = () => {
         </div>
         :
         <Box sx={{ margin: 'auto' }}>
-          <CircularProgress />
+          <ProgressDisplay />
         </Box>
       }
     </section>

@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -21,6 +19,8 @@ import "./recipeComponents.css";
 
 import { recipeLookUp } from "../../api/requests";
 
+import RecipeCard from "./RecipeCard";
+
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
 import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
 import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
@@ -28,6 +28,8 @@ import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan
 import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
 import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
 import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
+
+import ProgressDisplay from "./ProgressDisplay";
 
 
 const RecipesHome = () => {
@@ -93,35 +95,53 @@ const RecipesHome = () => {
                 margin: "1em",
                 maxWidth: "24em",
                 minWidth: "24em",
-                height: "24em"
+                height: "24em",
               }}
               data-recipelink={recipe.recipe.uri}
             >
-              <CardMedia
-                className="recipe-selection-card-link"
-                component="img"
-                alt={recipe.recipe.label}
-                height="200"
-                image={recipe.recipe.images.REGULAR.url}
-                data-recipelink={recipe.recipe.uri}
-                onClick={handleOpenRecipeCard}
-              />
-              <CardContent>
-                <Typography variant="h6" gutterBottom className="recipe-selection-card-link" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>
-                  {recipe.recipe.label}
-                </Typography>
-              </CardContent>
-              <CardActions
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "right",
-                  alignItems: "end",
-                }}
+              <div className="recipe-selection-details-container">
+                <CardMedia
+                  sx={{
+                    cursor: "pointer"
+                  }}
+                  component="img"
+                  alt={recipe.recipe.label}
+                  height="200"
+                  image={recipe.recipe.images.REGULAR.url}
+                  data-recipelink={recipe.recipe.uri}
+                  onClick={handleOpenRecipeCard}
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    sx={{
+                      textAlign: "left",
+                      cursor: "pointer"
+                    }}
+                    data-recipelink={recipe.recipe.uri}
+                    onClick={handleOpenRecipeCard}
+                  >
+                    {recipe.recipe.label}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    justifyContent: "end"
+                  }}
 
-              >
-                <Button size="small" data-recipelink={recipe.recipe.uri} onClick={handleOpenRecipeCard}>View details</Button>
-              </CardActions>
+                >
+                  <Button
+                    size="small"
+                    data-recipelink={recipe.recipe.uri}
+                    onClick={handleOpenRecipeCard}
+                  >
+                    View details
+                  </Button>
+                </CardActions>
+              </div>
+
             </Card>
           ))}
 
@@ -170,7 +190,7 @@ const RecipesHome = () => {
         </div>
         :
         <Box sx={{ margin: 'auto' }}>
-          <CircularProgress />
+          <ProgressDisplay />
         </Box>
       }
     </section>

@@ -1,0 +1,18 @@
+.home-container {
+  padding: 1em;
+  position: relative;
+}
+
+.home-image{
+  width: 80%
+}
+
+#home-text{
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 70%;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+}
