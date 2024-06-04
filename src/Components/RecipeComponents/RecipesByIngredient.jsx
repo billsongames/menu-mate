@@ -29,6 +29,12 @@ const RecipesByIngredient = () => {
 
   const descriptionElementRef = useRef(null)
 
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
+  }
+
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef
@@ -89,7 +95,7 @@ const RecipesByIngredient = () => {
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography variant="h5">{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
+          <Typography sx={sx_title}>{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
           <div className="recipe-selection-container">
             {recipeList.map((recipe) => (
               <RecipeCard recipe={recipe} />

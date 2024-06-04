@@ -10,7 +10,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import "./searchBar.css";
 
-const SearchBar = ({ onSearchSubmit }) => {
+
+
+const SearchBar = ()  => {
 
   const navigate = useNavigate()
 
@@ -40,6 +42,8 @@ const SearchBar = ({ onSearchSubmit }) => {
 
   return (
     <div className="searchbar-container">
+
+
       <div className="searchbar-title">
         Search for inspiration...
       </div>

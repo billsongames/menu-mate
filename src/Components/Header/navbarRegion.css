@@ -1,7 +1,12 @@
+.navBarRegion-container{
+  margin: auto;
+  width: 80%;
+}
+
 .region-button {
-  margin: 0.5em;
+  margin: 0.25em;
   width: 10em;
-  height: 3em;
+  height: 2em;
   border-radius: 100px;
   cursor: pointer
 }
@@ -9,3 +14,4 @@
 .region-button:hover {
   background-color: #8FBA74
 }
+

@@ -24,6 +24,12 @@ const RecipesLessThan600Calories = () => {
 
   const descriptionElementRef = useRef(null)
 
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
+  }
+
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef
@@ -55,10 +61,10 @@ const RecipesLessThan600Calories = () => {
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography variant="h5">Less than 600 calories</Typography>
+          <Typography sx={sx_title}>Less than 600 calories</Typography>
           <div className="recipe-selection-container">
             {recipeList.map((recipe) => (
-              <RecipeCard recipe={recipe} />
+              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
             ))}
           </div>
         </React.Fragment>

@@ -10,6 +10,7 @@ import ProgressDisplay from "./ProgressDisplay";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
+import { BiFontSize } from "react-icons/bi";
 
 
 const RecipesHome = () => {
@@ -24,6 +25,12 @@ const RecipesHome = () => {
   const [open, setOpen] = useState(false)
 
   const descriptionElementRef = useRef(null)
+
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
+  }
 
   useEffect(() => {
     if (open) {
@@ -56,10 +63,10 @@ const RecipesHome = () => {
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography variant="h5">Recipes, recipes, recipes...</Typography>
+          <Typography sx={sx_title}>Recipes, recipes, recipes...</Typography>
           <div className="recipe-selection-container">
             {recipeList.map((recipe) => (
-              <RecipeCard recipe={recipe} />
+              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
             ))}
           </div>
         </React.Fragment>

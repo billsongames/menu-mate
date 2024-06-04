@@ -29,6 +29,12 @@ const RecipesByRegion = () => {
 
   const descriptionElementRef = useRef(null)
 
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
+  }
+
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef
@@ -61,10 +67,10 @@ const RecipesByRegion = () => {
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography variant="h5">{regionHeading} recipes</Typography>
+          <Typography sx={sx_title}>{regionHeading} recipes</Typography>
           <div className="recipe-selection-container">
             {recipeList.map((recipe) => (
-              <RecipeCard recipe={recipe} />
+              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
             ))}
           </div>
         </React.Fragment>

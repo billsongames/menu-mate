@@ -24,6 +24,12 @@ const RecipesVegetarian = () => {
 
   const descriptionElementRef = useRef(null)
 
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
+  }
+
   useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef
@@ -55,10 +61,10 @@ const RecipesVegetarian = () => {
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography variant="h5">Vegetarian Recipes</Typography>
+          <Typography sx={sx_title}>Vegetarian Recipes</Typography>
           <div className="recipe-selection-container">
             {recipeList.map((recipe) => (
-              <RecipeCard recipe={recipe} />
+              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
             ))}
           </div>
         </React.Fragment>

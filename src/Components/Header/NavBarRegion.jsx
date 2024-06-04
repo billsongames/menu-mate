@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Carousel from 'react-material-ui-carousel'
 import { Paper, Button } from '@mui/material'
@@ -14,6 +14,8 @@ import "./navbarRegion.css";
 const NavBarRegion = () => {
 
   const navigate = useNavigate()
+
+  const currentRegion  = useParams()
 
   const regionsOne = [
     "American",
@@ -49,8 +51,8 @@ const NavBarRegion = () => {
 
 
   return (
-    <nav className="region-button-container">
-      <Typography variant="h5">Recipes by region</Typography>
+    <nav className="navBarRegion-container">
+{/*       <Typography variant="h5">Recipes by region</Typography> */}
 {/*       <Carousel
         autoPlay={false}
         animation="slide"
@@ -67,7 +69,7 @@ const NavBarRegion = () => {
       > */}
         <div>
           {regionsOne.map((region) => (
-            <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
+            <button key={region} id={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
           ))}
         </div>
         <div>
