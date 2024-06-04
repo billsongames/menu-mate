@@ -51,7 +51,7 @@ const NavBarRegion = () => {
   return (
     <nav className="region-button-container">
       <Typography variant="h5">Recipes by region</Typography>
-      <Carousel
+{/*       <Carousel
         autoPlay={false}
         animation="slide"
         NavButton={({ onClick, className, style, next, prev }) => {
@@ -64,7 +64,7 @@ const NavBarRegion = () => {
             </Button>
           )
         }}
-      >
+      > */}
         <div>
           {regionsOne.map((region) => (
             <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
@@ -75,7 +75,12 @@ const NavBarRegion = () => {
             <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
           ))}
         </div>
-      </Carousel>
+        <div>
+          {regionsThree.map((region) => (
+            <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
+          ))}
+        </div>
+{/*       </Carousel> */}
     </nav>
   )
 }

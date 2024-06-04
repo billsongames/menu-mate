@@ -25,7 +25,7 @@ const SearchBar = ({ onSearchSubmit }) => {
     if (searchText) {
       navigate(`/recipes/ingredient/${searchText}`)
     }
-    
+
   }
 
   const handleMouseEnter = () => {
@@ -39,6 +39,10 @@ const SearchBar = ({ onSearchSubmit }) => {
   }
 
   return (
+    <div className="searchbar-container">
+      <div className="searchbar-title">
+        Search for inspiration...
+      </div>
       <form
         id="searchbar-wrapper"
         onSubmit={handleSubmit}
@@ -54,6 +58,7 @@ const SearchBar = ({ onSearchSubmit }) => {
         />
         <SearchIcon className="searchbar-icon" onClick={handleSubmit} />
       </form>
+    </div>
 
 
 
