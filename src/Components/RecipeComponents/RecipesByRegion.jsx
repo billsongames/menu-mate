@@ -21,7 +21,8 @@ const RecipesByRegion = () => {
   const { region } = useParams()
   const [regionHeading, setRegionHeading] = useState(null)
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}`
+/*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}` */
+  const searchURL = `https://api.edamam.com/search?q=&mealType=dinner&time=1%2B&cuisineType=${region}&app_id=${appID}&app_key=${appKey}`
 
   const [recipeList, setRecipeList] = useState([])
 

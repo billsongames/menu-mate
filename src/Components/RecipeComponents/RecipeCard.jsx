@@ -60,7 +60,7 @@ const RecipeCard = ({ recipe }) => {
             component="img"
             alt={recipe.recipe.label}
             height="200"
-            image={recipe.recipe.images.REGULAR.url}
+            image={recipe.recipe.image}
             data-recipelink={recipe.recipe.uri}
             onClick={handleOpenRecipeCard}
           />
