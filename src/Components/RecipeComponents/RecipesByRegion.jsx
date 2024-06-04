@@ -22,7 +22,7 @@ const RecipesByRegion = () => {
   const [regionHeading, setRegionHeading] = useState(null)
 
 /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}` */
-  const searchURL = `https://api.edamam.com/search?q=&mealType=dinner&time=1%2B&cuisineType=${region}&app_id=${appID}&app_key=${appKey}`
+  const searchURL = `https://api.edamam.com/search?q=&from=0&to=20&mealType=dinner&time=1%2B&cuisineType=${region}&app_id=${appID}&app_key=${appKey}`
 
   const [recipeList, setRecipeList] = useState([])
 
@@ -52,6 +52,7 @@ const RecipesByRegion = () => {
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          console.log(response.data)
           setRegionHeading(region)
         })
         .catch((error) => {
