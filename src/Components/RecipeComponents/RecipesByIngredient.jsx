@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
@@ -18,10 +19,30 @@ const RecipesByIngredient = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
+  const recipesPerLoad = 20
+  const [next, setNext] = useState(recipesPerLoad)
+
+  const handleLoadMoreRecipes = () => {
+    setNext(next + recipesPerLoad)
+  }
+
+  const from = 0
+  const to = 100
+
   const { ingredient } = useParams()
   const [ingredientHeading, setIngredientHeading] = useState(null)
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}`
+/*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}` */
+  const searchURL = 
+`https://api.edamam.com/search?
+q=${ingredient}
+&from=${from}
+&to=${to}
+&dishType=Main course
+&time=1%2B
+&app_id=${appID}
+&app_key=${appKey}`
+
 
   const [recipeList, setRecipeList] = useState({})
 
@@ -97,9 +118,14 @@ const RecipesByIngredient = () => {
         <React.Fragment>
           <Typography sx={sx_title}>{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
           <div className="recipe-selection-container">
-            {recipeList.map((recipe) => (
-              <RecipeCard recipe={recipe} />
+          {recipeList.slice(0, next).map((recipe, index) => (
+              <RecipeCard key={index} recipe={recipe} />
             ))}
+          </div>
+          <div>
+            {next < recipeList.length && (
+              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
+            )}            
           </div>
         </React.Fragment>
         :

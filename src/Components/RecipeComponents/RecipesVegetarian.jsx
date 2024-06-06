@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
@@ -16,9 +17,29 @@ const RecipesVegetarian = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
+  const recipesPerLoad = 20
+  const [next, setNext] = useState(recipesPerLoad)
+
+  const handleLoadMoreRecipes = () => {
+    setNext(next + recipesPerLoad)
+  }
+
+  const from = 0
+  const to = 100
+
   const [recipeList, setRecipeList] = useState({})
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian`
+  /* const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian` */
+  const searchURL = 
+`https://api.edamam.com/search?
+q=
+&health=vegetarian
+&from=${from}
+&to=${to}
+&dishType=Main course
+&time=1%2B
+&app_id=${appID}
+&app_key=${appKey}`
 
   const [open, setOpen] = useState(false)
 
@@ -46,6 +67,7 @@ const RecipesVegetarian = () => {
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          console.log(response.data.hits)
         })
         .catch((error) => {
           console.log(error)
@@ -63,9 +85,14 @@ const RecipesVegetarian = () => {
         <React.Fragment>
           <Typography sx={sx_title}>Vegetarian Recipes</Typography>
           <div className="recipe-selection-container">
-            {recipeList.map((recipe) => (
-              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
+          {recipeList.slice(0, next).map((recipe, index) => (
+              <RecipeCard key={index} recipe={recipe} />
             ))}
+          </div>
+          <div>
+            {next < recipeList.length && (
+              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
+            )}            
           </div>
         </React.Fragment>
         :

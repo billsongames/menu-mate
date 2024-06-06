@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 
 import axios from "axios";
@@ -16,9 +17,29 @@ const RecipesLessThan600Calories = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
+  const recipesPerLoad = 20
+  const [next, setNext] = useState(recipesPerLoad)
+
+  const handleLoadMoreRecipes = () => {
+    setNext(next + recipesPerLoad)
+  }
+
+  const from = 0
+  const to = 100
+
   const [recipeList, setRecipeList] = useState({})
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&calories=600`
+  /* const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&calories=600` */
+  const searchURL = 
+`https://api.edamam.com/search?
+q=
+&calories=600
+&from=${from}
+&to=${to}
+&dishType=Main course
+&time=1%2B
+&app_id=${appID}
+&app_key=${appKey}`
 
   const [open, setOpen] = useState(false)
 
@@ -63,9 +84,14 @@ const RecipesLessThan600Calories = () => {
         <React.Fragment>
           <Typography sx={sx_title}>Less than 600 calories</Typography>
           <div className="recipe-selection-container">
-            {recipeList.map((recipe) => (
-              <RecipeCard key={recipe.recipe.uri} recipe={recipe} />
+          {recipeList.slice(0, next).map((recipe, index) => (
+              <RecipeCard key={index} recipe={recipe} />
             ))}
+          </div>
+          <div>
+            {next < recipeList.length && (
+              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
+            )}            
           </div>
         </React.Fragment>
         :

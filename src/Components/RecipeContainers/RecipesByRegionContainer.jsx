@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import SearchBar from "../Header/SearchBar";
-import NavBarRegion from "../Header/NavBarRegion";
 import HeaderContainer from "../Header/HeaderContainer";
 import RecipesByRegion from "../RecipeComponents/RecipesByRegion";
 
