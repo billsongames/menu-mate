@@ -46,9 +46,9 @@ const RecipeCard = ({ recipe }) => {
         key={recipe.recipe.uri}
         sx={{
           margin: "1em",
-          maxWidth: "24em",
-          minWidth: "24em",
-          height: "24em",
+          maxWidth: "20em",
+          minWidth: "20em",
+          height: "22em",
         }}
         data-recipelink={recipe.recipe.uri}
       >

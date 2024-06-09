@@ -1,0 +1,20 @@
+.menuChoices-container {
+  display: flex;
+  flex-direction: row;
+  justify-items: end;
+  align-items: center;
+  margin: 0 2em
+}
+
+.menuChoices-slot {
+  display: flex;
+
+}
+
+.menuChoices-slot>img {
+  margin: 0 0.5em;
+  height: 4em;
+  width: 4em;
+  object-fit: cover;
+  border-radius: 4px;
+}

@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
+import PaginationButtons from "./PaginationButtons";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
@@ -24,6 +25,9 @@ const RecipesByRegion = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
+  const from = 0
+  const to = 96
+
   const recipesPerLoad = 12
   const [next, setNext] = useState(recipesPerLoad)
 
@@ -33,7 +37,7 @@ const RecipesByRegion = () => {
 
   const [page, setPage] = React.useState(1);
   const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(12)
+  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
 
   const handlePageChange = (event, value) => {
     setPage(value)
@@ -41,11 +45,9 @@ const RecipesByRegion = () => {
     setListEnd(paginationData[value].listEnd)
   }
 
-  const from = 0
-  const to = 96
-
   const { region } = useParams()
-  const [regionHeading, setRegionHeading] = useState(null)
+
+  /*   const [regionHeading, setRegionHeading] = useState(region) */
 
   /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}` */
   const searchURL =
@@ -71,12 +73,17 @@ q=
     fontSize: "2em"
   }
 
-  const sx_pagination = {
+  const sx_paginationStack = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: "1em"
   }
+
+  const sx_paginationButton = {
+    button: { color: "#8FBA74" }
+  }
+
 
   useEffect(() => {
     if (open) {
@@ -97,8 +104,9 @@ q=
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
-          console.log(response.data)
-          setRegionHeading(region)
+          console.log(response.data.hits)
+          console.log(searchURL)
+          /*           setRegionHeading(region) */
         })
         .catch((error) => {
           console.log(error)
@@ -119,8 +127,15 @@ q=
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography sx={sx_title}>{regionHeading} recipes</Typography>
+          <Typography sx={sx_title}>{region} recipes</Typography>
           Page {page} / 8
+          <div>
+            
+
+            {/*             {next < recipeList.length && (
+              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
+            )} */}
+          </div>
           <div className="recipe-selection-container">
 
 
@@ -128,17 +143,12 @@ q=
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <div>
-            <Stack sx={sx_pagination} spacing={2}>
-              <Pagination count={8} page={page} showFirstButton showLastButton onChange={handlePageChange} />
-            </Stack>
-            {/*             {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )} */}
-          </div>
+          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
+
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>
+          <Typography sx={sx_title}>{region} recipes</Typography>
           <ProgressDisplay />
         </Box>
       }

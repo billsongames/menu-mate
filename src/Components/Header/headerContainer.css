@@ -2,9 +2,11 @@
   margin: auto;
   position: relative;
   height: 14em;
+  background-color: black;
 }
 
 .header-image {
+  filter: opacity(75%);
   position: absolute;
   width: 100%;
   height: 14em;

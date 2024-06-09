@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
+import MenuChoices from "../MenuChoices/MenuChoices";
+
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
@@ -17,6 +19,7 @@ const TopBar = () => {
   const buttonSX = {
     color: "white",
     fontWeight: "bold",
+
     ":hover": {
       textDecoration: "underline",
     }
@@ -53,7 +56,7 @@ const TopBar = () => {
   return (
     <div className="topbar-container">
       <div>
-        <Button href = "/" sx={buttonSX}>
+        <Button href = "/" >
           <img className="topbar-logo" src={logo} />
         </Button>
       </div>
@@ -99,6 +102,7 @@ const TopBar = () => {
           </MenuItem>
         </Menu>
       </div>
+      <MenuChoices />
     </div>
 
 
