@@ -10,7 +10,7 @@ const MenuChoices = () => {
 
   const { menuChoices } = useContext(MenuChoicesContext)
 
-  console.log(menuChoices)
+
 
   return (
     <div className="menuChoices-container">

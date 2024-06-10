@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+
+import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -30,6 +32,8 @@ const RecipeCard = ({ recipe }) => {
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [open, setOpen] = useState(false)
 
+  const { updateMenuChoices } = useContext(MenuChoicesContext)
+
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
@@ -42,6 +46,7 @@ const RecipeCard = ({ recipe }) => {
 
   const handleAddRecipeToMenu = () => {
     alert("added")
+    updateMenuChoices()
   }
 
   return (
@@ -96,7 +101,7 @@ const RecipeCard = ({ recipe }) => {
             >
               View details
             </Button>
-            <Button onClick={handleAddRecipeToMenu}>
+            <Button onClick={updateMenuChoices}>
               Add
             </Button>
           </CardActions>
