@@ -40,6 +40,11 @@ const RecipeCard = ({ recipe }) => {
     setOpen(true);
   }
 
+  const handleUpdateMenuChoices=(event) => {
+    event.preventDefault()
+    updateMenuChoices(event)
+  }
+
   const handleCloseRecipeChoiceCard = () => setOpen(false)
 
   const descriptionElementRef = useRef(null)
@@ -101,7 +106,12 @@ const RecipeCard = ({ recipe }) => {
             >
               View details
             </Button>
-            <Button onClick={updateMenuChoices}>
+            <Button 
+              onClick={handleUpdateMenuChoices}
+              data-imageurl={recipe.recipe.image}
+              data-title={recipe.recipe.label}
+            >
+
               Add
             </Button>
           </CardActions>

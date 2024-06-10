@@ -19,7 +19,7 @@ const MenuChoices = () => {
         <React.Fragment>
           {menuChoices.map((choice, index) => (
             <div key={index} className="menuChoices-slot">
-              <img src={choice.img} />
+              <img src={choice.img} title={choice.title}/>
             </div>
           ))}
         </React.Fragment>

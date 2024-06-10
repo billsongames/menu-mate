@@ -7,11 +7,42 @@ function MenuChoicesProvider(props) {
   const menuChoicesDefault = [
     {
       choice: 1,
+      title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       complete: false
     },
     {
       choice: 2,
+      title: "Choose a recipe",
+      img: "../../assets/img/emptyMenuSlot.png",
+      complete: false
+    },
+    {
+      choice: 3,
+      title: "Choose a recipe",
+      img: "../../assets/img/emptyMenuSlot.png",
+      complete: false
+    },
+    {
+      choice: 4,
+      title: "Choose a recipe",
+      img: "../../assets/img/emptyMenuSlot.png",
+      complete: false
+    },
+    {
+      choice: 5,
+      title: "Choose a recipe",
+      img: "../../assets/img/emptyMenuSlot.png",
+      complete: false
+    },    {
+      choice: 6,
+      title: "Choose a recipe",
+      img: "../../assets/img/emptyMenuSlot.png",
+      complete: false
+    },
+    {
+      choice: 7,
+      title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       complete: false
     }
@@ -22,18 +53,22 @@ function MenuChoicesProvider(props) {
   const [menuChoices, setMenuChoices] = useState()
 
   const updateMenuChoices = (event) => {
-    console.log("hello")
+    event.preventDefault()
 
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
     const newChoiceData = [...choiceData]
-    console.log(choiceData)
-    const targetIndex = choiceData.findIndex(choice => choice.choice === 1)
-    newChoiceData[targetIndex].img = ""
+    const targetIndex = choiceData.findIndex(choice => choice.complete === false)
 
-
-    setMenuChoices(newChoiceData)
-    console.log(newChoiceData)
-    localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(newChoiceData))
+    if (targetIndex === -1){ 
+      return
+    } else {
+      newChoiceData[targetIndex].img = event.target.dataset.imageurl
+      newChoiceData[targetIndex].title = event.target.dataset.title
+      newChoiceData[targetIndex].complete = true
+      setMenuChoices(newChoiceData)
+      console.log(newChoiceData)
+      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(newChoiceData))
+    }
   }
 
   useEffect(() => {
