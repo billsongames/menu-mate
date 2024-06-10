@@ -40,6 +40,10 @@ const RecipeCard = ({ recipe }) => {
 
   const descriptionElementRef = useRef(null)
 
+  const handleAddRecipeToMenu = () => {
+    alert("added")
+  }
+
   return (
     <React.Fragment>
       <Card
@@ -91,6 +95,9 @@ const RecipeCard = ({ recipe }) => {
               onClick={handleOpenRecipeCard}
             >
               View details
+            </Button>
+            <Button onClick={handleAddRecipeToMenu}>
+              Add
             </Button>
           </CardActions>
         </div>

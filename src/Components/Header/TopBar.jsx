@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -15,6 +15,8 @@ import "./topbar.css"
 import logo from "../../assets/logo/menumate-logo-256x64-light.png"
 
 const TopBar = () => {
+
+
 
   const buttonSX = {
     color: "white",
@@ -104,32 +106,6 @@ const TopBar = () => {
       </div>
       <MenuChoices />
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*       <Link to = {"/"}>
-            Home
-          </Link>
-          <Link to = {"recipes"}>
-            Recipes
-          </Link>   */
-
   )
 }
 

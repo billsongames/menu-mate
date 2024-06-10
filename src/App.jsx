@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from "./Components/Home/Home";
+import { MenuChoicesProvider } from "./context/MenuChoicesContext";
 
+import Home from "./Components/Home/Home";
 import TopBar from "./Components/Header/TopBar";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import RecipesHomeContainer from "./Components/RecipeContainers/RecipesHomeContainer";
@@ -18,16 +19,20 @@ const App = () => {
 
   return (
     <div className="App">
-      <TopBar />
       <BrowserRouter>
-        <Routes>          
-          <Route path="/" element={<Home />} />
-          <Route path="/recipes/:home" element={<RecipesHomeContainer />} />
-          <Route path="/recipes/region/:region" element={<RecipesByRegionContainer />} />
-          <Route path="/recipes/ingredient/:ingredient" element={<RecipesByIngredientContainer />} />
-          <Route path="/recipes/vegetarian" element={<RecipesVegetarianContainer />} />
-          <Route path="/recipes/less-than-600-calories" element={<RecipesLessThan600CaloriesContainer />} />
-        </Routes>
+        <MenuChoicesProvider>
+          <TopBar />
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes/:home" element={<RecipesHomeContainer />} />
+            <Route path="/recipes/region/:region" element={<RecipesByRegionContainer />} />
+            <Route path="/recipes/ingredient/:ingredient" element={<RecipesByIngredientContainer />} />
+            <Route path="/recipes/vegetarian" element={<RecipesVegetarianContainer />} />
+            <Route path="/recipes/less-than-600-calories" element={<RecipesLessThan600CaloriesContainer />} />
+          </Routes>
+
+        </MenuChoicesProvider>
       </BrowserRouter>
     </div>
 

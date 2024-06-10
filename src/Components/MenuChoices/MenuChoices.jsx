@@ -1,48 +1,32 @@
-import { React, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+
+import { MenuChoicesContext } from "../../context/MenuChoicesContext";
+
 import "./menuChoices.css"
 
 import emptyMenuSlot from "../../assets/img/emptyMenuSlot.png"
 
 const MenuChoices = () => {
 
-  let menuSlots = [
-    {
-      name: "slot1",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },
-    {
-      name: "slot2",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },
-    {
-      name: "slot3",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },
-    {
-      name: "slot4",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },  
-    {
-      name: "slot5",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },
-    {
-      name: "slot6",
-      img: "../../assets/img/emptyMenuSlot.png"
-    },
-    {
-      name: "slot7",
-      img: "../../assets/img/emptyMenuSlot.png"
-    }
-  ]
+  const { menuChoices } = useContext(MenuChoicesContext)
+
+  console.log(menuChoices)
 
   return (
     <div className="menuChoices-container">
-      {menuSlots.map((slot, index) => (
-        <div key={index} className="menuChoices-slot">
-          <img src={slot.img} />
-        </div>
-      ))}
+      {menuChoices
+        ?
+        <React.Fragment>
+          {menuChoices.map((choice, index) => (
+            <div key={index} className="menuChoices-slot">
+              <img src={choice.img} />
+            </div>
+          ))}
+        </React.Fragment>
+        :
+        <></>
+      }
+
 
     </div>
 
