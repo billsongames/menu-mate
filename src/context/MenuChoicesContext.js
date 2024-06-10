@@ -6,47 +6,62 @@ function MenuChoicesProvider(props) {
 
   const menuChoicesDefault = [
     {
-      choice: 1,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },
     {
-      choice: 2,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },
     {
-      choice: 3,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },
     {
-      choice: 4,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },
     {
-      choice: 5,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },    {
-      choice: 6,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     },
     {
-      choice: 7,
+      recipe_uri: "",
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
+      ingredients: [],
       complete: false
     }
   ]
+
+  const menuChoiceDefaultEntry = {
+    recipe_uri: "",
+    title: "Choose a recipe",
+    img: "../../assets/img/emptyMenuSlot.png",
+    ingredients: [],
+    complete: false
+  }
 
 
   /*   const [menuChoices, setMenuChoices] = useState(menuChoicesDefault) */
@@ -62,12 +77,34 @@ function MenuChoicesProvider(props) {
     if (targetIndex === -1){ 
       return
     } else {
-      newChoiceData[targetIndex].img = event.target.dataset.imageurl
-      newChoiceData[targetIndex].title = event.target.dataset.title
-      newChoiceData[targetIndex].complete = true
-      setMenuChoices(newChoiceData)
-      console.log(newChoiceData)
-      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(newChoiceData))
+      choiceData[targetIndex].recipe_uri = event.target.dataset.recipeuri
+      choiceData[targetIndex].img = event.target.dataset.imageurl
+      choiceData[targetIndex].title = event.target.dataset.title
+      choiceData[targetIndex].ingredients = JSON.parse(event.target.dataset.ingredients)
+      choiceData[targetIndex].complete = true
+
+      setMenuChoices(choiceData)
+      console.log(choiceData)
+      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
+    }
+  }
+
+  const removeMenuChoice = (event) => {
+    event.preventDefault()
+    console.log(event.target.dataset.recipeuri)
+    const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+    const targetIndex = choiceData.findIndex(choice => choice.recipe_uri === event.target.dataset.recipeuri)
+
+    if (targetIndex === -1) {
+      return
+    } else {
+      choiceData.splice(targetIndex, 1)
+      choiceData.push(menuChoiceDefaultEntry)
+
+      setMenuChoices(choiceData)
+      console.log(choiceData)
+      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
+
     }
   }
 
@@ -82,7 +119,7 @@ function MenuChoicesProvider(props) {
   }, [])
 
   return (
-    <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, updateMenuChoices }}>
+    <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, updateMenuChoices, removeMenuChoice }}>
       {props.children}
     </MenuChoicesContext.Provider>
 

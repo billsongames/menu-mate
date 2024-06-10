@@ -8,7 +8,6 @@
 
 .menuChoices-slot {
   display: flex;
-
 }
 
 .menuChoices-slot>img {
@@ -17,4 +16,19 @@
   width: 4em;
   object-fit: cover;
   border-radius: 4px;
+}
+
+.menuChoices-delete-button {
+  display: flex;
+  width: 1.5em;
+  height: 1.5em;
+  justify-content: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+.menuChoices-delete-icon {
+  z-index: -1;
+  pointer-events:none;
+  color: darkred
 }

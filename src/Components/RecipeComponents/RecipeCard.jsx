@@ -49,10 +49,8 @@ const RecipeCard = ({ recipe }) => {
 
   const descriptionElementRef = useRef(null)
 
-  const handleAddRecipeToMenu = () => {
-    alert("added")
-    updateMenuChoices()
-  }
+
+  
 
   return (
     <React.Fragment>
@@ -107,11 +105,13 @@ const RecipeCard = ({ recipe }) => {
               View details
             </Button>
             <Button 
+              size="small"
               onClick={handleUpdateMenuChoices}
               data-imageurl={recipe.recipe.image}
               data-title={recipe.recipe.label}
+              data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
+              data-recipeuri={recipe.recipe.uri}
             >
-
               Add
             </Button>
           </CardActions>

@@ -105,8 +105,7 @@ q=
         .then((response) => {
           setRecipeList(response.data.hits)
           console.log(response.data.hits)
-          console.log(searchURL)
-          /*           setRegionHeading(region) */
+          console.log(response.data.hits[0])
         })
         .catch((error) => {
           console.log(error)
