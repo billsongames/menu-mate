@@ -6,48 +6,48 @@ function MenuChoicesProvider(props) {
 
   const menuChoicesDefault = [
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },    {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],
       complete: false
     },
     {
-      recipe_uri: "",
+      recipe_uri: null,
       title: "Choose a recipe",
       img: "../../assets/img/emptyMenuSlot.png",
       ingredients: [],

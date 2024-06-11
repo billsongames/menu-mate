@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -45,7 +44,9 @@ const RecipeCard = ({ recipe }) => {
     updateMenuChoices(event)
   }
 
-  const handleCloseRecipeChoiceCard = () => setOpen(false)
+  const handleCloseRecipeChoiceCard = () => {
+    setOpen(false)
+  }  
 
   const descriptionElementRef = useRef(null)
 
