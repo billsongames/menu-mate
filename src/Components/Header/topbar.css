@@ -7,12 +7,13 @@
   top: 0;
   z-index: 1;
   background-color: #8FBA74;
-  text-decoration: ;
+  height: 5em
+
 }
 
 .topbar-logo {
   padding: 0 1em 0 0.5em;
-  height: 40px
+  height: 4em
 }
 
 .Mui-selected {

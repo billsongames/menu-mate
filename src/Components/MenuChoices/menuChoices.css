@@ -1,0 +1,44 @@
+.menuChoices-container {
+  display: flex;
+  flex-direction: row;
+  justify-items: end;
+  align-items: center;
+  margin: 0 2em
+}
+
+.menuChoices-slot {
+  display: flex;
+  position: relative;
+  margin: 0 0.5em
+}
+
+.menuChoices-slot>img {
+  height: 4em;
+  width: 4em;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.menuChoices-slot>div {
+  position: absolute;
+  display: none;
+  width: 100%;
+  z-index: 1;
+}
+
+.menuChoices-slot:hover>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.menuChoices-clearButton {
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0.25em;
+  border: 1px solid;
+  border-color: #8FBA74;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}

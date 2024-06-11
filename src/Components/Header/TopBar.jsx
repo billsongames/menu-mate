@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
+
+import MenuChoices from "../MenuChoices/MenuChoices";
 
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -14,9 +16,12 @@ import logo from "../../assets/logo/menumate-logo-256x64-light.png"
 
 const TopBar = () => {
 
+
+
   const buttonSX = {
     color: "white",
     fontWeight: "bold",
+
     ":hover": {
       textDecoration: "underline",
     }
@@ -53,7 +58,7 @@ const TopBar = () => {
   return (
     <div className="topbar-container">
       <div>
-        <Button href = "/" sx={buttonSX}>
+        <Button href = "/" >
           <img className="topbar-logo" src={logo} />
         </Button>
       </div>
@@ -87,7 +92,7 @@ const TopBar = () => {
           }}
         >
           <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
-            <Button href="/recipes" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
+            <Button href="/recipes/home" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
           </MenuItem>
 
           <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
@@ -99,33 +104,8 @@ const TopBar = () => {
           </MenuItem>
         </Menu>
       </div>
+      <MenuChoices />
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*       <Link to = {"/"}>
-            Home
-          </Link>
-          <Link to = {"recipes"}>
-            Recipes
-          </Link>   */
-
   )
 }
 

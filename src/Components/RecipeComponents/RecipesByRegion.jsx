@@ -4,32 +4,20 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CircularProgress from '@mui/material/CircularProgress';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
+
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+
+import RecipeCard from "./RecipeCard";
+import ProgressDisplay from "./ProgressDisplay";
+import PaginationButtons from "./PaginationButtons";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
 
-import { recipeLookUp } from "../../api/requests";
-
-import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
-import RecipeChoiceCookingTime from "../RecipeChoiceCard/RecipeChoiceCookingTime";
-import RecipeChoiceIngredients from "../RecipeChoiceCard/RecipeChoiceIngredients";
-import RecipeChoiceLessThan600Cal from "../RecipeChoiceCard/RecipeChoiceLessThan600Cal";
-import RecipeChoiceNutrients from "../RecipeChoiceCard/RecipeChoiceNutrients";
-import RecipeChoiceRegion from "../RecipeChoiceCard/RecipeChoiceRegion";
-import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
-
-import ProgressDisplay from "./ProgressDisplay";
+import { paginationData } from "../../api/paginationData";
 
 
 const RecipesByRegion = () => {
@@ -37,25 +25,65 @@ const RecipesByRegion = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const { region } = useParams()
-  const [regionHeading, setRegionHeading] = useState(null)
+  const from = 0
+  const to = 96
 
-  const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}`
+  const recipesPerLoad = 12
+  const [next, setNext] = useState(recipesPerLoad)
+
+  const handleLoadMoreRecipes = () => {
+    setNext(next + recipesPerLoad)
+  }
+
+  const [page, setPage] = React.useState(1);
+  const [listStart, setListStart] = useState(0)
+  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    setListStart(paginationData[value].listStart)
+    setListEnd(paginationData[value].listEnd)
+  }
+
+  const { region } = useParams()
+
+  /*   const [regionHeading, setRegionHeading] = useState(region) */
+
+  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}` */
+  const searchURL =
+    `https://api.edamam.com/search?
+q=
+&from=${from}
+&to=${to}
+&dishType=Main course
+&time=1%2B
+&cuisineType=${region}
+&app_id=${appID}
+&app_key=${appKey}`
 
   const [recipeList, setRecipeList] = useState([])
-  const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
 
   const [open, setOpen] = useState(false)
 
-  const handleOpenRecipeCard = async (event) => {
-    event.preventDefault()
-    setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
-    setOpen(true);
+  const descriptionElementRef = useRef(null)
+
+  const sx_title = {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: "2em"
   }
 
-  const handleCloseRecipeChoiceCard = () => setOpen(false)
+  const sx_paginationStack = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "1em"
+  }
 
-  const descriptionElementRef = useRef(null)
+  const sx_paginationButton = {
+    button: { color: "#8FBA74" }
+  }
+
 
   useEffect(() => {
     if (open) {
@@ -67,13 +95,15 @@ const RecipesByRegion = () => {
   }, [open])
 
   useEffect(() => {
+    setListStart(0)
+    setListEnd(12)
+    setPage(1)
     setRecipeList([])
     async function getRecipeList() {
       axios
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
-          setRegionHeading(region)
         })
         .catch((error) => {
           console.log(error)
@@ -83,154 +113,44 @@ const RecipesByRegion = () => {
   }, [region])
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
 
 
   return (
     <section>
+
       {recipeList.length > 0
         ?
-        <div>
-          <Typography variant="h5">{regionHeading} recipes</Typography>
+        <React.Fragment>
+          <Typography sx={sx_title}>{region} recipes</Typography>
+          Page {page} / 8
+          <div>
+            
 
+            {/*             {next < recipeList.length && (
+              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
+            )} */}
+          </div>
           <div className="recipe-selection-container">
 
 
-            {recipeList.map((recipe) => (
-
-              <Card
-                key={recipe.recipe.uri}
-                sx={{
-                  margin: "1em",
-                  maxWidth: "24em",
-                  minWidth: "24em",
-                  height: "24em"
-                }}
-                data-recipelink={recipe.recipe.uri}
-              >
-                <div className="recipe-selection-details-container">
-                  <CardMedia
-                    sx={{
-                      cursor: "pointer"
-                    }}
-                    component="img"
-                    alt={recipe.recipe.label}
-                    height="200"
-                    image={recipe.recipe.images.REGULAR.url}
-                    data-recipelink={recipe.recipe.uri}
-                    onClick={handleOpenRecipeCard}
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      sx={{
-                        textAlign: "left",
-                        cursor: "pointer"
-                      }}
-                      data-recipelink={recipe.recipe.uri}
-                      onClick={handleOpenRecipeCard}
-                    >
-                      {recipe.recipe.label}
-                    </Typography>
-                  </CardContent>
-                  <CardActions
-                    sx={{
-                      display: "flex",
-                      justifyContent: "end"
-                    }}
-
-                  >
-                    <Button
-                      size="small"
-                      data-recipelink={recipe.recipe.uri}
-                      onClick={handleOpenRecipeCard}
-                    >
-                      View details
-                    </Button>
-                  </CardActions>
-                </div>
-              </Card>
+            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+              <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
+          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
 
-          {recipeChoiceDetails != null
-            ?
-            <Dialog
-              open={open}
-              fullWidth={true}
-              maxWidth="sm"
-              height="400px"
-              onClose={handleCloseRecipeChoiceCard}
-              scroll="paper"
-              aria-labelledby="scroll-dialog-title"
-              aria-describedby="scroll-dialog-description"
-              PaperProps={{ sx: { height: "80%" } }}
-            >
-
-              <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
-              <DialogContent>
-                <div className="recipe-dialog-image-info-container">
-                  <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image" />
-                  <div className="recipe-dialog-info-container">
-                    <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
-                    <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
-                    <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
-                    <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
-                    <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
-                  </div>
-                </div>
-                {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
-                <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
-                <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
-
-
-
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
-              </DialogActions>
-
-
-
-            </Dialog>
-            : <></>
-          }
-        </div>
+        </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>
+          <Typography sx={sx_title}>{region} recipes</Typography>
           <ProgressDisplay />
         </Box>
       }
     </section>
   )
 }
-
-
 
 export default RecipesByRegion
