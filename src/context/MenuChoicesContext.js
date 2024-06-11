@@ -71,7 +71,6 @@ function MenuChoicesProvider(props) {
     event.preventDefault()
 
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-    const newChoiceData = [...choiceData]
     const targetIndex = choiceData.findIndex(choice => choice.complete === false)
 
     if (targetIndex === -1){ 

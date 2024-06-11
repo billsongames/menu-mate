@@ -31,16 +31,16 @@ const MenuChoices = () => {
   const { removeMenuChoice } = useContext(MenuChoicesContext)
 
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
-  const [open, setOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
-    setOpen(true);
+    setDialogOpen(true);
   }
 
   const handleCloseRecipeChoiceCard = () => {
-    setOpen(false)
+    setDialogOpen(false)
 
   }
 
@@ -87,7 +87,7 @@ const MenuChoices = () => {
         ?
 
         <Dialog
-          open={open}
+          open={dialogOpen}
           fullWidth={true}
           maxWidth="sm"
           height="400px"

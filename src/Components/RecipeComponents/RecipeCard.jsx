@@ -13,6 +13,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
+import CheckIcon from '@mui/icons-material/Check';
+
 import { recipeLookUp } from "../../api/requests";
 
 import RecipeChoiceCalorieCount from "../RecipeChoiceCard/RecipeChoiceCalorieCount";
@@ -39,19 +41,21 @@ const RecipeCard = ({ recipe }) => {
     setOpen(true);
   }
 
-  const handleUpdateMenuChoices=(event) => {
+  const handleUpdateMenuChoices = (event) => {
     event.preventDefault()
     updateMenuChoices(event)
   }
 
   const handleCloseRecipeChoiceCard = () => {
     setOpen(false)
-  }  
+  }
 
-  const descriptionElementRef = useRef(null)
+  const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+  const targetIndex = choiceData.findIndex(choice => choice.recipe_uri === recipe.recipe.uri)
 
 
-  
+
+
 
   return (
     <React.Fragment>
@@ -94,7 +98,7 @@ const RecipeCard = ({ recipe }) => {
           <CardActions
             sx={{
               display: "flex",
-              justifyContent: "end"
+              justifyContent: "start"
             }}
 
           >
@@ -105,16 +109,64 @@ const RecipeCard = ({ recipe }) => {
             >
               View details
             </Button>
-            <Button 
-              size="small"
-              onClick={handleUpdateMenuChoices}
-              data-imageurl={recipe.recipe.image}
-              data-title={recipe.recipe.label}
-              data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
-              data-recipeuri={recipe.recipe.uri}
-            >
-              Add
-            </Button>
+
+
+
+
+
+
+
+
+
+
+
+            {targetIndex == -1
+              ?
+              <Button
+                size="small"
+                onClick={handleUpdateMenuChoices}
+                data-imageurl={recipe.recipe.image}
+                data-title={recipe.recipe.label}
+                data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
+                data-recipeuri={recipe.recipe.uri}
+              >
+                Add to menu
+              </Button>
+              :
+              <React.Fragment>
+                <Button size="small" disabled="true">
+                  Added to menu
+                </Button>
+                <CheckIcon
+                  sx={{
+                    fill: "#8FBA74",
+                    width: "1em"
+                  }}
+                />
+
+
+
+              </React.Fragment>
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </CardActions>
         </div>
 
@@ -154,7 +206,7 @@ const RecipeCard = ({ recipe }) => {
 
           </DialogContent>
           <DialogActions>
-          <Button 
+            <Button
               size="small"
               onClick={handleUpdateMenuChoices}
               data-imageurl={recipe.recipe.image}
@@ -174,7 +226,7 @@ const RecipeCard = ({ recipe }) => {
       }
     </React.Fragment>
   )
-  
+
 
 }
 
