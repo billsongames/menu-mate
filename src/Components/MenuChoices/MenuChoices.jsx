@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { AiFillDelete } from "react-icons/ai";
+import ClearIcon from '@mui/icons-material/Clear';
+
+import { Button, Card, CardMedia, CardActions, Stack } from "@mui/material";
 
 import "./menuChoices.css"
 
@@ -15,32 +18,27 @@ const MenuChoices = () => {
   const handleRemoveMenuChoice = (event) => {
     event.preventDefault()
     removeMenuChoice(event)
-
   }
 
-
-
-
-
   return (
-    <div className="menuChoices-container">
+    <div>
       {menuChoices
         ?
-        <React.Fragment>
+        <div className="menuChoices-container">
           {menuChoices.map((choice, index) => (
             <div key={index} className="menuChoices-slot">
-              <img src={choice.img} title={choice.title} />
-              <div className="menuChoices-delete-button" data-recipeuri={choice.recipe_uri} onClick={handleRemoveMenuChoice}>
-                {choice.complete === true
-                  ? <DeleteIcon className="menuChoices-delete-icon" />
-                  : <></>
-                }
-
-              </div>
-
+              <img src={choice.img} />
+              {choice.complete === true
+                ? <div>
+                    <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe_uri}>
+                      <ClearIcon sx={{fill: "#8FBA74", pointerEvents:"none", size: "1.5em"}} />
+                    </div>
+                  </div>
+                : <></>
+              }
             </div>
           ))}
-        </React.Fragment>
+        </div>
         :
         <></>
       }
