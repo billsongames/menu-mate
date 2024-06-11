@@ -104,8 +104,6 @@ q=
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
-          console.log(response.data.hits)
-          console.log(response.data.hits[0])
         })
         .catch((error) => {
           console.log(error)

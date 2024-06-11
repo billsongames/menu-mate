@@ -67,7 +67,6 @@ q=
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
-          console.log(response.data.hits)
         })
         .catch((error) => {
           console.log(error)

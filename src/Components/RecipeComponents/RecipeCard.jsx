@@ -153,7 +153,17 @@ const RecipeCard = ({ recipe }) => {
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
+          <Button 
+              size="small"
+              onClick={handleUpdateMenuChoices}
+              data-imageurl={recipe.recipe.image}
+              data-title={recipe.recipe.label}
+              data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
+              data-recipeuri={recipe.recipe.uri}
+            >
+              Add
+            </Button>
+            <Button size="small" onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
           </DialogActions>
 
 

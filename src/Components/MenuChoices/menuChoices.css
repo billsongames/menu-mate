@@ -36,6 +36,8 @@
   width: 1.5em;
   height: 1.5em;
   margin: 0.25em;
+  border: 1px solid;
+  border-color: #8FBA74;
   border-radius: 4px;
   background-color: white;
   cursor: pointer;

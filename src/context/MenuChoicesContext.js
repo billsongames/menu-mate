@@ -84,14 +84,12 @@ function MenuChoicesProvider(props) {
       choiceData[targetIndex].complete = true
 
       setMenuChoices(choiceData)
-      console.log(choiceData)
       localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
     }
   }
 
   const removeMenuChoice = (event) => {
     event.preventDefault()
-    console.log(event.target.dataset.recipeuri)
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
     const targetIndex = choiceData.findIndex(choice => choice.recipe_uri === event.target.dataset.recipeuri)
 
@@ -102,7 +100,6 @@ function MenuChoicesProvider(props) {
       choiceData.push(menuChoiceDefaultEntry)
 
       setMenuChoices(choiceData)
-      console.log(choiceData)
       localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
 
     }

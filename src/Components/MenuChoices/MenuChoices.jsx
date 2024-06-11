@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
-import { AiFillDelete } from "react-icons/ai";
 import ClearIcon from '@mui/icons-material/Clear';
 
-import { Button, Card, CardMedia, CardActions, Stack } from "@mui/material";
+import "./menuChoices.css";
 
-import "./menuChoices.css"
-
-import emptyMenuSlot from "../../assets/img/emptyMenuSlot.png"
 
 const MenuChoices = () => {
 
@@ -27,7 +23,7 @@ const MenuChoices = () => {
         <div className="menuChoices-container">
           {menuChoices.map((choice, index) => (
             <div key={index} className="menuChoices-slot">
-              <img src={choice.img} />
+              <img src={choice.img} title={choice.title} />
               {choice.complete === true
                 ? <div>
                     <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe_uri}>
