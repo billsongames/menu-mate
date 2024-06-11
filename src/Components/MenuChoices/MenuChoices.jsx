@@ -8,6 +8,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Drawer from '@mui/material/Drawer';
 
 import { recipeLookUp } from "../../api/requests";
 
@@ -41,12 +42,17 @@ const MenuChoices = () => {
 
   const handleCloseRecipeChoiceCard = () => {
     setDialogOpen(false)
-
   }
 
   const handleRemoveMenuChoice = (event) => {
     event.preventDefault()
     removeMenuChoice(event)
+  }
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen)
   }
 
   return (
@@ -78,10 +84,13 @@ const MenuChoices = () => {
               }
             </div>
           ))}
+          <button onClick={toggleDrawer}>View menu</button>
         </div>
         :
         <></>
       }
+
+
 
       {recipeChoiceDetails !== null
         ?
@@ -137,7 +146,57 @@ const MenuChoices = () => {
         : <></>
       }
 
+      <Drawer
+        open={drawerOpen}
+        anchor="right"
+        onClose={toggleDrawer}
+      >
+        MENU
+        {menuChoices
+          ?
+          <div className="menuChoices-drawer-container">
+            {menuChoices.map((choice, index) => (
+              <div className="menuChoices-drawer-slot-container">
+                <div key={index} className="menuChoices-drawer-slot">
+                  {choice.recipe_uri != null
+                    ?
+                    <img src={choice.img} title={choice.title} data-recipelink={choice.recipe_uri} onClick={handleOpenRecipeCard} />
+                    :
+                    <img src={choice.img} title={choice.title} />
+                  }
+                  {choice.complete === true
+                    ? <div>
+                      <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe_uri}>
+                        <ClearIcon
+                          sx={{
+                            fill: "#8FBA74",
+                            pointerEvents: "none",
+                            width: "1em"
+                          }}
+                        />
+                      </div>
+                    </div>
+                    : <></>
+                  }
+                </div>
+                <div>
+                  {choice.title}
+                </div>
+              </div>
+
+            ))}
+          </div>
+          :
+          <></>
+        }
+
+      </Drawer>
+
     </div>
+
+
+
+
 
   )
 }

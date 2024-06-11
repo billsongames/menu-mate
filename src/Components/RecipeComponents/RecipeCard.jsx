@@ -206,16 +206,34 @@ const RecipeCard = ({ recipe }) => {
 
           </DialogContent>
           <DialogActions>
-            <Button
-              size="small"
-              onClick={handleUpdateMenuChoices}
-              data-imageurl={recipe.recipe.image}
-              data-title={recipe.recipe.label}
-              data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
-              data-recipeuri={recipe.recipe.uri}
-            >
-              Add
-            </Button>
+          {targetIndex == -1
+              ?
+              <Button
+                size="small"
+                onClick={handleUpdateMenuChoices}
+                data-imageurl={recipe.recipe.image}
+                data-title={recipe.recipe.label}
+                data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
+                data-recipeuri={recipe.recipe.uri}
+              >
+                Add to menu
+              </Button>
+              :
+              <React.Fragment>
+                <Button size="small" disabled="true">
+                  Added to menu
+                </Button>
+                <CheckIcon
+                  sx={{
+                    fill: "#8FBA74",
+                    width: "1em"
+                  }}
+                />
+
+
+
+              </React.Fragment>
+            }
             <Button size="small" onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
           </DialogActions>
 
