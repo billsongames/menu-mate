@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Drawer from '@mui/material/Drawer';
+import Divider from "@mui/material/Divider";
 
 import { recipeLookUp } from "../../api/requests";
 
@@ -23,6 +24,8 @@ import RecipeChoiceServings from "../RecipeChoiceCard/RecipeChoiceServings";
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "../RecipeComponents/recipeComponents.css";
 
+import defaultMenuChoiceImage from "../../assets/img/emptyMenuSlot.png"
+
 import "./menuChoices.css";
 
 
@@ -36,7 +39,8 @@ const MenuChoices = () => {
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
-    setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
+    /* setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
+    setRecipeChoiceDetails(JSON.parse(event.target.dataset.completerecipe))
     setDialogOpen(true);
   }
 
@@ -62,15 +66,15 @@ const MenuChoices = () => {
         <div className="menuChoices-container">
           {menuChoices.map((choice, index) => (
             <div key={index} className="menuChoices-slot">
-              {choice.recipe_uri != null
+              {choice.complete === true
                 ?
-                <img src={choice.img} title={choice.title} data-recipelink={choice.recipe_uri} onClick={handleOpenRecipeCard} />
+                <img src={choice.recipe.image} title={choice.recipe.label} data-recipelink={choice.recipe.uri} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
                 :
-                <img src={choice.img} title={choice.title} />
+                <img src={defaultMenuChoiceImage} title="Choose a recipe" />
               }
               {choice.complete === true
                 ? <div>
-                  <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe_uri}>
+                  <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
                     <ClearIcon
                       sx={{
                         fill: "#8FBA74",
@@ -94,7 +98,6 @@ const MenuChoices = () => {
 
       {recipeChoiceDetails !== null
         ?
-
         <Dialog
           open={dialogOpen}
           fullWidth={true}
@@ -110,7 +113,7 @@ const MenuChoices = () => {
           <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
-              <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image" />
+              <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
               <div className="recipe-dialog-info-container">
                 <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
                 <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
@@ -139,34 +142,62 @@ const MenuChoices = () => {
           </Button> */}
             <Button size="small" onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
           </DialogActions>
-
-
-
         </Dialog>
         : <></>
       }
 
-      <Drawer
-        open={drawerOpen}
-        anchor="right"
-        onClose={toggleDrawer}
-      >
+      <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer}>
         MENU
         {menuChoices
           ?
           <div className="menuChoices-drawer-container">
             {menuChoices.map((choice, index) => (
-              <div className="menuChoices-drawer-slot-container">
-                <div key={index} className="menuChoices-drawer-slot">
-                  {choice.recipe_uri != null
-                    ?
-                    <img src={choice.img} title={choice.title} data-recipelink={choice.recipe_uri} onClick={handleOpenRecipeCard} />
-                    :
-                    <img src={choice.img} title={choice.title} />
-                  }
+
+
+              <div key={index} className="menuChoices-drawer-entry-container">
+                <div className="menuChoices-drawer-image">
                   {choice.complete === true
-                    ? <div>
-                      <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe_uri}>
+                    ?
+                    <React.Fragment>
+                      <img src={choice.recipe.image} title={choice.recipe.label} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
+                      <div>
+                        <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                          <ClearIcon
+                            sx={{
+                              fill: "#8FBA74",
+                              pointerEvents: "none",
+                              width: "1em"
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                      <img src={defaultMenuChoiceImage} title="Choose a recipe" />
+                    </React.Fragment>
+                  }
+                </div>
+
+                {choice.complete === true
+                  ?
+                  <div className="menuChoices-drawer-info">
+                    <div className="menuChoices-drawer-label">
+                      {choice.recipe.label}
+                    </div>
+                    <div className="menuChoices-drawer-item">
+                      {`${Math.round((choice.recipe.totalNutrients.ENERC_KCAL.quantity) / (choice.recipe.yield))} calories`}
+                    </div>
+                  </div>
+                  :
+                  <></>
+                }
+
+
+                {choice.complete === true
+                  ?
+                    <div className="menuChoices-drawer-clearButton-container">
+                      <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
                         <ClearIcon
                           sx={{
                             fill: "#8FBA74",
@@ -176,29 +207,29 @@ const MenuChoices = () => {
                         />
                       </div>
                     </div>
-                    : <></>
-                  }
-                </div>
-                <div>
-                  {choice.title}
-                </div>
+                  :
+                  <></>
+                }
               </div>
 
+              
             ))}
-          </div>
+
+          </div>          
           :
           <></>
-        }
-
+        } 
+        
       </Drawer>
 
     </div>
-
-
-
-
-
   )
+
+
+
+
+
+
 }
 
 export default MenuChoices

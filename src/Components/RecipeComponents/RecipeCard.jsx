@@ -33,17 +33,18 @@ const RecipeCard = ({ recipe }) => {
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [open, setOpen] = useState(false)
 
-  const { updateMenuChoices } = useContext(MenuChoicesContext)
+  const { addToMenuChoices } = useContext(MenuChoicesContext)
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
-    setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51)))
+/*     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
+    setRecipeChoiceDetails(JSON.parse(event.target.dataset.completerecipe))
     setOpen(true);
   }
 
-  const handleUpdateMenuChoices = (event) => {
+  const handleAddToMenuChoices = (event) => {
     event.preventDefault()
-    updateMenuChoices(event)
+    addToMenuChoices(event)
   }
 
   const handleCloseRecipeChoiceCard = () => {
@@ -51,7 +52,7 @@ const RecipeCard = ({ recipe }) => {
   }
 
   const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-  const targetIndex = choiceData.findIndex(choice => choice.recipe_uri === recipe.recipe.uri)
+  const targetIndex = choiceData.findIndex(choice => choice.recipe.uri === recipe.recipe.uri)
 
 
 
@@ -79,6 +80,7 @@ const RecipeCard = ({ recipe }) => {
             height="200"
             image={recipe.recipe.image}
             data-recipelink={recipe.recipe.uri}
+            data-completerecipe={JSON.stringify(recipe.recipe)}
             onClick={handleOpenRecipeCard}
           />
           <CardContent>
@@ -105,36 +107,28 @@ const RecipeCard = ({ recipe }) => {
             <Button
               size="small"
               data-recipelink={recipe.recipe.uri}
+              data-completerecipe={JSON.stringify(recipe.recipe)}
               onClick={handleOpenRecipeCard}
             >
               View details
             </Button>
 
-
-
-
-
-
-
-
-
-
-
             {targetIndex == -1
               ?
               <Button
                 size="small"
-                onClick={handleUpdateMenuChoices}
+                onClick={handleAddToMenuChoices}
                 data-imageurl={recipe.recipe.image}
                 data-title={recipe.recipe.label}
                 data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
                 data-recipeuri={recipe.recipe.uri}
+                data-completerecipe={JSON.stringify(recipe.recipe)}
               >
                 Add to menu
               </Button>
               :
               <React.Fragment>
-                <Button size="small" disabled="true">
+                <Button size="small" disabled={true}>
                   Added to menu
                 </Button>
                 <CheckIcon
@@ -189,7 +183,7 @@ const RecipeCard = ({ recipe }) => {
           <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
-              <img src={recipeChoiceDetails.images.REGULAR.url} className="recipe-dialog-image" />
+              <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
               <div className="recipe-dialog-info-container">
                 <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
                 <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
@@ -210,17 +204,18 @@ const RecipeCard = ({ recipe }) => {
               ?
               <Button
                 size="small"
-                onClick={handleUpdateMenuChoices}
+                onClick={handleAddToMenuChoices}
                 data-imageurl={recipe.recipe.image}
                 data-title={recipe.recipe.label}
                 data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
                 data-recipeuri={recipe.recipe.uri}
+                data-completerecipe={JSON.stringify(recipe.recipe)}
               >
                 Add to menu
               </Button>
               :
               <React.Fragment>
-                <Button size="small" disabled="true">
+                <Button size="small" disabled={true}>
                   Added to menu
                 </Button>
                 <CheckIcon

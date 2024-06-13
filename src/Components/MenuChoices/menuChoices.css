@@ -47,7 +47,7 @@
 /* ################################################ */
 
 .menuChoices-drawer-container {
-  width: 24em;
+  width: 32em;
   display: flex;
   flex-direction: column;
   justify-items: left;
@@ -55,35 +55,44 @@
   margin: 2em
 }
 
-.menuChoices-drawer-slot-container{
+.menuChoices-drawer-entry-container{
   display: flex;
   flex-direction: row;
-}
-
-.menuChoices-drawer-slot {
-  display: flex;
-  position: relative;
   margin: 0.5em 0
 }
 
-.menuChoices-drawer-slot>img {
+.menuChoices-drawer-image {
+  display: flex;
+  position: relative;
+  margin: 0.5em 0;
+
+}
+
+.menuChoices-drawer-image>img {
   height: 4em;
-  width: 4em;
+  width: 6em;
   object-fit: cover;
   border-radius: 4px;
   background-color: wheat
   }
 
-.menuChoices-drawer-slot>div {
+.menuChoices-drawer-image>div {
   position: absolute;
   display: none;
   width: 100%;
   z-index: 1;
 }
 
-.menuChoices-drawer-slot:hover>div {
+.menuChoices-drawer-image:hover>div {
   display: flex;
   flex-direction: row;
+  justify-content: end;
+}
+
+.menuChoices-drawer-clearButton-container{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 2;
   justify-content: end;
 }
 
@@ -96,4 +105,20 @@
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
+}
+
+.menuChoices-drawer-info{
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.menuChoices-drawer-label {
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.menuChoices-drawer-item{
+  font-size: 0.75em;
 }
