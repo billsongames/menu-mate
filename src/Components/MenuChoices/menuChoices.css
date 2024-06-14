@@ -43,6 +43,10 @@
   cursor: pointer;
 }
 
+.menuChoices-clearButton:hover, .menuChoices-drawer-clearButton:hover {
+  background-color: lightgray;
+}
+
 /* ################################################ */
 
 .menuChoices-drawer-container {
@@ -60,13 +64,13 @@
   border-radius: 4px;
 }
 
-.menuChoices-drawer-header{
+.menuChoices-drawer-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.menuChoices-drawer-header{
+.menuChoices-drawer-header {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -87,7 +91,8 @@
   align-items: center;
 }
 
-.menuChoices-drawer-header-close, .menuChoices-drawer-header-spacer {
+.menuChoices-drawer-header-close,
+.menuChoices-drawer-header-spacer {
   display: flex;
   margin: 0 1em;
   justify-content: left;
@@ -138,12 +143,14 @@
   cursor: pointer;
 }
 
+.menu
+
 .menuChoices-drawer-info {
   margin: 0 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  align-content:space-between ;
+  align-content: space-between;
 }
 
 .menuChoices-drawer-label {

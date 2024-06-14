@@ -87,7 +87,10 @@ const MenuChoices = () => {
                       sx={{
                         fill: "#8FBA74",
                         pointerEvents: "none",
-                        width: "1em"
+                        width: "1em",
+                        zIndex: "-1",
+                        "&:hover" : {fill: "blue"}
+                        
                       }}
                     />
                   </div>
@@ -205,7 +208,7 @@ const MenuChoices = () => {
                                 sx={{
                                   fill: "#8FBA74",
                                   pointerEvents: "none",
-                                  width: "1em"
+                                  width: "1em",
                                 }}
                               />
                             </div>
