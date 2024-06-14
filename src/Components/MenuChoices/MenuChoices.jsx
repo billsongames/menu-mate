@@ -4,6 +4,8 @@ import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 import ClearIcon from '@mui/icons-material/Clear';
 
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -113,10 +115,10 @@ const MenuChoices = () => {
           scroll="paper"
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
-          PaperProps={{ sx: { height: "80%" } }}
+          PaperProps={{ sx: { height: "56em" } }}
         >
 
-          <DialogTitle variant="h5" fontWeight="bold"  gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+          <DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
               <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
@@ -153,108 +155,147 @@ const MenuChoices = () => {
       }
 
       <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer}>
-        <Typography
-          gutterBottom
-          variant="h6"
-          sx={{
-            textAlign: "left",
-            margin: "0 1em"
-          }}
-        >
-          MENU
-        </Typography>
-        {menuChoices
-          ?
-          <div className="menuChoices-drawer-container">
-            {menuChoices.map((choice, index) => (
-              <div key={index}>
-                <div className="menuChoices-drawer-entry-container">
-                  <div className="menuChoices-drawer-image">
+        <Card sx={{ height: "100%" }}>
+          <div className="menuChoices-drawer-header">
+            <div className="menuChoices-drawer-header-close">
+              <div className="menuChoices-drawer-header-clearButton-container">
+                <div className="menuChoices-drawer-clearButton" onClick={toggleDrawer} >
+                  <ClearIcon
+                    sx={{
+                      fill: "#8FBA74",
+                      pointerEvents: "none",
+                      width: "1em"
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Typography
+              gutterBottom
+              variant="h6"
+              sx={{
+                width: "60%",
+                margin: "0.5em 1em",
+                textAlign: "center",
+                fontWeight: "bold"
+              }}
+            >
+              MENU
+            </Typography>
+            <div className="menuChoices-drawer-header-spacer">
+
+            </div>
+          </div>
+
+          {menuChoices
+            ?
+            <div className="menuChoices-drawer-container">
+              {menuChoices.map((choice, index) => (
+                <div key={index}>
+                  <div className="menuChoices-drawer-entry-container">
+                    <div className="menuChoices-drawer-image">
+                      {choice.complete === true
+                        ?
+                        <React.Fragment>
+                          <img src={choice.recipe.image} title={choice.recipe.label} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
+                          <div>
+                            <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                              <ClearIcon
+                                sx={{
+                                  fill: "#8FBA74",
+                                  pointerEvents: "none",
+                                  width: "1em"
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                          <img src={defaultMenuChoiceImage} title="Choose a recipe" />
+                        </React.Fragment>
+                      }
+                    </div>
+
                     {choice.complete === true
                       ?
-                      <React.Fragment>
-                        <img src={choice.recipe.image} title={choice.recipe.label} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
-                        <div>
-                          <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                            <ClearIcon
-                              sx={{
-                                fill: "#8FBA74",
-                                pointerEvents: "none",
-                                width: "1em"
-                              }}
-                            />
+                      <div className="menuChoices-drawer-info">
+                        <div className="menuChoices-drawer-label">
+                          {choice.recipe.label}
+                        </div>
+
+                        <div className="menuChoices-drawer-item">
+                          <PublicIcon sx={{ height: "0.75em" }} />
+                          <div>
+                            {`${(choice.recipe.cuisineType[0]).charAt(0).toUpperCase() + (choice.recipe.cuisineType[0]).slice(1)}`}
                           </div>
                         </div>
-                      </React.Fragment>
+
+                        <div className="menuChoices-drawer-item">
+                          <BarChartIcon sx={{ height: "0.75em" }} />
+                          <div>
+                            {`${Math.round((choice.recipe.totalNutrients.ENERC_KCAL.quantity) / (choice.recipe.yield))} calories`}
+                          </div>
+                        </div>
+
+                        <div className="menuChoices-drawer-item">
+                          <TimerIcon sx={{ height: "0.75em" }} />
+                          <div>
+                            {`${choice.recipe.totalTime} minutes`}
+                          </div>
+                        </div>
+
+
+                      </div>
                       :
-                      <React.Fragment>
-                        <img src={defaultMenuChoiceImage} title="Choose a recipe" />
-                      </React.Fragment>
+                      <div className="menuChoices-drawer-info">
+                        <div className="menuChoices-drawer-label-empty">
+                          Choose a recipe
+                        </div>
+                      </div>
+                    }
+
+                    {choice.complete === true
+                      ?
+                      <div className="menuChoices-drawer-clearButton-container">
+                        <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                          <ClearIcon
+                            sx={{
+                              fill: "#8FBA74",
+                              pointerEvents: "none",
+                              width: "1em"
+                            }}
+                          />
+                        </div>
+                      </div>
+                      :
+                      <></>
                     }
                   </div>
-
-                  {choice.complete === true
-                    ?
-                    <div className="menuChoices-drawer-info">
-                      <div className="menuChoices-drawer-label">
-                        {choice.recipe.label}
-                      </div>
-
-                      <div className="menuChoices-drawer-item">
-                        <PublicIcon sx={{ height: "0.75em" }} />
-                        <div>
-                          {`${(choice.recipe.cuisineType[0]).charAt(0).toUpperCase() + (choice.recipe.cuisineType[0]).slice(1)}`}
-                        </div>
-                      </div>
-
-                      <div className="menuChoices-drawer-item">
-                        <BarChartIcon sx={{ height: "0.75em" }} />
-                        <div>
-                          {`${Math.round((choice.recipe.totalNutrients.ENERC_KCAL.quantity) / (choice.recipe.yield))} calories`}
-                        </div>
-                      </div>
-
-                      <div className="menuChoices-drawer-item">
-                        <TimerIcon sx={{ height: "0.75em" }} />
-                        <div>
-                          {`${choice.recipe.totalTime} minutes`}
-                        </div>
-                      </div>
-
-
-                    </div>
-                    :
-                    <></>
-                  }
-
-
-                  {choice.complete === true
-                    ?
-                    <div className="menuChoices-drawer-clearButton-container">
-                      <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                        <ClearIcon
-                          sx={{
-                            fill: "#8FBA74",
-                            pointerEvents: "none",
-                            width: "1em"
-                          }}
-                        />
-                      </div>
-                    </div>
-                    :
-                    <></>
-                  }
+                  <Divider />
                 </div>
-                <Divider />
-              </div>
-
-
-            ))}
-
-          </div>
-          :
-          <></>
-        }
+              ))}
+            </div>
+            :
+            <></>
+          }
+          
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            <div>
+              <Button>
+                CONTINUE TO INGREDIENTS
+              </Button>
+            </div>
+            
+          </CardActions>
+        </Card>
 
       </Drawer>
 

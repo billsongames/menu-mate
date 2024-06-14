@@ -143,24 +143,6 @@ const RecipeCard = ({ recipe }) => {
               </React.Fragment>
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </CardActions>
         </div>
 
@@ -172,12 +154,11 @@ const RecipeCard = ({ recipe }) => {
           open={open}
           fullWidth={true}
           maxWidth="sm"
-          height="400px"
           onClose={handleCloseRecipeChoiceCard}
           scroll="paper"
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
-          PaperProps={{ sx: { height: "80%" } }}
+          PaperProps={{ sx: { height: "56em" } }}
         >
 
           <DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
