@@ -12,7 +12,7 @@ const RecipeChoiceLessThan600Cal = ({ calorieCount }) => {
     return (
       <div className="recipe-dialog-info-row">
         <GppGoodIcon className="recipe-dialog-icon" />
-        <Chip label="Less than 600 calories" />
+        Less than 600 calories
       </div>
     )
   } else {

@@ -10,7 +10,7 @@ const RecipeChoiceCalorieCount = ({ calorieCount }) => {
   return (
     <div className="recipe-dialog-info-row">
       <BarChartIcon className="recipe-dialog-icon" />
-      <Chip label={`${calorieCount} calories`} />
+      {`${calorieCount} calories`}
     </div>
   )
 }

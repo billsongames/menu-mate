@@ -31,7 +31,7 @@ const RecipeChoiceNutrients = ({ nutrients }) => {
 
   return (
     <div className="recipe-choice-ingredient-nutrients-container">
-      <Typography>Nutrients</Typography>
+      <Typography variant="h6" fontWeight="bold" >Nutrients</Typography>
       {list_jsx}
     </div>
   )

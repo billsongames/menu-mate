@@ -180,7 +180,7 @@ const RecipeCard = ({ recipe }) => {
           PaperProps={{ sx: { height: "80%" } }}
         >
 
-          <DialogTitle variant="h4" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+          <DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
               <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />

@@ -10,7 +10,7 @@ const RecipeChoiceServings = ({ servings }) => {
   return (
     <div className="recipe-dialog-info-row">
       <PeopleIcon className="recipe-dialog-icon" />
-      <Chip label={`Serves ${servings}`} />
+      {`Serves ${servings}`}
     </div>
   )
 }
