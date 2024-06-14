@@ -229,21 +229,21 @@ const MenuChoices = () => {
                         </div>
 
                         <div className="menuChoices-drawer-item">
-                          <PublicIcon sx={{ height: "0.75em" }} />
+                          <PublicIcon sx={{ height: "0.5em" }} />
                           <div>
                             {`${(choice.recipe.cuisineType[0]).charAt(0).toUpperCase() + (choice.recipe.cuisineType[0]).slice(1)}`}
                           </div>
                         </div>
 
                         <div className="menuChoices-drawer-item">
-                          <BarChartIcon sx={{ height: "0.75em" }} />
+                          <BarChartIcon sx={{ height: "0.5em" }} />
                           <div>
                             {`${Math.round((choice.recipe.totalNutrients.ENERC_KCAL.quantity) / (choice.recipe.yield))} calories`}
                           </div>
                         </div>
 
                         <div className="menuChoices-drawer-item">
-                          <TimerIcon sx={{ height: "0.75em" }} />
+                          <TimerIcon sx={{ height: "0.55em" }} />
                           <div>
                             {`${choice.recipe.totalTime} minutes`}
                           </div>
