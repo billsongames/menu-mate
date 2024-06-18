@@ -11,7 +11,6 @@ import ProgressDisplay from "./ProgressDisplay";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
-import { BiFontSize } from "react-icons/bi";
 
 
 const RecipesHome = () => {
@@ -33,10 +32,10 @@ const RecipesHome = () => {
 
   const [recipeList, setRecipeList] = useState({})
 
-/*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&random=true` */
+  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&random=true` */
 
-  const searchURL = 
-`https://api.edamam.com/search?
+  const searchURL =
+    `https://api.edamam.com/search?
 q=
 &from=${from}
 &to=${to}
@@ -77,8 +76,8 @@ q=
         })
     }
     getRecipeList()
-
   }, [])
+
 
 
   return (
@@ -88,14 +87,14 @@ q=
         <React.Fragment>
           <Typography sx={sx_title}>Recipes, recipes, recipes...</Typography>
           <div className="recipe-selection-container">
-          {recipeList.slice(0, next).map((recipe, index) => (
+            {recipeList.slice(0, next).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
           <div>
             {next < recipeList.length && (
               <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )}            
+            )}
           </div>
         </React.Fragment>
         :

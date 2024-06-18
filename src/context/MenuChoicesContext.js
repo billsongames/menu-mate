@@ -6,31 +6,31 @@ function MenuChoicesProvider(props) {
 
   const menuChoicesDefault = [
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     },
     {
-      recipe : {},
+      recipe: {},
       complete: false
     }
   ]
@@ -40,26 +40,17 @@ function MenuChoicesProvider(props) {
     complete: false
   }
 
-
-  /*   const [menuChoices, setMenuChoices] = useState(menuChoicesDefault) */
-  const [menuChoices, setMenuChoices] = useState()
+  const [menuChoices, setMenuChoices] = useState(menuChoicesDefault)
 
   const addToMenuChoices = (event) => {
     event.preventDefault()
 
-    console.log(JSON.parse(event.target.dataset.completerecipe))
-
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
     const targetIndex = choiceData.findIndex(choice => choice.complete === false)
 
-    if (targetIndex === -1){ 
+    if (targetIndex === -1) {
       return
     } else {
-/*       choiceData[targetIndex].recipe_uri = event.target.dataset.recipeuri
-      choiceData[targetIndex].img = event.target.dataset.imageurl
-      choiceData[targetIndex].title = event.target.dataset.title
-      choiceData[targetIndex].ingredients = JSON.parse(event.target.dataset.ingredients) */
-
       choiceData[targetIndex].recipe = JSON.parse(event.target.dataset.completerecipe)
       choiceData[targetIndex].complete = true
 
@@ -85,15 +76,15 @@ function MenuChoicesProvider(props) {
     }
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("MenuMate_MenuChoices") === null) {
-      setMenuChoices(menuChoicesDefault)
-      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
-    }
-    else {
-      setMenuChoices(JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-    }
-  }, [])
+    useEffect(() => {
+      if (localStorage.getItem("MenuMate_MenuChoices") === null) {
+        setMenuChoices(menuChoicesDefault)
+        localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
+      }
+      else {
+        setMenuChoices(JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+      }
+    }, [])
 
   return (
     <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, addToMenuChoices, removeMenuChoice }}>

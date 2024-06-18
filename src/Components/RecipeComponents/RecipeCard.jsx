@@ -33,6 +33,7 @@ const RecipeCard = ({ recipe }) => {
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [open, setOpen] = useState(false)
 
+  const { menuChoices } = useContext(MenuChoicesContext)
   const { addToMenuChoices } = useContext(MenuChoicesContext)
 
   const handleOpenRecipeCard = async (event) => {
@@ -44,6 +45,7 @@ const RecipeCard = ({ recipe }) => {
 
   const handleAddToMenuChoices = (event) => {
     event.preventDefault()
+    console.log(menuChoices)
     addToMenuChoices(event)
   }
 
@@ -52,6 +54,7 @@ const RecipeCard = ({ recipe }) => {
   }
 
   const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+
   const targetIndex = choiceData.findIndex(choice => choice.recipe.uri === recipe.recipe.uri)
 
 
@@ -113,7 +116,7 @@ const RecipeCard = ({ recipe }) => {
               View details
             </Button>
 
-            {targetIndex == -1
+            {targetIndex === -1
               ?
               <Button
                 size="small"
@@ -181,7 +184,7 @@ const RecipeCard = ({ recipe }) => {
 
           </DialogContent>
           <DialogActions>
-          {targetIndex == -1
+          {targetIndex === -1
               ?
               <Button
                 size="small"

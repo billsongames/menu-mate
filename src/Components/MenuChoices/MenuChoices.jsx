@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
+import { DisplayModeContext } from "../../context/DisplayModeContext";
 import ClearIcon from '@mui/icons-material/Clear';
 
 import Button from '@mui/material/Button';
@@ -45,6 +47,10 @@ const MenuChoices = () => {
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [dialogOpen, setDialogOpen] = useState(false)
 
+  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+
+  const navigate = useNavigate()
+
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
     /* setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
@@ -67,6 +73,11 @@ const MenuChoices = () => {
     setDrawerOpen(!drawerOpen)
   }
 
+  const handleContinueToIngredientsClick = () =>{
+    navigate("/ingredients-summary")
+
+  }
+
   return (
     <div>
       {menuChoices
@@ -76,7 +87,13 @@ const MenuChoices = () => {
             <div key={index} className="menuChoices-slot">
               {choice.complete === true
                 ?
-                <img src={choice.recipe.image} title={choice.recipe.label} data-recipelink={choice.recipe.uri} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
+                <img
+                  src={choice.recipe.image}
+                  title={choice.recipe.label}
+                  data-recipelink={choice.recipe.uri}
+                  data-completerecipe={JSON.stringify(choice.recipe)}
+/*                   onClick={handleOpenRecipeCard} */
+                />
                 :
                 <img src={defaultMenuChoiceImage} title="Choose a recipe" />
               }
@@ -89,8 +106,8 @@ const MenuChoices = () => {
                         pointerEvents: "none",
                         width: "1em",
                         zIndex: "-1",
-                        "&:hover" : {fill: "blue"}
-                        
+                        "&:hover": { fill: "blue" }
+
                       }}
                     />
                   </div>
@@ -157,6 +174,8 @@ const MenuChoices = () => {
         : <></>
       }
 
+
+
       <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer}>
         <Card sx={{ height: "100%" }}>
           <div className="menuChoices-drawer-header">
@@ -201,7 +220,12 @@ const MenuChoices = () => {
                       {choice.complete === true
                         ?
                         <React.Fragment>
-                          <img src={choice.recipe.image} title={choice.recipe.label} data-completerecipe={JSON.stringify(choice.recipe)} onClick={handleOpenRecipeCard} />
+                          <img
+                            src={choice.recipe.image}
+                            title={choice.recipe.label}
+                            data-completerecipe={JSON.stringify(choice.recipe)}
+/*                             onClick={handleOpenRecipeCard} */
+                          />
                           <div>
                             <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
                               <ClearIcon
@@ -283,7 +307,7 @@ const MenuChoices = () => {
             :
             <></>
           }
-          
+
           <CardActions
             sx={{
               display: "flex",
@@ -292,11 +316,11 @@ const MenuChoices = () => {
             }}
           >
             <div>
-              <Button>
+              <Button onClick={() => handleContinueToIngredientsClick()} /* href="/ingredients-summary" */>
                 CONTINUE TO INGREDIENTS
               </Button>
             </div>
-            
+
           </CardActions>
         </Card>
 

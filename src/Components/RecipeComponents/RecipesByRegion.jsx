@@ -22,6 +22,8 @@ import { paginationData } from "../../api/paginationData";
 
 const RecipesByRegion = () => {
 
+  const [foodCategories, setFoodCategories] = useState([])
+
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
@@ -112,6 +114,13 @@ q=
     getRecipeList()
   }, [region])
 
+  const foodCategoriesPopulate = () => {
+    recipeList.map((recipe) => (
+      foodCategories.push(recipe.recipe.ingredients[0].foodCategory))
+    )  
+    console.log(foodCategories)
+  }
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -120,6 +129,7 @@ q=
 
   return (
     <section>
+            <button onClick={foodCategoriesPopulate}>populate</button>
 
       {recipeList.length > 0
         ?
