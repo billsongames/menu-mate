@@ -23,7 +23,7 @@ const IngredientsSummaryContainer = () => {
   return(
     <React.Fragment>
       <div>
-        <Button sx={{color: "black"}}>BACK TO RECIPES</Button>
+        <Button>BACK TO RECIPES</Button>
       </div>
       
       <IngredientsMenuDisplay />

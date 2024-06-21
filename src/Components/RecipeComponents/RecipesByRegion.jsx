@@ -114,11 +114,19 @@ q=
     getRecipeList()
   }, [region])
 
+  const foodCategoriesFunc = (recipe) => {
+    const length = recipe.ingredients.length
+    for (let i=0; i<length; i++) {
+      foodCategories.push(recipe.ingredients[i].foodCategory)
+      } 
+    }
+
   const foodCategoriesPopulate = () => {
-    recipeList.map((recipe) => (
-      foodCategories.push(recipe.recipe.ingredients[0].foodCategory))
-    )  
-    console.log(foodCategories)
+    recipeList.map((recipe) => {
+      foodCategoriesFunc(recipe.recipe)
+    })
+    const list = [...new Set(foodCategories)]
+    console.log(list)
   }
 
 
