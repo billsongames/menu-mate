@@ -7,6 +7,10 @@ import { DisplayModeContext } from "../../context/DisplayModeContext";
 import "./home.css"
 
 
+
+import {foodCategories} from "../../data/foodCategories"
+
+
 const Home = () => {
 
   useEffect(() => {
@@ -18,9 +22,17 @@ const Home = () => {
   const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
 
   const handleBeginButtonClick = () => {
+
+    const list = foodCategories.filter((value,index) => foodCategories.indexOf(value) === index)
+    console.log(list)
+
+
+
+
+
+
     toggleDisplayMode("recipes")
     navigate("/recipes")
-
   }
 
   const imageData = [
