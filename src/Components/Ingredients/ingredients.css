@@ -1,3 +1,8 @@
+.ingredients-summary-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
 .ingredients-menuChoices-container{
   display: flex;
   flex-direction: column;

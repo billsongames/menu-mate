@@ -4,34 +4,39 @@ import { DisplayModeContext } from "../../context/DisplayModeContext"
 
 import MenuChoices from "../MenuChoices/MenuChoices";
 import IngredientsMenuDisplay from "./IngredientsMenuDisplay";
+import IngredientsShoppingList from "./IngredientsShoppingList";
 
 import {
   Button,
   Card
-  } from "@mui/material";
+} from "@mui/material";
 
 const IngredientsSummaryContainer = () => {
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("ingredients")
-  },[])
+  }, [])
 
 
 
 
-  return(
+  return (
     <React.Fragment>
       <div>
-        <Button sx={{color: "black"}}>BACK TO RECIPES</Button>
+        <Button sx={{ color: "black" }}>BACK TO RECIPES</Button>
       </div>
-      
-      <IngredientsMenuDisplay />
+      <div className="ingredients-summary-container">
+        <IngredientsMenuDisplay />
+        <IngredientsShoppingList />
+      </div>
 
-      
 
-      
-      
+
+
+
+
+
 
     </React.Fragment>
   )
