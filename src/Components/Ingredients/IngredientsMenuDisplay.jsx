@@ -14,13 +14,8 @@ import "./ingredients.css"
 
 
 const IngredientsMenuDisplay = () => {
+
   const { menuChoices } = useContext(MenuChoicesContext)
-
-
-
-
-
-
 
   return (
     <div>

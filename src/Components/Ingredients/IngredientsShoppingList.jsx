@@ -1,22 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { foodCategories } from "../../data/foodCategorries";
+import Checkbox from '@mui/material/Checkbox';
+
+import { MenuChoicesContext } from "../../context/MenuChoicesContext";
+
+import { filteredFoodCategories } from "../../data/filteredFoodCategories";
 
 const IngredientsShoppingList = () => {
 
-  const [filteredList, setFilteredList] = useState([...new Set(foodCategories)])
+  const { menuChoices } = useContext(MenuChoicesContext)
+  const [ingredientsList, setIngredientsList] = useState([])
 
-  console.log(filteredList)
+  useEffect(() => {
+    const list = []
+    menuChoices.map((choice) => {
+      if (choice.complete === true) {
+        console.log(choice)
+        const length = choice.recipe.ingredients.length
+        for (let i = 0; i < length; i++) {
+          list.push(choice.recipe.ingredients[i].text)
+        }
+      }
+    })
+    console.log(list)
+    setIngredientsList(list)
+  }, [menuChoices])
+
+
+
+
 
   return (
     <div className="shoppingList">
-      {filteredList.map((item, index) => (
-        <div key={index}>
-          {item}
-        </div>
+      {ingredientsList
+        ?
+        <ul>
+          {ingredientsList.map((ingredient, index) => {
+            return(
+              <li key={index}>
+                {ingredient}
+              </li>
+            )  
+            })
+          }
+        </ul>
+        :
+        <></>
 
+      }
 
-      ))}
     </div>
   )
 }

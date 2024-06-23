@@ -35,3 +35,10 @@
   font-weight: bold;
   text-align: left;
 }
+
+.shoppingList {
+  background-color: red;
+  margin: 1em;
+  border-radius: 4px;
+  text-align: left;
+}
