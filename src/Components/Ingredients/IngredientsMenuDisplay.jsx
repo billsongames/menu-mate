@@ -43,9 +43,6 @@ const IngredientsMenuDisplay = () => {
 
               </div>
             ))}
-            <div>
-              <Button>Generate Shopping List</Button>
-            </div>
           </div>
 
         </React.Fragment>

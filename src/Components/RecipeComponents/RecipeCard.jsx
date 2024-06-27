@@ -31,7 +31,7 @@ import "./recipeComponents.css";
 const RecipeCard = ({ recipe }) => {
 
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
-  const [open, setOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const { menuChoices } = useContext(MenuChoicesContext)
   const { addToMenuChoices } = useContext(MenuChoicesContext)
@@ -40,7 +40,7 @@ const RecipeCard = ({ recipe }) => {
     event.preventDefault()
 /*     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
     setRecipeChoiceDetails(JSON.parse(event.target.dataset.completerecipe))
-    setOpen(true);
+    setDialogOpen(true);
   }
 
   const handleAddToMenuChoices = (event) => {
@@ -50,7 +50,7 @@ const RecipeCard = ({ recipe }) => {
   }
 
   const handleCloseRecipeChoiceCard = () => {
-    setOpen(false)
+    setDialogOpen(false)
   }
 
   const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
@@ -154,7 +154,7 @@ const RecipeCard = ({ recipe }) => {
       {recipeChoiceDetails != null
         ?
         <Dialog
-          open={open}
+          open={dialogOpen}
           fullWidth={true}
           maxWidth="sm"
           onClose={handleCloseRecipeChoiceCard}
@@ -163,8 +163,8 @@ const RecipeCard = ({ recipe }) => {
           aria-describedby="scroll-dialog-description"
           PaperProps={{ sx: { height: "56em" } }}
         >
-
-          <DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+<DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+          
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
               <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />

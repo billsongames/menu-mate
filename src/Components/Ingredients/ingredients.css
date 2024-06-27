@@ -1,6 +1,6 @@
 .ingredients-summary-container {
-  display: grid;
-  grid-template-columns: 40% 60%;
+  display: flex;
+  flex-direction: row;
 }
 
 .ingredients-menuChoices-container{
@@ -37,8 +37,9 @@
 }
 
 .shoppingList {
-  background-color: red;
+  background-color: #8FBA74;
   margin: 1em;
+  padding: 1em;
   border-radius: 4px;
   text-align: left;
 }
