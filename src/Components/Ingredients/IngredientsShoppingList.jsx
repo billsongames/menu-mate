@@ -12,50 +12,55 @@ import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 
 import { filteredFoodCategories } from "../../data/filteredFoodCategories";
 
+import logo from "../../assets/logo/menumate-logo-256x64-light.png"
+
 const IngredientsShoppingList = () => {
 
   const { menuChoices } = useContext(MenuChoicesContext)
-  const [ingredientsList, setIngredientsList] = useState([])
+  const [ingredientsJSX, setIngredientsJSX] = useState([])
   const [shoppingList, setShoppingList] = useState([])
-
-  const [checkedState, setCheckedState] = useState([])
-
   const [dialogOpen, setDialogOpen] = useState(false)
 
-
-
   useEffect(() => {
-    const list = []
-    const checkArray = []
+    const jsxElements = []
+    const listArray = []
+
     menuChoices.map((choice) => {
       if (choice.complete === true) {
         console.log(choice)
-        const length = choice.recipe.ingredients.length
+        const length = choice.recipe.ingredientLines.length
+        jsxElements.push(
+          <div className="ingredients-list-slot-title">{choice.recipe.label}</div>
+        )
+
         for (let i = 0; i < length; i++) {
-          list.push(choice.recipe.ingredients[i].text)
-          checkArray.push(false)
+          jsxElements.push(
+            <div className="ingredients-list-slot-list-item" key={`${choice.recipe.label}-${i}`}>
+              <input
+                type="checkbox"
+                className="checkbox"
+                value={choice.recipe.ingredientLines[i]}
+                onChange={() => handleCheckboxChange()}
+              />
+              <label htmlFor={`checkbox-${choice.recipe.label}-${i}`}>
+                {choice.recipe.ingredientLines[i]}
+              </label>
+            </div>
+          )
+
+          listArray.push(choice.recipe.ingredientLines[i])
         }
       }
     })
 
-    setIngredientsList(list)
-    setCheckedState(checkArray)
+    setIngredientsJSX(jsxElements)
 
   }, [menuChoices])
 
-  const handleCheckboxChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    )
-    setCheckedState(updatedCheckedState)
 
-    let array = []
-    let checkboxes = document.querySelectorAll("input[type=checkbox]:checked")
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      array.push(checkboxes[i].value)
-    }
-    setShoppingList(array)
+  const handleCheckboxChange = () => {
+    const data = [...document.querySelectorAll(".checkbox:checked")].map(event => event.value)
+    setShoppingList(data)
   }
 
   const handleOpenShoppingList = () => {
@@ -66,64 +71,43 @@ const IngredientsShoppingList = () => {
     setDialogOpen(false)
   }
 
-
-
-
-
-
-
   return (
-    <div className="shoppingList">
-      <div>
+    <div className="ingredients-list-container">
+      <div className="ingredients-list-title">
         FULL INGREDIENT LIST - TICK THE ONES YOU NEED
       </div>
 
-      {ingredientsList
+      {ingredientsJSX
         ?
         <div>
           <Button onClick={handleOpenShoppingList}>GENERATE SHOPPING LIST</Button>
-          <ul>
-            {ingredientsList.map((ingredient, index) => {
-              return (
-                <li key={index}>
-                  <input
-                    type="checkbox"
-                    id={`checkbox-${index}`}
-                    name={ingredient}
-                    value={ingredient}
-                    checked={checkedState[index]}
-                    onChange={() => handleCheckboxChange(index)}
-                  />
-                  <label htmlFor={`checkbox-${index}`}>
-                    {ingredient}
-                  </label>
-                </li>
-              )
-            })
-            }
-          </ul>
+          {ingredientsJSX}
         </div>
         :
         <></>
-
       }
       <Dialog
         open={dialogOpen}
         fullWidth={true}
-        maxWidth="sm"
+        maxWidth="md"
         onClose={handleCloseShoppingList}
         scroll="paper"
-        PaperProps={{ sx: { height: "56em" } }}
+        PaperProps={{ sx: { height: "56em", backgroundColor: "wheat" } }}
       >
-        <DialogTitle variat="h6" fontWeight={"bold"}>SHOPPING LIST</DialogTitle>
+
         <DialogContent>
+          <img src={logo} />
+          <DialogTitle variat="h6" fontWeight={"bold"}>SHOPPING LIST</DialogTitle>
           {shoppingList
             ?
-            <ul>
+            <ul className="shoppingList">
               {shoppingList.map((ingredient, index) => {
                 return (
                   <li key={index}>
-                    {ingredient}
+                    <div className="shoppingList-item">
+                      {ingredient}
+                    </div>
+
                   </li>
                 )
               })}

@@ -37,7 +37,7 @@ const IngredientsMenuDisplay = () => {
                   :
                   <img src={defaultMenuChoiceImage} title="Choose a recipe" />
                 }
-                <div className="ingredients-menuChoices-drawer-label">
+                <div className="ingredients-menuChoices-slot-label">
                   {choice.recipe.label}
                 </div>
 

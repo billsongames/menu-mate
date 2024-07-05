@@ -7,25 +7,32 @@ import MenuChoices from "../MenuChoices/MenuChoices";
 import IngredientsMenuDisplay from "./IngredientsMenuDisplay";
 import IngredientsShoppingList from "./IngredientsShoppingList";
 
-import {
-  Button,
-  Card
-} from "@mui/material";
+import { Button } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
 
 const IngredientsSummaryContainer = () => {
+
+  const navigate = useNavigate()  
+
   const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("ingredients")
   }, [])
 
+  const handleBackToRecipesClick = () => {
+    toggleDisplayMode("recipes")
+    navigate("/recipes")
+  }
+
 
 
 
   return (
     <React.Fragment>
-      <div>
-        <Button sx={{ color: "black" }}>BACK TO RECIPES</Button>
+      <div className="ingredients-summary">
+        <Button onClick={handleBackToRecipesClick}>BACK TO RECIPES</Button>
       </div>
       <div className="ingredients-summary-container">
         <IngredientsMenuDisplay />
