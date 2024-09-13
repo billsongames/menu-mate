@@ -137,8 +137,6 @@ q=
 
   return (
     <section>
-            <button onClick={foodCategoriesPopulate}>populate</button>
-
       {recipeList.length > 0
         ?
         <React.Fragment>
