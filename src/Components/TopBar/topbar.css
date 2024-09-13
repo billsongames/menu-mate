@@ -7,14 +7,14 @@
   top: 0;
   z-index: 1;
   background-color: #8FBA74;
-  height: 5em;
+  height: 3em;
   overflow: hidden;
 
 }
 
 .topbar-logo {
   padding: 0 1em 0 0.5em;
-  height: 4em
+  height: 2em
 }
 
 .Mui-selected {
@@ -23,14 +23,7 @@
 
 
 
-@media only screen and (max-width: 480px) {
-  .topbar-container{
-    height: 3em
-  }
-  .topbar-logo{
-    height: 2em
-  }
-}
+
 
 @media only screen and (min-width: 480px) {
   .topbar-container{

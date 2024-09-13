@@ -1,5 +1,6 @@
-.navBarRegion-container{
+.navBarRegion-container-desktop{
   margin: auto;
+  display: none;
 }
 
 .region-button {
@@ -7,33 +8,48 @@
   width: 9em;
   height: 2em;
   border-radius: 100px;
-  cursor: pointer
+  cursor: pointer;
+  font-size: 0.75em;
 }
 
 .region-button:hover {
   background-color: #8FBA74
 }
 
+.regionsDrawer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10em
+}
 
 
 
 
 
 
-@media only screen and (max-width: 480px) {
+
+/* @media only screen and (max-width: 480px) {
   .region-button{
     width: 9em;
     font-size: 0.5em;
   }
 
-}
+} */
 
 @media only screen and (min-width: 480px) {
-
 
 }
 
 @media only screen and (min-width: 768px) {
+  .navBarRegion-container-mobile{
+    display: none;
+  }
+
+
+  .navBarRegion-container-desktop{
+    display: block;
+  }
 
 
 }
