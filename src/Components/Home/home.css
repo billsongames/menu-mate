@@ -1,18 +1,50 @@
 .home-container {
-  padding: 1em;
   position: relative;
+  background-color: wheat;
 }
 
 .home-image{
-  width: 80%;
+  width: 100%
+
 }
 
 #home-text{
   position: absolute;
+  padding: 1em;
   top: 10%;
   left: 15%;
   width: 70%;
   font-size: 4em;
   color: white;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 480px) {
+  #home-text {
+    font-size: 1em
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  #home-text {
+    font-size: 2em
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #home-text {
+    font-size: 3em
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #home-text {
+    font-size: 4em
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #home-text {
+    font-size: 4em
+  }
 }

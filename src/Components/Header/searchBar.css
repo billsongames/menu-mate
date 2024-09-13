@@ -8,7 +8,7 @@
 .searchbar-title {
   position: absolute;
   text-align: left;
-  padding: 0.25em 0;
+  padding: 0.5em 0;
   width: 90%;
   top: 0;
   left: 5%;
@@ -46,4 +46,42 @@
 
 .searchbar-icon:hover {
   scale: 1.4
+}
+
+
+
+
+
+@media only screen and (max-width: 480px) {
+  .searchbar-container{
+    height: 2em
+  }
+  .searchbar-title{
+    font-size: 1.5em;
+  }
+  #searchbar-wrapper{
+    height: 1em;
+    top: 3em
+  }
+
+}
+
+@media only screen and (min-width: 480px) {
+
+
+}
+
+@media only screen and (min-width: 768px) {
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }

@@ -8,18 +8,18 @@ import "./home.css"
 
 
 
-import {foodCategories} from "../../data/foodCategories"
+import { foodCategories } from "../../data/foodCategories"
 
 
 const Home = () => {
 
   useEffect(() => {
     toggleDisplayMode("home")
-  },[])
+  }, [])
 
   const navigate = useNavigate()
 
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   const handleBeginButtonClick = () => {
     toggleDisplayMode("recipes")
@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div>
-        <img src={imageData[1].img} className="home-image" />
+        <img src={imageData[2].img} className="home-image" />
         <div id="home-text">
           <div>Add the recipes</div>
           <div>Create the menu</div>
@@ -55,7 +55,6 @@ const Home = () => {
           <button onClick={() => handleBeginButtonClick()}>BEGIN</button>
         </div>
       </div>
-
     </div>
   )
 }

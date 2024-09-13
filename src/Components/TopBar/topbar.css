@@ -7,7 +7,8 @@
   top: 0;
   z-index: 1;
   background-color: #8FBA74;
-  height: 5em
+  height: 5em;
+  overflow: hidden;
 
 }
 
@@ -18,5 +19,56 @@
 
 .Mui-selected {
   background-color: white;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+  .topbar-container{
+    height: 3em
+  }
+  .topbar-logo{
+    height: 2em
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .topbar-container{
+    height: 3em
+  }
+  .topbar-logo{
+    height: 2em
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+  .topbar-container{
+    height: 4em
+  }
+  .topbar-logo{
+    height: 3em
+  }
+
+}
+
+@media only screen and (min-width: 1024px) {
+  .topbar-container{
+    height: 5em
+  }
+  .topbar-logo{
+    height: 4em
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  .topbar-container{
+    height: 3em
+  }
+  .topbar-logo{
+    height: 2em
+  }
+
 }
 

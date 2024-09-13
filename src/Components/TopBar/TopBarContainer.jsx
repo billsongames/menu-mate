@@ -15,8 +15,6 @@ const TopBarContainer = () => {
         ? <TopBar />
         : <TopBarIngredients />
       }
-
-
     </React.Fragment>
 
   )
