@@ -1,5 +1,10 @@
 import React from "react";
 
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
@@ -31,8 +36,18 @@ const RecipeChoiceNutrients = ({ nutrients }) => {
 
   return (
     <div className="recipe-choice-ingredient-nutrients-container">
-      <Typography variant="h6" fontWeight="bold" >Nutrients</Typography>
-      {list_jsx}
+      <Accordion slotProps={{ heading: { component: 'h6' } }}>
+        <AccordionSummary
+          expandIcon={<ArrowDownwardIcon />}
+        >
+          <b>Nutrients</b>
+        </AccordionSummary>
+        <AccordionDetails>
+          {list_jsx}
+        </AccordionDetails>
+      </Accordion>
+
+
     </div>
   )
 }

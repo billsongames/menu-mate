@@ -146,7 +146,7 @@ const NavBarRegion = () => {
             <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
           ))}
         </div>
-        <button onClick={toggleRegionDrawer}>close</button>
+        <Button onClick={toggleRegionDrawer}>CLOSE</Button>
           
         
 
