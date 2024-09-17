@@ -21,7 +21,7 @@
 }
 
 .recipe-selection-details-container{
-  height: 16em;
+  height: 18em;
   display: grid;
   grid-template-rows: 60% 30% 10%;
 }

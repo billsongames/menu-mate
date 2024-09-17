@@ -69,15 +69,14 @@ const RecipeCard = ({ recipe }) => {
       <Card
         key={recipe.recipe.uri}
         sx={{
-          height: "16em",
           "@media screen and (max-width:480px)": {
             margin: "1em 0",
             width: "100%"
           },
           "@media screen and (min-width:768px)": {
             margin: "1em",
-            width: "20em",
-
+            minWidth: "300px",
+            maxWidth: "300px"
           }
         }}
 
@@ -91,7 +90,7 @@ const RecipeCard = ({ recipe }) => {
             }}
             component="img"
             alt={recipe.recipe.label}
-            height="160"
+            height="180"
             image={recipe.recipe.image}
             data-recipelink={recipe.recipe.uri}
             data-completerecipe={JSON.stringify(recipe.recipe)}
@@ -100,11 +99,16 @@ const RecipeCard = ({ recipe }) => {
           <CardContent>
             <Typography
               gutterBottom
-              variant="h"
-              sx={{
+                 sx={{
                 fontWeight: "bold",
                 textAlign: "left",
-                cursor: "pointer"
+                cursor: "pointer",
+                "@media screen and (max-width:480px)": {
+                  fontSize: "1em"
+                },
+                "@media screen and (min-width:768px)": {
+                  fontSize: "1em"
+                }
               }}
               data-recipelink={recipe.recipe.uri}
               onClick={handleOpenRecipeCard}
@@ -163,77 +167,89 @@ const RecipeCard = ({ recipe }) => {
 
       </Card>
 
-      {recipeChoiceDetails != null
-        ?
-        <Dialog
-          open={dialogOpen}
-          fullWidth={true}
-          maxWidth="sm"
-          onClose={handleCloseRecipeChoiceCard}
-          scroll="paper"
-          aria-labelledby="scroll-dialog-title"
-          aria-describedby="scroll-dialog-description"
-          PaperProps={{ sx: { height: "56em" } }}
-        >
-          <DialogTitle variant="h6" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+      {
+        recipeChoiceDetails != null
+          ?
+          <Dialog
+            open={dialogOpen}
+            fullWidth={true}
+            maxWidth="sm"
+            onClose={handleCloseRecipeChoiceCard}
+            scroll="paper"
+            aria-labelledby="scroll-dialog-title"
+            aria-describedby="scroll-dialog-description"
+            PaperProps={{ sx: { height: "56em" } }}
+          >
+            <DialogTitle
+            sx={{
+              fontWeight: "bold",
+              "@media screen and (max-width:480px)": {
+                fontSize: "1em"
+              },
+              "@media screen and (min-width:768px)": {
+                fontSize: "1.5em"            
+              }
+            }}
+             gutterBottom id="scroll-dialog-title">
+              {recipeChoiceDetails.label}</DialogTitle>
 
-          <DialogContent>
-            <div className="recipe-dialog-image-info-container">
-              <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
-              <div className="recipe-dialog-info-container">
-                <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
-                <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
-                <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
-                <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
-                <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
+            <DialogContent>
+              <div className="recipe-dialog-image-info-container">
+                <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
+                <div className="recipe-dialog-info-container">
+                  <RecipeChoiceRegion region={(recipeChoiceDetails.cuisineType[0]).charAt(0).toUpperCase() + (recipeChoiceDetails.cuisineType[0]).slice(1)} />
+                  <RecipeChoiceCalorieCount calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
+                  <RecipeChoiceCookingTime time={recipeChoiceDetails.totalTime} />
+                  <RecipeChoiceServings servings={recipeChoiceDetails.yield} />
+                  <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
+                </div>
               </div>
-            </div>
-            {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
-            <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
-            <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
+              {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
+              <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
+              <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
 
 
 
-          </DialogContent>
-          <DialogActions>
-            {targetIndex === -1
-              ?
-              <Button
-                size="small"
-                onClick={handleAddToMenuChoices}
-                data-imageurl={recipe.recipe.image}
-                data-title={recipe.recipe.label}
-                data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
-                data-recipeuri={recipe.recipe.uri}
-                data-completerecipe={JSON.stringify(recipe.recipe)}
-              >
-                Add to menu
-              </Button>
-              :
-              <React.Fragment>
-                <Button size="small" disabled={true}>
-                  Added to menu
+            </DialogContent>
+            <DialogActions>
+              {targetIndex === -1
+                ?
+                <Button
+                  size="small"
+                  onClick={handleAddToMenuChoices}
+                  data-imageurl={recipe.recipe.image}
+                  data-title={recipe.recipe.label}
+                  data-ingredients={JSON.stringify(recipe.recipe.ingredients)}
+                  data-recipeuri={recipe.recipe.uri}
+                  data-completerecipe={JSON.stringify(recipe.recipe)}
+                >
+                  Add to menu
                 </Button>
-                <CheckIcon
-                  sx={{
-                    fill: "#8FBA74",
-                    width: "1em"
-                  }}
-                />
+                :
+                <React.Fragment>
+                  <Button size="small" disabled={true}>
+                    Added to menu
+                  </Button>
+                  <CheckIcon
+                    sx={{
+                      fill: "#8FBA74",
+                      width: "1em"
+                    }}
+                  />
 
 
 
-              </React.Fragment>
-            }
-            <Button size="small" onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
-          </DialogActions>
+                </React.Fragment>
+              }
+              <Button size="small" onClick={handleCloseRecipeChoiceCard}>CLOSE</Button>
+            </DialogActions>
 
 
 
-        </Dialog>
-        : <></>
+          </Dialog>
+          : <></>
       }
-    </React.Fragment>
+    </React.Fragment >
   )
 
 
