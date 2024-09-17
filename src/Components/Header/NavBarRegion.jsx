@@ -24,7 +24,7 @@ const NavBarRegion = () => {
 
   const navigate = useNavigate()
 
-  const currentRegion  = useParams()
+  const currentRegion = useParams()
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -46,7 +46,7 @@ const NavBarRegion = () => {
     "Kosher"
   ]
 
-  const regionsThree =[
+  const regionsThree = [
     "Mediterranean",
     "Mexican",
     "Middle Eastern",
@@ -67,7 +67,7 @@ const NavBarRegion = () => {
     "Indian",
     "Italian",
     "Japanese",
-    "Kosher",    "Mediterranean",
+    "Kosher", "Mediterranean",
     "Mexican",
     "Middle Eastern",
     "Nordic",
@@ -103,22 +103,7 @@ const NavBarRegion = () => {
   return (
     <React.Fragment>
 
-    <nav className="navBarRegion-container-desktop">
-{/*       <Typography variant="h5">Recipes by region</Typography> */}
-{/*       <Carousel
-        autoPlay={false}
-        animation="slide"
-        NavButton={({ onClick, className, style, next, prev }) => {
-          // Other logic
-
-          return (
-            <Button onClick={onClick} className={className} style={style}>
-              {next && <ArrowForwardIosIcon sx={{color: "#8FBA74"}} />}
-              {prev && <ArrowBackIosIcon sx={{color: "#8FBA74"}} />}
-            </Button>
-          )
-        }}
-      > */}
+      <nav className="navBarRegion-container-desktop">
         <div>
           {regionsOne.map((region) => (
             <button key={region} id={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
@@ -134,25 +119,24 @@ const NavBarRegion = () => {
             <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
           ))}
         </div>
-{/*       </Carousel> */}
-    </nav>
+      </nav>
 
-    <nav className="navBarRegion-container-mobile">
-      <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
-      <Drawer open={drawerOpen} anchor="left">
-        <div className="regionsDrawer">
-          REGIONS
-          {allRegions.map((region)=> (
-            <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
-          ))}
-        </div>
-        <Button onClick={toggleRegionDrawer}>CLOSE</Button>
-          
-        
+      <nav className="navBarRegion-container-mobile">
+        <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
+        <Drawer open={drawerOpen} anchor="left">
+          <div className="regionsDrawer">
+            REGIONS
+            {allRegions.map((region) => (
+              <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
+            ))}
+          </div>
+          <Button onClick={toggleRegionDrawer}>CLOSE</Button>
 
-      </Drawer>
 
-    </nav>
+
+        </Drawer>
+
+      </nav>
     </React.Fragment>
   )
 }

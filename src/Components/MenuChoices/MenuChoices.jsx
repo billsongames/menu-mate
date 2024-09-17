@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 import { DisplayModeContext } from "../../context/DisplayModeContext";
 import ClearIcon from '@mui/icons-material/Clear';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+
+
+import Box from '@mui/material/Box';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -47,7 +52,7 @@ const MenuChoices = () => {
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [dialogOpen, setDialogOpen] = useState(false)
 
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   const navigate = useNavigate()
 
@@ -73,54 +78,61 @@ const MenuChoices = () => {
     setDrawerOpen(!drawerOpen)
   }
 
-  const handleContinueToIngredientsClick = () =>{
+  const handleContinueToIngredientsClick = () => {
     navigate("/ingredients-summary")
 
   }
 
   return (
     <div>
-      {menuChoices
-        ?
-        <div className="menuChoices-container">
-          {menuChoices.map((choice, index) => (
-            <div key={index} className="menuChoices-slot">
-              {choice.complete === true
-                ?
-                <img
-                  src={choice.recipe.image}
-                  title={choice.recipe.label}
-                  data-recipelink={choice.recipe.uri}
-                  data-completerecipe={JSON.stringify(choice.recipe)}
-/*                   onClick={handleOpenRecipeCard} */
-                />
-                :
-                <img src={defaultMenuChoiceImage} title="Choose a recipe" />
-              }
-              {choice.complete === true
-                ? <div>
-                  <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                    <ClearIcon
-                      sx={{
-                        fill: "#8FBA74",
-                        pointerEvents: "none",
-                        width: "1em",
-                        zIndex: "-1",
-                        "&:hover": { fill: "blue" }
+      <div className="menuChoices-desktop">
+        {menuChoices
+          ?
+          <div className="menuChoices-container">
+            {menuChoices.map((choice, index) => (
+              <div key={index} className="menuChoices-slot">
+                {choice.complete === true
+                  ?
+                  <img
+                    src={choice.recipe.image}
+                    title={choice.recipe.label}
+                    data-recipelink={choice.recipe.uri}
+                    data-completerecipe={JSON.stringify(choice.recipe)}
+                  /*                   onClick={handleOpenRecipeCard} */
+                  />
+                  :
+                  <img src={defaultMenuChoiceImage} title="Choose a recipe" />
+                }
+                {choice.complete === true
+                  ? <div>
+                    <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                      <ClearIcon
+                        sx={{
+                          fill: "#8FBA74",
+                          pointerEvents: "none",
+                          width: "1em",
+                          zIndex: "-1",
+                          "&:hover": { fill: "blue" }
 
-                      }}
-                    />
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                : <></>
-              }
-            </div>
-          ))}
-          <button onClick={toggleDrawer}>View menu</button>
-        </div>
-        :
-        <></>
-      }
+                  : <></>
+                }
+              </div>
+            ))}
+            <button onClick={toggleDrawer}>View menu</button>
+          </div>
+          :
+          <></>
+        }
+      </div>
+
+      <div className="menuChoices-mobile">
+        <button onClick={toggleDrawer}>View menu</button>
+      </div>
+
 
 
 
@@ -176,13 +188,14 @@ const MenuChoices = () => {
 
 
 
-      <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer}>
+      <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer} >
+        <Box sx={{width: 300}}>
         <Card sx={{ height: "100%" }}>
           <div className="menuChoices-drawer-header">
             <div className="menuChoices-drawer-header-close">
               <div className="menuChoices-drawer-header-clearButton-container">
                 <div className="menuChoices-drawer-clearButton" onClick={toggleDrawer} >
-                  <ClearIcon
+                  <ArrowForwardIcon
                     sx={{
                       fill: "#8FBA74",
                       pointerEvents: "none",
@@ -224,7 +237,7 @@ const MenuChoices = () => {
                             src={choice.recipe.image}
                             title={choice.recipe.label}
                             data-completerecipe={JSON.stringify(choice.recipe)}
-/*                             onClick={handleOpenRecipeCard} */
+                          /*                             onClick={handleOpenRecipeCard} */
                           />
                           <div>
                             <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
@@ -252,7 +265,7 @@ const MenuChoices = () => {
                           {choice.recipe.label}
                         </div>
 
-                        <div className="menuChoices-drawer-item">
+{/*                         <div className="menuChoices-drawer-item">
                           <PublicIcon sx={{ height: "0.5em" }} />
                           <div>
                             {`${(choice.recipe.cuisineType[0]).charAt(0).toUpperCase() + (choice.recipe.cuisineType[0]).slice(1)}`}
@@ -271,7 +284,7 @@ const MenuChoices = () => {
                           <div>
                             {`${choice.recipe.totalTime} minutes`}
                           </div>
-                        </div>
+                        </div> */}
 
 
                       </div>
@@ -323,6 +336,9 @@ const MenuChoices = () => {
 
           </CardActions>
         </Card>
+
+        </Box>
+
 
       </Drawer>
 

@@ -103,7 +103,10 @@ const TopBar = () => {
               </MenuItem>
             </Menu>
           </div>
-          <MenuChoices />
+          <div className="topbar-menu-desktop">
+            <MenuChoices />
+          </div>
+
 
         </React.Fragment>
 
