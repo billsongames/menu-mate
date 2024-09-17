@@ -32,9 +32,9 @@ const RecipesByIngredient = () => {
   const { ingredient } = useParams()
   const [ingredientHeading, setIngredientHeading] = useState(null)
 
-/*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}` */
-  const searchURL = 
-`https://api.edamam.com/search?
+  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}` */
+  const searchURL =
+    `https://api.edamam.com/search?
 q=${ingredient}
 &from=${from}
 &to=${to}
@@ -116,16 +116,28 @@ q=${ingredient}
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography sx={sx_title}>{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
+          <Typography sx={{
+
+            "@media screen and (max-width:480px)": {
+              fontSize: "1.5em",
+              fontWeight: "bold"
+            },
+            "@media screen and (min-width:768px)": {
+              fontSize: "2em",
+              fontWeight: "bold"
+            }
+          }}>
+            {ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes
+          </Typography>
           <div className="recipe-selection-container">
-          {recipeList.slice(0, next).map((recipe, index) => (
+            {recipeList.slice(0, next).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
           <div>
             {next < recipeList.length && (
               <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )}            
+            )}
           </div>
         </React.Fragment>
         :

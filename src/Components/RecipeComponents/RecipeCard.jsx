@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 
@@ -29,6 +30,8 @@ import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
 
 const RecipeCard = ({ recipe }) => {
+
+  const mediaMobile = useMediaQuery("(max-width:480px)")
 
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -66,11 +69,19 @@ const RecipeCard = ({ recipe }) => {
       <Card
         key={recipe.recipe.uri}
         sx={{
-          margin: "1em",
-          maxWidth: "20em",
-          minWidth: "20em",
-          height: "22em",
+          height: "16em",
+          "@media screen and (max-width:480px)": {
+            margin: "1em 0",
+            width: "100%"
+          },
+          "@media screen and (min-width:768px)": {
+            margin: "1em",
+            width: "20em",
+
+          }
         }}
+
+
         data-recipelink={recipe.recipe.uri}
       >
         <div className="recipe-selection-details-container">
@@ -80,7 +91,7 @@ const RecipeCard = ({ recipe }) => {
             }}
             component="img"
             alt={recipe.recipe.label}
-            height="200"
+            height="160"
             image={recipe.recipe.image}
             data-recipelink={recipe.recipe.uri}
             data-completerecipe={JSON.stringify(recipe.recipe)}
@@ -89,8 +100,9 @@ const RecipeCard = ({ recipe }) => {
           <CardContent>
             <Typography
               gutterBottom
-              variant="h6"
+              variant="h"
               sx={{
+                fontWeight: "bold",
                 textAlign: "left",
                 cursor: "pointer"
               }}
