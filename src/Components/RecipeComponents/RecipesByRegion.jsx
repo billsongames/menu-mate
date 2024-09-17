@@ -116,10 +116,10 @@ q=
 
   const foodCategoriesFunc = (recipe) => {
     const length = recipe.ingredients.length
-    for (let i=0; i<length; i++) {
+    for (let i = 0; i < length; i++) {
       foodCategories.push(recipe.ingredients[i].foodCategory)
-      } 
     }
+  }
 
   const foodCategoriesPopulate = () => {
     recipeList.map((recipe) => {
@@ -137,20 +137,11 @@ q=
 
   return (
     <section>
-            <button onClick={foodCategoriesPopulate}>populate</button>
-
       {recipeList.length > 0
         ?
         <React.Fragment>
           <Typography sx={sx_title}>{region} recipes</Typography>
           Page {page} / 8
-          <div>
-            
-
-            {/*             {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )} */}
-          </div>
           <div className="recipe-selection-container">
 
 

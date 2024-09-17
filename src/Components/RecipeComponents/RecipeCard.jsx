@@ -38,7 +38,7 @@ const RecipeCard = ({ recipe }) => {
 
   const handleOpenRecipeCard = async (event) => {
     event.preventDefault()
-/*     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
+    /*     setRecipeChoiceDetails(await recipeLookUp((event.target.dataset.recipelink).slice(51))) */
     setRecipeChoiceDetails(JSON.parse(event.target.dataset.completerecipe))
     setDialogOpen(true);
   }
@@ -163,8 +163,8 @@ const RecipeCard = ({ recipe }) => {
           aria-describedby="scroll-dialog-description"
           PaperProps={{ sx: { height: "56em" } }}
         >
-<DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
-          
+          <DialogTitle variant="h5" fontWeight="bold" gutterBottom id="scroll-dialog-title">{recipeChoiceDetails.label}</DialogTitle>
+
           <DialogContent>
             <div className="recipe-dialog-image-info-container">
               <img src={recipeChoiceDetails.image} className="recipe-dialog-image" />
@@ -184,7 +184,7 @@ const RecipeCard = ({ recipe }) => {
 
           </DialogContent>
           <DialogActions>
-          {targetIndex === -1
+            {targetIndex === -1
               ?
               <Button
                 size="small"

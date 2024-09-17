@@ -12,6 +12,9 @@ import "./recipeComponents.css";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
+import PaginationButtons from "./PaginationButtons";
+
+import { paginationData } from "../../api/paginationData";
 
 
 const RecipesByIngredient = () => {
@@ -19,15 +22,27 @@ const RecipesByIngredient = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const recipesPerLoad = 20
+  const from = 0
+  const to = 96
+
+  const recipesPerLoad = 12
   const [next, setNext] = useState(recipesPerLoad)
 
   const handleLoadMoreRecipes = () => {
     setNext(next + recipesPerLoad)
   }
 
-  const from = 0
-  const to = 100
+  const [page, setPage] = React.useState(1);
+  const [listStart, setListStart] = useState(0)
+  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    setListStart(paginationData[value].listStart)
+    setListEnd(paginationData[value].listEnd)
+  }
+
+
 
   const { ingredient } = useParams()
   const [ingredientHeading, setIngredientHeading] = useState(null)
@@ -117,16 +132,13 @@ q=${ingredient}
         ?
         <React.Fragment>
           <Typography sx={sx_title}>{ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes</Typography>
+          Page {page} / 8
           <div className="recipe-selection-container">
           {recipeList.slice(0, next).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <div>
-            {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )}            
-          </div>
+          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>

@@ -15,7 +15,7 @@
   align-items: start;
   margin: 1em;
   background-color: #8FBA74;
-  width: 20em;
+  width: 24em;
   border-radius: 4px;
 }
 
@@ -23,7 +23,7 @@
   display: flex;
   position: relative;
   margin: 0.5em;
-  width: 16em
+  width: 20em
 }
 
 .ingredients-menuChoices-slot>img {
