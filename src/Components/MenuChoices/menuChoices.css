@@ -1,5 +1,4 @@
 .menuChoices-desktop {
-  display: none;
 }
 
 .menuChoices-container {
@@ -109,8 +108,8 @@
 }
 
 .menuChoices-drawer-image>img {
-  height: 5em;
-  width: 6em;
+  height: 3em;
+  width: 5em;
   object-fit: cover;
   border-radius: 4px;
   background-color: wheat
@@ -157,7 +156,7 @@
 }
 
 .menuChoices-drawer-label {
-  margin: 0 0 0 0.5em;
+  margin: 0 0.5em;
   font-size: 0.75em;
   font-weight: bold;
 }
@@ -183,4 +182,37 @@
   line-height: 1em;
   vertical-align: middle;
   font-size: 0.75em;
+}
+
+
+@media only screen and (max-width: 480px) {
+  .menuChoices-desktop{
+      display: none;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .menuChoices-desktop{
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .menuChoices-desktop{
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .menuChoices-mobile{
+    display: none;
+  }
+  .menuChoices-desktop{
+    display: block
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }
