@@ -1,18 +1,19 @@
-.menuChoices-desktop {
+.menuChoices-mobile {
 }
 
 .menuChoices-container {
   display: flex;
   flex-direction: row;
-  justify-items: end;
+  justify-content: end;
+  flex-grow: 1;
   align-items: center;
-  margin: 0 1em
+  margin: 0 0.5em
 }
 
 .menuChoices-slot {
   display: flex;
   position: relative;
-  margin: 0 0.5em
+  margin: 0 0.25em
 }
 
 .menuChoices-slot>img {
@@ -198,8 +199,15 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .menuChoices-desktop{
+  .menuChoices-mobile{
     display: none;
+  }
+  .menuChoices-desktop{
+    display: block
+  }
+  .menuChoices-slot>img {
+    height: 3em;
+    width: 3em;
   }
 }
 
@@ -209,6 +217,10 @@
   }
   .menuChoices-desktop{
     display: block
+  }
+  .menuChoices-slot>img {
+    height: 4em;
+    width: 4em;
   }
 }
 

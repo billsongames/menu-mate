@@ -102,12 +102,9 @@ const TopBar = () => {
                 <Button href="/recipes/less-than-600-calories" disableRipple={true} sx={menubuttonSX}>Less than 600 Calories</Button>
               </MenuItem>
             </Menu>
-          </div>
-          <div className="topbar-menu-desktop">
+            </div>
             <MenuChoices />
-          </div>
-
-
+            
         </React.Fragment>
 
         : displayMode === "ingredients"

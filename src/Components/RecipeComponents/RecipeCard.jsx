@@ -69,9 +69,9 @@ const RecipeCard = ({ recipe }) => {
       <Card
         key={recipe.recipe.uri}
         sx={{
-          "@media screen and (max-width:480px)": {
+          "@media screen and (max-width:768px)": {
             margin: "1em 0",
-            width: "100%"
+            width: "80%"
           },
           "@media screen and (min-width:768px)": {
             margin: "1em",

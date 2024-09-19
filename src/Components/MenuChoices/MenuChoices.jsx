@@ -92,7 +92,7 @@ const MenuChoices = () => {
   }
 
   return (
-    <div>
+    <div className="menuChoices-container">
       <div className="menuChoices-desktop">
         {menuChoices
           ?

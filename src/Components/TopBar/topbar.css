@@ -55,13 +55,4 @@
 
 }
 
-@media only screen and (min-width: 1200px) {
-  .topbar-container{
-    height: 3em
-  }
-  .topbar-logo{
-    height: 2em
-  }
-
-}
 
