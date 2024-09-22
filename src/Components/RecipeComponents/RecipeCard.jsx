@@ -31,8 +31,6 @@ import "./recipeComponents.css";
 
 const RecipeCard = ({ recipe }) => {
 
-  const mediaMobile = useMediaQuery("(max-width:480px)")
-
   const [recipeChoiceDetails, setRecipeChoiceDetails] = useState(null)
   const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -99,7 +97,7 @@ const RecipeCard = ({ recipe }) => {
           <CardContent>
             <Typography
               gutterBottom
-                 sx={{
+              sx={{
                 fontWeight: "bold",
                 textAlign: "left",
                 cursor: "pointer",
@@ -181,16 +179,16 @@ const RecipeCard = ({ recipe }) => {
             PaperProps={{ sx: { height: "56em" } }}
           >
             <DialogTitle
-            sx={{
-              fontWeight: "bold",
-              "@media screen and (max-width:480px)": {
-                fontSize: "1em"
-              },
-              "@media screen and (min-width:768px)": {
-                fontSize: "1.5em"            
-              }
-            }}
-             gutterBottom id="scroll-dialog-title">
+              sx={{
+                fontWeight: "bold",
+                "@media screen and (max-width:480px)": {
+                  fontSize: "1em"
+                },
+                "@media screen and (min-width:768px)": {
+                  fontSize: "1.5em"
+                }
+              }}
+              gutterBottom id="scroll-dialog-title">
               {recipeChoiceDetails.label}</DialogTitle>
 
             <DialogContent>

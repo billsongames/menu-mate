@@ -141,7 +141,7 @@ q=
         ?
         <React.Fragment>
           <Typography sx={{
-            "@media screen and (max-width:480px)": {
+            "@media screen and (max-width:768px)": {
               fontSize: "1.5em",
               fontWeight: "bold"
             },

@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 import "./topbar.css"
 
@@ -26,6 +27,13 @@ const TopBar = () => {
   const buttonSX = {
     color: "white",
     fontWeight: "bold",
+    "@media screen and (max-width:768px": {
+      size: "small"
+
+    },
+    "@media screen and (min-width:768px": {
+      size: "medium"
+    },
 
     ":hover": {
       textDecoration: "underline",
@@ -50,11 +58,11 @@ const TopBar = () => {
   const [anchorElement, setAnchorElement] = useState(null)
   const open = Boolean(anchorElement)
 
-  const handleClick = (event => {
+  const handleRecipesClick = (event => {
     setAnchorElement(event.currentTarget)
   })
 
-  const handleClose = () => {
+  const handleRecipesClose = () => {
     setAnchorElement(null)
   }
 
@@ -70,12 +78,27 @@ const TopBar = () => {
         <React.Fragment>
           <div>
             <Button
+              sx={{
+                color: "white",
+                cursor: "pointer",
+                fontWeight: "bold",
+                ":hover": {
+                  textDecoration: "underline",
+                },
+                "@media (max-width:1024px": {
+                  color: "red"
+
+                },
+                "@media (min-width:1024px": {
+                  fontSize: "28px",
+                  color: "white",
+                }
+              }}
               id="basic-button"
               aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-              sx={buttonSX}
+              onClick={handleRecipesClick}
               disableRipple={true}
             >
               RECIPES
@@ -85,26 +108,26 @@ const TopBar = () => {
               id="basic-menu"
               anchorEl={anchorElement}
               open={open}
-              onClose={handleClose}
+              onClose={handleRecipesClose}
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesClose}>
                 <Button href="/recipes/" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
               </MenuItem>
 
-              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesClose}>
                 <Button href="/recipes/vegetarian" disableRipple={true} sx={menubuttonSX}>Vegetarian Recipes</Button>
               </MenuItem>
 
-              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesClose}>
                 <Button href="/recipes/less-than-600-calories" disableRipple={true} sx={menubuttonSX}>Less than 600 Calories</Button>
               </MenuItem>
             </Menu>
-            </div>
-            <MenuChoices />
-            
+          </div>
+          <MenuChoices />
+
         </React.Fragment>
 
         : displayMode === "ingredients"

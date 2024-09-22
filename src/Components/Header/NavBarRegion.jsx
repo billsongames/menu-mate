@@ -3,8 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Carousel from 'react-material-ui-carousel'
 import { Paper } from '@mui/material'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -123,19 +122,48 @@ const NavBarRegion = () => {
 
       <nav className="navBarRegion-container-mobile">
         <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
-        <Drawer open={drawerOpen} anchor="left">
-          <div className="regionsDrawer">
-            REGIONS
-            {allRegions.map((region) => (
-              <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
-            ))}
-          </div>
-          <Button onClick={toggleRegionDrawer}>CLOSE</Button>
+        <Drawer open={drawerOpen} anchor="left" onClose={toggleRegionDrawer} >
+          <Card sx={{ height: "100%" }} scroll="paper">
+            <div className="regionsDrawer">
+              <div className="regionsDrawer-header">
+
+                <div className="regionsDrawer-header-spacer">
+                </div>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  sx={{
+                    width: "60%",
+                    margin: "0.5em 1em",
+                    textAlign: "center",
+                    fontWeight: "bold"
+                  }}
+                >
+                  REGIONS
+                </Typography>
+                <div className="regionsDrawer-header-close">
+                  <div className="regionsDrawer-header-clearButton-container">
+                    <div className="regionsDrawer-header-clearButton" onClick={toggleRegionDrawer} >
+                      <ArrowBackIcon
+                        sx={{
+                          fill: "#8FBA74",
+                          pointerEvents: "none",
+                          width: "1em"
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
 
 
+              </div>
 
+              {allRegions.map((region) => (
+                <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
+              ))}
+            </div>
+          </Card>
         </Drawer>
-
       </nav>
     </React.Fragment>
   )

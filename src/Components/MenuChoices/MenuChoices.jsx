@@ -130,7 +130,9 @@ const MenuChoices = () => {
                 }
               </div>
             ))}
-            <Button onClick={toggleDrawer} sx={buttonSX}>View menu</Button>
+            <Button onClick={toggleDrawer} sx={buttonSX}>
+              MENU
+            </Button>
           </div>
           :
           <></>
@@ -138,7 +140,7 @@ const MenuChoices = () => {
       </div>
 
       <div className="menuChoices-mobile">
-        <Button onClick={toggleDrawer} sx={buttonSX}>View menu</Button>
+        <Button onClick={toggleDrawer} sx={buttonSX}>MENU</Button>
       </div>
 
 
@@ -197,86 +199,85 @@ const MenuChoices = () => {
 
 
       <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer} >
-{/*         <Box sx={{ width: 300 }}> */}
-          <Card sx={{ height: "100%", width: "300px" }}>
-            <div className="menuChoices-drawer-header">
-              <div className="menuChoices-drawer-header-close">
-                <div className="menuChoices-drawer-header-clearButton-container">
-                  <div className="menuChoices-drawer-clearButton" onClick={toggleDrawer} >
-                    <ArrowForwardIcon
-                      sx={{
-                        fill: "#8FBA74",
-                        pointerEvents: "none",
-                        width: "1em"
-                      }}
-                    />
-                  </div>
+        {/*         <Box sx={{ width: 300 }}> */}
+        <Card sx={{ height: "100%", width: "300px" }}>
+          <div className="menuChoices-drawer-header">
+            <div className="menuChoices-drawer-header-close">
+              <div className="menuChoices-drawer-header-clearButton-container">
+                <div className="menuChoices-drawer-clearButton" onClick={toggleDrawer} >
+                  <ArrowForwardIcon
+                    sx={{
+                      fill: "#8FBA74",
+                      pointerEvents: "none",
+                      width: "1em"
+                    }}
+                  />
                 </div>
-              </div>
-
-              <Typography
-                gutterBottom
-                variant="h6"
-                sx={{
-                  width: "60%",
-                  margin: "0.5em 1em",
-                  textAlign: "center",
-                  fontWeight: "bold"
-                }}
-              >
-                MENU
-              </Typography>
-
-
-              <div className="menuChoices-drawer-header-spacer">
-
               </div>
             </div>
 
+            <Typography
+              gutterBottom
+              variant="h6"
+              sx={{
+                width: "60%",
+                margin: "0.5em 1em",
+                textAlign: "center",
+                fontWeight: "bold"
+              }}
+            >
+              MENU
+            </Typography>
 
-            {menuChoices
-              ?
-              <div className="menuChoices-drawer-container">
-                {menuChoices.map((choice, index) => (
-                  <div key={index}>
-                    <div className="menuChoices-drawer-entry-container">
-                      <div className="menuChoices-drawer-image">
-                        {choice.complete === true
-                          ?
-                          <React.Fragment>
-                            <img
-                              src={choice.recipe.image}
-                              title={choice.recipe.label}
-                              data-completerecipe={JSON.stringify(choice.recipe)}
-                            /*                             onClick={handleOpenRecipeCard} */
-                            />
-                            <div>
-                              <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                                <ClearIcon
-                                  sx={{
-                                    fill: "#8FBA74",
-                                    pointerEvents: "none",
-                                    width: "1em",
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </React.Fragment>
-                          :
-                          <React.Fragment>
-                            <img src={defaultMenuChoiceImage} title="Choose a recipe" />
-                          </React.Fragment>
-                        }
-                      </div>
 
+            <div className="menuChoices-drawer-header-spacer">
+            </div>
+          </div>
+
+
+          {menuChoices
+            ?
+            <div className="menuChoices-drawer-container">
+              {menuChoices.map((choice, index) => (
+                <div key={index}>
+                  <div className="menuChoices-drawer-entry-container">
+                    <div className="menuChoices-drawer-image">
                       {choice.complete === true
                         ?
-                        <div className="menuChoices-drawer-info">
-                          <div className="menuChoices-drawer-label">
-                            {choice.recipe.label}
+                        <React.Fragment>
+                          <img
+                            src={choice.recipe.image}
+                            title={choice.recipe.label}
+                            data-completerecipe={JSON.stringify(choice.recipe)}
+                          /*                             onClick={handleOpenRecipeCard} */
+                          />
+                          <div>
+                            <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                              <ClearIcon
+                                sx={{
+                                  fill: "#8FBA74",
+                                  pointerEvents: "none",
+                                  width: "1em",
+                                }}
+                              />
+                            </div>
                           </div>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                          <img src={defaultMenuChoiceImage} title="Choose a recipe" />
+                        </React.Fragment>
+                      }
+                    </div>
 
-                          {/*                         <div className="menuChoices-drawer-item">
+                    {choice.complete === true
+                      ?
+                      <div className="menuChoices-drawer-info">
+                        <div className="menuChoices-drawer-label">
+                          {choice.recipe.label}
+                        </div>
+
+                        {/*                         <div className="menuChoices-drawer-item">
                           <PublicIcon sx={{ height: "0.5em" }} />
                           <div>
                             {`${(choice.recipe.cuisineType[0]).charAt(0).toUpperCase() + (choice.recipe.cuisineType[0]).slice(1)}`}
@@ -298,60 +299,60 @@ const MenuChoices = () => {
                         </div> */}
 
 
+                      </div>
+                      :
+                      <div className="menuChoices-drawer-info">
+                        <div className="menuChoices-drawer-label-empty">
+                          Choose a recipe
                         </div>
-                        :
-                        <div className="menuChoices-drawer-info">
-                          <div className="menuChoices-drawer-label-empty">
-                            Choose a recipe
-                          </div>
-                        </div>
-                      }
+                      </div>
+                    }
 
-                      {choice.complete === true
-                        ?
-                        <div className="menuChoices-drawer-clearButton-container">
-                          <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                            <ClearIcon
-                              sx={{
-                                fill: "#8FBA74",
-                                pointerEvents: "none",
-                                width: "1em"
-                              }}
-                            />
-                          </div>
+                    {choice.complete === true
+                      ?
+                      <div className="menuChoices-drawer-clearButton-container">
+                        <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
+                          <ClearIcon
+                            sx={{
+                              fill: "#8FBA74",
+                              pointerEvents: "none",
+                              width: "1em"
+                            }}
+                          />
                         </div>
-                        :
-                        <></>
-                      }
-                    </div>
-                    <Divider />
+                      </div>
+                      :
+                      <></>
+                    }
                   </div>
-                ))}
-              </div>
-              :
-              <></>
-            }
+                  <Divider />
+                </div>
+              ))}
+            </div>
+            :
+            <></>
+          }
 
 
-            <CardActions
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center"
-              }}
-            >
-              <div>
-                <Button onClick={() => handleContinueToIngredientsClick()} /* href="/ingredients-summary" */>
-                  CONTINUE TO INGREDIENTS
-                </Button>
-              </div>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            <div>
+              <Button onClick={() => handleContinueToIngredientsClick()} /* href="/ingredients-summary" */>
+                CONTINUE TO INGREDIENTS
+              </Button>
+            </div>
 
-            </CardActions>
+          </CardActions>
 
 
-          </Card>
+        </Card>
 
-{/*         </Box> */}
+        {/*         </Box> */}
 
 
       </Drawer>
