@@ -200,7 +200,7 @@ const MenuChoices = () => {
 
       <Drawer open={drawerOpen} anchor="right" onClose={toggleDrawer} >
         {/*         <Box sx={{ width: 300 }}> */}
-        <Card sx={{ height: "100%", width: "300px" }}>
+        <Card sx={{ height: "100%", width: "300px", backgroundColor: "#8FBA74" }}>
           <div className="menuChoices-drawer-header">
             <div className="menuChoices-drawer-header-close">
               <div className="menuChoices-drawer-header-clearButton-container">

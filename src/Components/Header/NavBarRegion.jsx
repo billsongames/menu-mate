@@ -123,7 +123,7 @@ const NavBarRegion = () => {
       <nav className="navBarRegion-container-mobile">
         <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
         <Drawer open={drawerOpen} anchor="left" onClose={toggleRegionDrawer} >
-          <Card sx={{ height: "100%" }} scroll="paper">
+          <Card sx={{ height: "100%", backgroundColor: "#8FBA74"}} scroll="paper">
             <div className="regionsDrawer">
               <div className="regionsDrawer-header">
 
@@ -157,10 +157,12 @@ const NavBarRegion = () => {
 
 
               </div>
+              <div className="regionsDrawer-button-container">
+                {allRegions.map((region) => (
+                  <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
+                ))}
+              </div>
 
-              {allRegions.map((region) => (
-                <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
-              ))}
             </div>
           </Card>
         </Drawer>

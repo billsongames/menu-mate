@@ -36,17 +36,23 @@
 
 @media only screen and (min-width: 768px) {
 .header-container{
-  height: 12em
+  height: 8em
 }
 
 .header-image{
-  height: 12emnp
+  height: 8em
 }
 
 }
 
 @media only screen and (min-width: 1024px) {
-
+  .header-container{
+    height: 12.5em
+  }
+  
+  .header-image{
+    height: 12.5em
+  }
 
 }
 
