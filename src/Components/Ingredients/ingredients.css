@@ -1,0 +1,95 @@
+.ingredients-summary {
+  text-align: left;
+  margin: 0 1em
+}
+
+.ingredients-summary-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ingredients-menuChoices-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: start;
+  margin: 1em;
+  background-color: #8FBA74;
+  width: 20em;
+  border-radius: 4px;
+}
+
+.ingredients-menuChoices-slot {
+  display: flex;
+  position: relative;
+  margin: 0.5em;
+  width: 16em
+}
+
+.ingredients-menuChoices-slot>img {
+  height: 4em;
+  width: 4em;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: wheat;
+}
+
+.ingredients-menuChoices-slot-label {
+  margin: 0 0 0 0.5em;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* ########################################### */
+
+.ingredients-list-container {
+  background-color: #8FBA74;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 4px;
+  text-align: left;
+  width: 32em;
+}
+
+.ingredients-list-title{
+  font-size: 1em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.ingredients-list-slot-title{
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: left;
+  padding: 1em 0 0 0
+}
+
+.ingredients-list-slot-list-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.75em;
+  text-align: left;
+  padding: 0.25em
+}
+
+/* ########################################### */
+
+.shoppingList {
+  font-size: 1em;
+  text-align: left;
+  list-style-type: disc;
+}
+
+.shoppingList-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1em;
+  text-align: left;
+  padding: 0.25em;
+  list-style-type: disc;
+}
+
+

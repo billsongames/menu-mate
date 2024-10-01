@@ -11,7 +11,7 @@ const PaginationButtons = ({ count, page, onPageChange }) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "1em"
+    padding: "1em 0"
   }
 
   const theme = createTheme({
@@ -37,7 +37,7 @@ const PaginationButtons = ({ count, page, onPageChange }) => {
     <Stack sx={sx_paginationStack} spacing={2}>
       <Pagination
         count={count}
-        size="large"
+        size="small"
         page={page}
         showFirstButton
         showLastButton

@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+import { useNavigate } from "react-router-dom";
+
+import { DisplayModeContext } from "../../context/DisplayModeContext";
 
 import "./home.css"
 
-import foodPic from "../../assets/img/ingredients/mushrooms-8058299_1280.jpg"
+
+
+import { foodCategories } from "../../data/foodCategories"
 
 
 const Home = () => {
+
+  useEffect(() => {
+    toggleDisplayMode("home")
+  }, [])
+
+  const navigate = useNavigate()
+
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
+
+  const handleBeginButtonClick = () => {
+    toggleDisplayMode("recipes")
+    navigate("/recipes")
+  }
 
   const imageData = [
     {
@@ -31,14 +47,14 @@ const Home = () => {
   return (
     <div className="home-container">
       <div>
-        <img src={imageData[1].img} className="home-image" />
+        <img src={imageData[2].img} className="home-image" />
         <div id="home-text">
           <div>Add the recipes</div>
           <div>Create the menu</div>
           <div>Hassle free shopping</div>
+          <button onClick={() => handleBeginButtonClick()}>BEGIN</button>
         </div>
       </div>
-
     </div>
   )
 }

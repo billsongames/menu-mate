@@ -14,9 +14,7 @@ import "./topbar.css"
 
 import logo from "../../assets/logo/menumate-logo-256x64-light.png"
 
-const TopBar = () => {
-
-
+const TopBarIngredients = () => {
 
   const buttonSX = {
     color: "white",
@@ -28,7 +26,7 @@ const TopBar = () => {
   }
 
   const menuItemSX = {
-        ":hover": {
+    ":hover": {
       bgcolor: "white"
     }
   }
@@ -40,8 +38,6 @@ const TopBar = () => {
       bgcolor: "white",
       textDecoration: "underline",
     },
-    
-
   }
 
   const [anchorElement, setAnchorElement] = useState(null)
@@ -58,30 +54,23 @@ const TopBar = () => {
   return (
     <div className="topbar-container">
       <div>
-        <Button href = "/" >
+        <Button href="/" >
           <img className="topbar-logo" src={logo} />
         </Button>
       </div>
       <div>
-        <Stack
-          direction="row"
-          spacing={2}
-          divider={<Divider orientation="vertical" flexItem />}
+        <Button
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+          sx={buttonSX}
+          disableRipple={true}
         >
+          ING
+        </Button>
 
-{/*           <Button href="../">HOME</Button> */}
-          <Button
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            sx={buttonSX}
-            disableRipple={true} 
-          >
-            RECIPES
-          </Button>
-        </Stack>
         <Menu
           id="basic-menu"
           anchorEl={anchorElement}
@@ -92,7 +81,7 @@ const TopBar = () => {
           }}
         >
           <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
-            <Button href="/recipes/home" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
+            <Button href="/recipes/" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
           </MenuItem>
 
           <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleClose}>
@@ -109,4 +98,4 @@ const TopBar = () => {
   )
 }
 
-export default TopBar
+export default TopBarIngredients

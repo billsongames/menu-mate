@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@mui/material'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Paper } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import { Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Drawer from '@mui/material/Drawer';
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 
 import "./navbarRegion.css";
 
@@ -15,7 +23,9 @@ const NavBarRegion = () => {
 
   const navigate = useNavigate()
 
-  const currentRegion  = useParams()
+  const currentRegion = useParams()
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const regionsOne = [
     "American",
@@ -35,8 +45,28 @@ const NavBarRegion = () => {
     "Kosher"
   ]
 
-  const regionsThree =[
+  const regionsThree = [
     "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+    "Nordic",
+    "South American",
+    "South East Asian"
+  ]
+
+  const allRegions = [
+    "American",
+    "Asian",
+    "British",
+    "Caribbean",
+    "Central Europe",
+    "Chinese",
+    "Eastern Europe",
+    "French",
+    "Indian",
+    "Italian",
+    "Japanese",
+    "Kosher", "Mediterranean",
     "Mexican",
     "Middle Eastern",
     "Nordic",
@@ -49,24 +79,30 @@ const NavBarRegion = () => {
     navigate(`/recipes/region/${event.target.dataset.region}`)
   }
 
+  const handleRegionDrawerClick = (event) => {
+    event.preventDefault()
+    setDrawerOpen(!drawerOpen)
+    navigate(`/recipes/region/${event.target.dataset.region}`)
+  }
+
+  const toggleRegionDrawer = (event) => {
+    setDrawerOpen(!drawerOpen)
+  }
+
+  const buttonSX = {
+    color: "white",
+    fontWeight: "bold",
+
+    ":hover": {
+      textDecoration: "underline",
+    }
+  }
+
 
   return (
-    <nav className="navBarRegion-container">
-{/*       <Typography variant="h5">Recipes by region</Typography> */}
-{/*       <Carousel
-        autoPlay={false}
-        animation="slide"
-        NavButton={({ onClick, className, style, next, prev }) => {
-          // Other logic
+    <React.Fragment>
 
-          return (
-            <Button onClick={onClick} className={className} style={style}>
-              {next && <ArrowForwardIosIcon sx={{color: "#8FBA74"}} />}
-              {prev && <ArrowBackIosIcon sx={{color: "#8FBA74"}} />}
-            </Button>
-          )
-        }}
-      > */}
+      <nav className="navBarRegion-container-desktop">
         <div>
           {regionsOne.map((region) => (
             <button key={region} id={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
@@ -82,8 +118,54 @@ const NavBarRegion = () => {
             <button key={region} className="region-button" data-region={region} onClick={handleClick}>{region}</button>
           ))}
         </div>
-{/*       </Carousel> */}
-    </nav>
+      </nav>
+
+      <nav className="navBarRegion-container-mobile">
+        <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
+        <Drawer open={drawerOpen} anchor="left" onClose={toggleRegionDrawer} >
+          <Card sx={{ height: "100%" }} scroll="paper">
+            <div className="regionsDrawer">
+              <div className="regionsDrawer-header">
+
+                <div className="regionsDrawer-header-spacer">
+                </div>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  sx={{
+                    width: "60%",
+                    margin: "0.5em 1em",
+                    textAlign: "center",
+                    fontWeight: "bold"
+                  }}
+                >
+                  REGIONS
+                </Typography>
+                <div className="regionsDrawer-header-close">
+                  <div className="regionsDrawer-header-clearButton-container">
+                    <div className="regionsDrawer-header-clearButton" onClick={toggleRegionDrawer} >
+                      <ArrowBackIcon
+                        sx={{
+                          fill: "#8FBA74",
+                          pointerEvents: "none",
+                          width: "1em"
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              {allRegions.map((region) => (
+                <button key={region} id={region} className="region-button" data-region={region} onClick={handleRegionDrawerClick}>{region}</button>
+              ))}
+            </div>
+          </Card>
+        </Drawer>
+      </nav>
+    </React.Fragment>
   )
 }
 

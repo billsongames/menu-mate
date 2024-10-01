@@ -1,15 +1,19 @@
+.menuChoices-mobile {
+}
+
 .menuChoices-container {
   display: flex;
   flex-direction: row;
-  justify-items: end;
+  justify-content: end;
+  flex-grow: 1;
   align-items: center;
-  margin: 0 2em
+  margin: 0 0.5em
 }
 
 .menuChoices-slot {
   display: flex;
   position: relative;
-  margin: 0 0.5em
+  margin: 0 0.25em
 }
 
 .menuChoices-slot>img {
@@ -17,6 +21,7 @@
   width: 4em;
   object-fit: cover;
   border-radius: 4px;
+  background-color: wheat;
 }
 
 .menuChoices-slot>div {
@@ -35,10 +40,186 @@
 .menuChoices-clearButton {
   width: 1.5em;
   height: 1.5em;
-  margin: 0.25em;
   border: 1px solid;
   border-color: #8FBA74;
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
+}
+
+.menuChoices-clearButton:hover, .menuChoices-drawer-clearButton:hover {
+  background-color: lightgray;
+}
+
+/* ################################################ */
+
+.menuChoices-drawer-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: left;
+  margin: 1em;
+}
+
+.menuChoices-drawer-entry-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0.5em 0;
+  border-radius: 4px;
+}
+
+.menuChoices-drawer-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: center;
+  width: 100%
+}
+
+.menuChoices-drawer-clearButton-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 2;
+  justify-content: start;
+}
+
+.menuChoices-drawer-header-clearButton-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuChoices-drawer-header-close,
+.menuChoices-drawer-header-spacer {
+  display: flex;
+  margin: 0 1em;
+  justify-content: left;
+  align-content: center;
+  width: 20%
+}
+
+.menuChoices-drawer-image {
+  display: flex;
+  position: relative;
+}
+
+.menuChoices-drawer-image>img {
+  height: 3em;
+  width: 5em;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: wheat
+}
+
+.menuChoices-drawer-image>div {
+  position: absolute;
+  display: none;
+  width: 100%;
+  z-index: 1;
+}
+
+.menuChoices-drawer-image:hover>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.menuChoices-drawer-clearButton-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 2;
+  justify-content: end;
+}
+
+.menuChoices-drawer-clearButton {
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid;
+  border-color: #8FBA74;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.menu
+
+.menuChoices-drawer-info {
+  margin: 0 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+}
+
+.menuChoices-drawer-label {
+  margin: 0 0.5em;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.menuChoices-drawer-label-empty {
+  margin: 0 0 0 0.5em;
+  color: grey;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+
+.menuChoices-drawer-item {
+  display: flex;
+  flex-direction: row;
+  height: 1em;
+  justify-content: start;
+  align-items: center;
+  padding: 0.1em 0 0.1em 0
+}
+
+.menuChoices-drawer-item>div {
+  line-height: 1em;
+  vertical-align: middle;
+  font-size: 0.75em;
+}
+
+
+@media only screen and (max-width: 480px) {
+  .menuChoices-desktop{
+      display: none;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .menuChoices-desktop{
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .menuChoices-mobile{
+    display: none;
+  }
+  .menuChoices-desktop{
+    display: block
+  }
+  .menuChoices-slot>img {
+    height: 3em;
+    width: 3em;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .menuChoices-mobile{
+    display: none;
+  }
+  .menuChoices-desktop{
+    display: block
+  }
+  .menuChoices-slot>img {
+    height: 4em;
+    width: 4em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }

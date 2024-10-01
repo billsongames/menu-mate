@@ -6,81 +6,52 @@ function MenuChoicesProvider(props) {
 
   const menuChoicesDefault = [
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
       complete: false
     },
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
       complete: false
     },
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
       complete: false
     },
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
       complete: false
     },
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
-      complete: false
-    },    {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
       complete: false
     },
     {
-      recipe_uri: "",
-      title: "Choose a recipe",
-      img: "../../assets/img/emptyMenuSlot.png",
-      ingredients: [],
+      recipe: {},
+      complete: false
+    },
+    {
+      recipe: {},
       complete: false
     }
   ]
 
   const menuChoiceDefaultEntry = {
-    recipe_uri: "",
-    title: "Choose a recipe",
-    img: "../../assets/img/emptyMenuSlot.png",
-    ingredients: [],
+    recipe: {},
     complete: false
   }
 
+  const [menuChoices, setMenuChoices] = useState(menuChoicesDefault)
 
-  /*   const [menuChoices, setMenuChoices] = useState(menuChoicesDefault) */
-  const [menuChoices, setMenuChoices] = useState()
-
-  const updateMenuChoices = (event) => {
+  const addToMenuChoices = (event) => {
     event.preventDefault()
 
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-    const newChoiceData = [...choiceData]
     const targetIndex = choiceData.findIndex(choice => choice.complete === false)
 
-    if (targetIndex === -1){ 
+    if (targetIndex === -1) {
       return
     } else {
-      choiceData[targetIndex].recipe_uri = event.target.dataset.recipeuri
-      choiceData[targetIndex].img = event.target.dataset.imageurl
-      choiceData[targetIndex].title = event.target.dataset.title
-      choiceData[targetIndex].ingredients = JSON.parse(event.target.dataset.ingredients)
+      choiceData[targetIndex].recipe = JSON.parse(event.target.dataset.completerecipe)
       choiceData[targetIndex].complete = true
 
       setMenuChoices(choiceData)
@@ -91,7 +62,7 @@ function MenuChoicesProvider(props) {
   const removeMenuChoice = (event) => {
     event.preventDefault()
     const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-    const targetIndex = choiceData.findIndex(choice => choice.recipe_uri === event.target.dataset.recipeuri)
+    const targetIndex = choiceData.findIndex(choice => choice.recipe.uri === event.target.dataset.recipeuri)
 
     if (targetIndex === -1) {
       return
@@ -105,18 +76,18 @@ function MenuChoicesProvider(props) {
     }
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("MenuMate_MenuChoices") === null) {
-      setMenuChoices(menuChoicesDefault)
-      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
-    }
-    else {
-      setMenuChoices(JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
-    }
-  }, [])
+    useEffect(() => {
+      if (localStorage.getItem("MenuMate_MenuChoices") === null) {
+        setMenuChoices(menuChoicesDefault)
+        localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
+      }
+      else {
+        setMenuChoices(JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+      }
+    }, [])
 
   return (
-    <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, updateMenuChoices, removeMenuChoice }}>
+    <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, addToMenuChoices, removeMenuChoice }}>
       {props.children}
     </MenuChoicesContext.Provider>
 
