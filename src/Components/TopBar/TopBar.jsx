@@ -114,7 +114,7 @@ const TopBar = () => {
               }}
             >
               <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesClose}>
-                <Button href="/recipes/" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
+                <Button href="/recipes" disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
               </MenuItem>
 
               <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesClose}>
