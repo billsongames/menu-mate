@@ -6,12 +6,14 @@ import axios from "axios";
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
+import { NoEncryption } from "@mui/icons-material";
 
 
 const RecipesByIngredient = () => {
@@ -21,6 +23,7 @@ const RecipesByIngredient = () => {
 
   const recipesPerLoad = 20
   const [next, setNext] = useState(recipesPerLoad)
+  const [resultCount, setResultCount] = useState()
 
   const handleLoadMoreRecipes = () => {
     setNext(next + recipesPerLoad)
@@ -31,6 +34,7 @@ const RecipesByIngredient = () => {
 
   const { ingredient } = useParams()
   const [ingredientHeading, setIngredientHeading] = useState(null)
+
 
   /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}` */
   const searchURL =
@@ -44,7 +48,7 @@ q=${ingredient}
 &app_key=${appKey}`
 
 
-  const [recipeList, setRecipeList] = useState({})
+  const [recipeList, setRecipeList] = useState([])
 
   const [open, setOpen] = useState(false)
 
@@ -65,15 +69,20 @@ q=${ingredient}
     }
   }, [open])
 
-  useEffect(() => {
 
-    setRecipeList([])
+
+  useEffect(() => {
     async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+
       axios
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
           setIngredientHeading(ingredient)
+          console.log(response.data)
         })
         .catch((error) => {
           console.log(error)
@@ -140,10 +149,29 @@ q=${ingredient}
             )}
           </div>
         </React.Fragment>
-        :
-        <Box sx={{ margin: 'auto' }}>
-          <ProgressDisplay />
-        </Box>
+
+        : resultCount === 0
+          ?
+          <>
+            <div>
+              <SentimentVeryDissatisfiedIcon sx={{
+                color: "#8FBA74",
+                width: 80,
+                height: 80
+                }}
+              />
+            </div>
+            <div>
+              <Typography>
+                Sorry, no results
+              </Typography>
+              
+            </div>
+          </>
+          :
+          <Box sx={{ margin: 'auto' }}>
+            <ProgressDisplay />
+          </Box>
       }
     </section>
   )

@@ -106,27 +106,14 @@ const MenuChoices = () => {
                     title={choice.recipe.label}
                     data-recipelink={choice.recipe.uri}
                     data-completerecipe={JSON.stringify(choice.recipe)}
-                  /*                   onClick={handleOpenRecipeCard} */
+                    onClick={toggleDrawer}
                   />
                   :
-                  <img src={defaultMenuChoiceImage} title="Choose a recipe" />
-                }
-                {choice.complete === true
-                  ? <div>
-                    <div className="menuChoices-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                      <ClearIcon
-                        sx={{
-                          fill: "#8FBA74",
-                          pointerEvents: "none",
-                          width: "1em",
-                          zIndex: "-1",
-                          "&:hover": { fill: "blue" }
-
-                        }}
-                      />
-                    </div>
-                  </div>
-                  : <></>
+                  <img
+                    src={defaultMenuChoiceImage}
+                    title="Choose a recipe"
+                    onClick={toggleDrawer}
+                  />
                 }
               </div>
             ))}
@@ -249,19 +236,7 @@ const MenuChoices = () => {
                             src={choice.recipe.image}
                             title={choice.recipe.label}
                             data-completerecipe={JSON.stringify(choice.recipe)}
-                          /*                             onClick={handleOpenRecipeCard} */
                           />
-                          <div>
-                            <div className="menuChoices-drawer-clearButton" onClick={handleRemoveMenuChoice} data-recipeuri={choice.recipe.uri}>
-                              <ClearIcon
-                                sx={{
-                                  fill: "#8FBA74",
-                                  pointerEvents: "none",
-                                  width: "1em",
-                                }}
-                              />
-                            </div>
-                          </div>
                         </React.Fragment>
                         :
                         <React.Fragment>
