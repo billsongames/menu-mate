@@ -32,6 +32,7 @@ const RecipesByRegion = () => {
 
   const recipesPerLoad = 12
   const [next, setNext] = useState(recipesPerLoad)
+  const [resultCount, setResultCount] = useState()
 
   const handleLoadMoreRecipes = () => {
     setNext(next + recipesPerLoad)
@@ -102,10 +103,14 @@ q=
     setPage(1)
     setRecipeList([])
     async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+
       axios
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
         })
         .catch((error) => {
           console.log(error)
@@ -152,7 +157,7 @@ q=
           }}
           >
             {region} recipes</Typography>
-          Page {page} / 8
+            Page {page} / 8
           <div>
 
 
@@ -171,10 +176,8 @@ q=
 
         </React.Fragment>
         :
-        <Box sx={{ margin: 'auto' }}>
-          <Typography sx={sx_title}>{region} recipes</Typography>
-          <ProgressDisplay />
-        </Box>
+        <ProgressDisplay />
+
       }
     </section>
   )

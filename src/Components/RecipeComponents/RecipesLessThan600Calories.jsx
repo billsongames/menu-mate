@@ -82,7 +82,18 @@ q=
       {recipeList.length > 0
         ?
         <React.Fragment>
-          <Typography sx={sx_title}>Less than 600 calories</Typography>
+          <Typography sx={{
+            "@media screen and (max-width:768px)": {
+              fontSize: "1.5em",
+              fontWeight: "bold"
+            },
+            "@media screen and (min-width:768px)": {
+              fontSize: "2em",
+              fontWeight: "bold"
+            }
+          }}>
+            Less than 600 calories
+          </Typography>
           <div className="recipe-selection-container">
           {recipeList.slice(0, next).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />

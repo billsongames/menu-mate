@@ -13,7 +13,8 @@
 .menuChoices-slot {
   display: flex;
   position: relative;
-  margin: 0 0.25em
+  margin: 0 0.25em;
+  cursor: pointer
 }
 
 .menuChoices-slot>img {
