@@ -11,25 +11,34 @@ import "./recipeComponents.css";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
+import PaginationButtons from "./PaginationButtons";
+
+import { paginationData } from "../../api/paginationData";
+
 
 const RecipesLessThan600Calories = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const recipesPerLoad = 20
-  const [next, setNext] = useState(recipesPerLoad)
-
-  const handleLoadMoreRecipes = () => {
-    setNext(next + recipesPerLoad)
-  }
-
   const from = 0
-  const to = 100
+  const to = 96
+
+  const recipesPerLoad = 12
+  const [resultCount, setResultCount] = useState()
+
+  const [page, setPage] = React.useState(1);
+  const [listStart, setListStart] = useState(0)
+  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    setListStart(paginationData[value].listStart)
+    setListEnd(paginationData[value].listEnd)
+  }
 
   const [recipeList, setRecipeList] = useState({})
 
-  /* const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&calories=600` */
   const searchURL = 
 `https://api.edamam.com/search?
 q=
@@ -73,8 +82,11 @@ q=
         })
     }
     getRecipeList()
-
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
 
 
   return (
@@ -94,16 +106,13 @@ q=
           }}>
             Less than 600 calories
           </Typography>
+          Page {page} / 8
           <div className="recipe-selection-container">
-          {recipeList.slice(0, next).map((recipe, index) => (
+          {recipeList.slice(listStart, listEnd).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <div>
-            {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )}            
-          </div>
+          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>

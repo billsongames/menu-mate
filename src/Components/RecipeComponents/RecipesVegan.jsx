@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import axios from "axios";
+import { useMediaQuery } from "@mui/material";
 
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 
-import "../RecipeChoiceCard/recipeChoiceCard.css";
-import "./recipeComponents.css";
+import axios from "axios";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
@@ -15,7 +14,11 @@ import PaginationButtons from "./PaginationButtons";
 
 import { paginationData } from "../../api/paginationData";
 
-const RecipesVegetarian = () => {
+import "../RecipeChoiceCard/recipeChoiceCard.css";
+import "./recipeComponents.css";
+
+
+const RecipesVegan = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -38,11 +41,10 @@ const RecipesVegetarian = () => {
 
   const [recipeList, setRecipeList] = useState({})
 
-  /* const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian` */
-  const searchURL = 
-`https://api.edamam.com/search?
+  const searchURL =
+    `https://api.edamam.com/search?
 q=
-&health=vegetarian
+&health=vegan
 &from=${from}
 &to=${to}
 &dishType=Main course
@@ -56,8 +58,7 @@ q=
 
   const sx_title = {
     color: "black",
-    fontWeight: "bold",
-    fontSize: "2em"
+    fontWeight: "bold"
   }
 
   useEffect(() => {
@@ -96,14 +97,15 @@ q=
   }, [page]);
 
 
+
   return (
     <section>
-
       {recipeList.length > 0
         ?
         <React.Fragment>
           <Typography sx={{
-            "@media screen and (max-width:768px)": {
+
+            "@media screen and (max-width:480px)": {
               fontSize: "1.5em",
               fontWeight: "bold"
             },
@@ -111,12 +113,13 @@ q=
               fontSize: "2em",
               fontWeight: "bold"
             }
-          }}>
-            Vegetarian Recipes
+          }}
+          >
+            Vegan Recipes
           </Typography>
           Page {page} / 8
           <div className="recipe-selection-container">
-          {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
@@ -133,4 +136,4 @@ q=
 
 
 
-export default RecipesVegetarian
+export default RecipesVegan

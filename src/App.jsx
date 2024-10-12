@@ -12,8 +12,11 @@ import RecipesHomeContainer from "./Components/RecipeContainers/RecipesHomeConta
 import RecipesByIngredientContainer from "./Components/RecipeContainers/RecipesByIngredientContainer";
 import RecipesByRegionContainer from "./Components/RecipeContainers/RecipesByRegionContainer";
 import RecipesVegetarianContainer from "./Components/RecipeContainers/RecipesVegetarianContainer";
+import RecipesVeganContainer from "./Components/RecipeContainers/RecipesVeganContainer";
+import RecipesDairyFreeContainer from "./Components/RecipeContainers/RecipesDairyFreeContainer";
 import RecipesLessThan600CaloriesContainer from "./Components/RecipeContainers/RecipesLessThan600CaloriesContainer";
 import IngredientsSummaryContainer from "./Components/Ingredients/IngredientsSummaryContainer";
+
 
 import './App.css';
 
@@ -33,6 +36,8 @@ const App = () => {
               <Route path="/recipes/region/:region" element={<RecipesByRegionContainer />} />
               <Route path="/recipes/ingredient/:ingredient" element={<RecipesByIngredientContainer />} />
               <Route path="/recipes/vegetarian" element={<RecipesVegetarianContainer />} />
+              <Route path="/recipes/vegan" element={<RecipesVeganContainer />} />
+              <Route path="/recipes/dairy-free" element={<RecipesDairyFreeContainer />} />
               <Route path="/recipes/less-than-600-calories" element={<RecipesLessThan600CaloriesContainer />} />
 
               <Route path="/ingredients-summary" element={<IngredientsSummaryContainer />} />

@@ -3,26 +3,19 @@ import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
-import Box from '@mui/material/Box';
-import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
-
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
 import PaginationButtons from "./PaginationButtons";
 
+import { paginationData } from "../../api/paginationData";
+
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
 
-import { paginationData } from "../../api/paginationData";
-
 
 const RecipesByRegion = () => {
-
-  const [foodCategories, setFoodCategories] = useState([])
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -31,12 +24,7 @@ const RecipesByRegion = () => {
   const to = 96
 
   const recipesPerLoad = 12
-  const [next, setNext] = useState(recipesPerLoad)
   const [resultCount, setResultCount] = useState()
-
-  const handleLoadMoreRecipes = () => {
-    setNext(next + recipesPerLoad)
-  }
 
   const [page, setPage] = React.useState(1);
   const [listStart, setListStart] = useState(0)
@@ -50,9 +38,6 @@ const RecipesByRegion = () => {
 
   const { region } = useParams()
 
-  /*   const [regionHeading, setRegionHeading] = useState(region) */
-
-  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&cuisineType=${region}` */
   const searchURL =
     `https://api.edamam.com/search?
 q=
@@ -70,22 +55,8 @@ q=
 
   const descriptionElementRef = useRef(null)
 
-  const sx_title = {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: "2em"
-  }
 
-  const sx_paginationStack = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "1em"
-  }
 
-  const sx_paginationButton = {
-    button: { color: "#8FBA74" }
-  }
 
 
   useEffect(() => {
@@ -119,25 +90,11 @@ q=
     getRecipeList()
   }, [region])
 
-  const foodCategoriesFunc = (recipe) => {
-    const length = recipe.ingredients.length
-    for (let i = 0; i < length; i++) {
-      foodCategories.push(recipe.ingredients[i].foodCategory)
-    }
-  }
-
-  const foodCategoriesPopulate = () => {
-    recipeList.map((recipe) => {
-      foodCategoriesFunc(recipe.recipe)
-    })
-    const list = [...new Set(foodCategories)]
-    console.log(list)
-  }
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
+
+
 
 
   return (
