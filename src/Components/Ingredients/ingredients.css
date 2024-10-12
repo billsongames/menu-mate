@@ -49,11 +49,18 @@
   padding: 1em;
   border-radius: 4px;
   text-align: left;
-  width: 32em;
+  width: 100%
+
 }
 
 .ingredients-list-title{
   font-size: 1em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.ingredients-list-subtitle{
+  font-size: 0.75em;
   font-weight: bold;
   text-align: left;
 }
@@ -82,11 +89,16 @@
   list-style-type: disc;
 }
 
+.shoppingList-title{
+  font-size: 1em;
+  font-weight: bold;
+}
+
 .shoppingList-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 1em;
+  font-size: 0.75em;
   text-align: left;
   padding: 0.25em;
   list-style-type: disc;

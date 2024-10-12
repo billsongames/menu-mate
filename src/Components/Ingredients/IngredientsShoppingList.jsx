@@ -74,14 +74,17 @@ const IngredientsShoppingList = () => {
   return (
     <div className="ingredients-list-container">
       <div className="ingredients-list-title">
-        FULL INGREDIENT LIST - TICK THE ONES YOU NEED
+        FULL INGREDIENT LIST
+      </div>
+      <div className="ingredients-list-subtitle">
+      TICK THE ONES YOU NEED
       </div>
 
       {ingredientsJSX
         ?
         <div>
-          <Button onClick={handleOpenShoppingList}>GENERATE SHOPPING LIST</Button>
           {ingredientsJSX}
+          <Button onClick={handleOpenShoppingList}>GENERATE SHOPPING LIST</Button>
         </div>
         :
         <></>
@@ -96,8 +99,8 @@ const IngredientsShoppingList = () => {
       >
 
         <DialogContent>
-          <img src={logo} />
-          <DialogTitle variat="h6" fontWeight={"bold"}>SHOPPING LIST</DialogTitle>
+          <img src={logo} height="30px"/>
+          <div className="shoppingList-title">SHOPPING LIST</div>
           {shoppingList
             ?
             <ul className="shoppingList">

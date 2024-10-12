@@ -35,7 +35,7 @@ const IngredientsSummaryContainer = () => {
         <Button onClick={handleBackToRecipesClick}>BACK TO RECIPES</Button>
       </div>
       <div className="ingredients-summary-container">
-        <IngredientsMenuDisplay />
+{/*         <IngredientsMenuDisplay /> */}
         <IngredientsShoppingList />
         
       </div>
