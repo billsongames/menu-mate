@@ -10,6 +10,9 @@ import axios from "axios";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
+import PaginationButtons from "./PaginationButtons";
+
+import { paginationData } from "../../api/paginationData";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
@@ -20,23 +23,23 @@ const RecipesHome = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const mediaMobile = useMediaQuery("(max-width:480px)")
+  const from = 0
+  const to = 96
 
-  const recipesPerLoad = 20
-  const [next, setNext] = useState(recipesPerLoad)
+  const recipesPerLoad = 12
+  const [resultCount, setResultCount] = useState()
 
-  const handleLoadMoreRecipes = () => {
-    setNext(next + recipesPerLoad)
+  const [page, setPage] = React.useState(1);
+  const [listStart, setListStart] = useState(0)
+  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    setListStart(paginationData[value].listStart)
+    setListEnd(paginationData[value].listEnd)
   }
 
-
-
-  const from = 0
-  const to = 100
-
   const [recipeList, setRecipeList] = useState({})
-
-  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&random=true` */
 
   const searchURL =
     `https://api.edamam.com/search?
@@ -67,12 +70,19 @@ q=
   }, [open])
 
   useEffect(() => {
+    setListStart(0)
+    setListEnd(12)
+    setPage(1)
     setRecipeList([])
     async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+
       axios
         .get(searchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
         })
         .catch((error) => {
           console.log(error)
@@ -80,6 +90,10 @@ q=
     }
     getRecipeList()
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
 
 
 
@@ -102,16 +116,13 @@ q=
           >
             Recipes, recipes, recipes...
           </Typography>
+          Page {page} / 8
           <div className="recipe-selection-container">
-            {recipeList.slice(0, next).map((recipe, index) => (
+            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <div>
-            {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )}
-          </div>
+          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>

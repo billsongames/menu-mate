@@ -71,10 +71,21 @@ const TopBar = () => {
     navigate("/recipes")
   }
 
-  const handleVegetarianNavClick = () => {
+  const handleVegetarianNavClick = (event) => {
     setAnchorElement(null)
-    navigate("/recipes/vegetarian")
+    navigate(`/recipes/vegetarian`)
   }
+
+  const handleVeganNavClick = () => {
+    setAnchorElement(null)
+    navigate("/recipes/vegan")
+  }
+
+  const handleDairyFreeNavClick = () => {
+    setAnchorElement(null)
+    navigate("/recipes/dairy-free")
+  }
+
 
   const handleLessThan600CaloriesNavClick = () => {
     setAnchorElement(null)
@@ -128,12 +139,20 @@ const TopBar = () => {
                 'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleRecipesNavClick}>
-                <Button disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
+              <MenuItem sx={menuItemSX} disableRipple={true} >
+                <Button onClick={handleRecipesNavClick} disableRipple={true} sx={menubuttonSX}>Recipe Search</Button>
               </MenuItem>
 
-              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleVegetarianNavClick}>
-                <Button disableRipple={true} sx={menubuttonSX}>Vegetarian Recipes</Button>
+              <MenuItem sx={menuItemSX} disableRipple={true} >
+                <Button onClick={handleVegetarianNavClick} disableRipple={true} sx={menubuttonSX}>Vegetarian Recipes</Button>
+              </MenuItem>
+
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleVeganNavClick}>
+                <Button disableRipple={true} sx={menubuttonSX}>Vegan Recipes</Button>
+              </MenuItem>
+
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleDairyFreeNavClick}>
+                <Button disableRipple={true} sx={menubuttonSX}>Dairy Free Recipes</Button>
               </MenuItem>
 
               <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleLessThan600CaloriesNavClick}>
