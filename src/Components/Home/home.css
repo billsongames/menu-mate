@@ -3,20 +3,33 @@
   background-color: wheat;
 }
 
-.home-image{
+.home-image {
   width: 100%
-
 }
 
-#home-text{
+#home-text {
   position: absolute;
-  padding: 1em;
-  top: 10%;
+  top: 5%;
   left: 15%;
   width: 70%;
-  font-size: 4em;
+  font-size: 3em;
   color: white;
   font-weight: bold;
+}
+
+.beginButton {
+  margin: 0.25em;
+  width: auto;
+  height: 2em;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.5em;
+  font-weight: bold;
+  background-color: #8FBA74;
+}
+
+.beginButton:hover {
+  background-color: wheat
 }
 
 @media only screen and (max-width: 480px) {
@@ -37,7 +50,7 @@
   }
 }
 
-@media only screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1024px) {
   #home-text {
     font-size: 4em
   }
@@ -47,4 +60,4 @@
   #home-text {
     font-size: 4em
   }
-}
+} */

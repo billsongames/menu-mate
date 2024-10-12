@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { DisplayModeContext } from "../../context/DisplayModeContext";
 
+import { Button } from "@mui/material";
+
 import "./home.css"
 
 
@@ -47,12 +49,12 @@ const Home = () => {
   return (
     <div className="home-container">
       <div>
-        <img src={imageData[2].img} className="home-image" />
+        <img src={imageData[1].img} className="home-image" />
         <div id="home-text">
           <div>Add the recipes</div>
           <div>Create the menu</div>
           <div>Hassle free shopping</div>
-          <button onClick={() => handleBeginButtonClick()}>BEGIN</button>
+          <button className="beginButton" onClick={() => handleBeginButtonClick()}>TO THE RECIPES...</button>
         </div>
       </div>
     </div>
