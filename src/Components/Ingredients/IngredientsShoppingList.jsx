@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from "@mui/material/Typography";
@@ -21,6 +25,8 @@ const IngredientsShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([])
   const [dialogOpen, setDialogOpen] = useState(false)
 
+
+
   useEffect(() => {
     const jsxElements = []
     const listArray = []
@@ -29,16 +35,14 @@ const IngredientsShoppingList = () => {
       if (choice.complete === true) {
         console.log(choice)
         const length = choice.recipe.ingredientLines.length
-        jsxElements.push(
-          <div className="ingredients-list-slot-title">{choice.recipe.label}</div>
-        )
+        const ingredientsJSX = []
 
         for (let i = 0; i < length; i++) {
-          jsxElements.push(
+          ingredientsJSX.push(
             <div className="ingredients-list-slot-list-item" key={`${choice.recipe.label}-${i}`}>
               <input
                 type="checkbox"
-                className="checkbox"
+                className="ingredient-checkbox"
                 value={choice.recipe.ingredientLines[i]}
                 onChange={() => handleCheckboxChange()}
               />
@@ -47,11 +51,24 @@ const IngredientsShoppingList = () => {
               </label>
             </div>
           )
-
-          listArray.push(choice.recipe.ingredientLines[i])
         }
+
+        jsxElements.push(
+          <Accordion slotProps={{ heading: { component: 'h6' } }}>
+            <AccordionSummary
+              expandIcon={<ArrowDownwardIcon />}
+            >
+              <img className="ingredients-list-slot-image" src={choice.recipe.image} />
+              <div className="ingredients-list-slot-title">{choice.recipe.label}</div>
+            </AccordionSummary>
+            <AccordionDetails>
+              {ingredientsJSX}
+            </AccordionDetails>
+          </Accordion>
+        )
       }
     })
+
 
     setIngredientsJSX(jsxElements)
 
@@ -59,7 +76,7 @@ const IngredientsShoppingList = () => {
 
 
   const handleCheckboxChange = () => {
-    const data = [...document.querySelectorAll(".checkbox:checked")].map(event => event.value)
+    const data = [...document.querySelectorAll(".ingredient-checkbox:checked")].map(event => event.value)
     setShoppingList(data)
   }
 
@@ -77,7 +94,7 @@ const IngredientsShoppingList = () => {
         FULL INGREDIENT LIST
       </div>
       <div className="ingredients-list-subtitle">
-      TICK THE ONES YOU NEED
+        TICK THE ONES YOU NEED
       </div>
 
       {ingredientsJSX
@@ -99,7 +116,7 @@ const IngredientsShoppingList = () => {
       >
 
         <DialogContent>
-          <img src={logo} height="30px"/>
+          <img src={logo} height="36px" />
           <div className="shoppingList-title">SHOPPING LIST</div>
           {shoppingList
             ?
