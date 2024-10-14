@@ -63,13 +63,14 @@
   font-size: 0.75em;
   font-weight: bold;
   text-align: left;
+  padding: 0 0 1em 0
 }
 
 .ingredients-list-slot-title{
   font-size: 0.75em;
   font-weight: bold;
   text-align: left;
-  padding: 1em 0 0 0
+  padding: 0 1em
 }
 
 .ingredients-list-slot-list-item{
@@ -81,12 +82,24 @@
   padding: 0.25em
 }
 
+.ingredients-list-slot-image {
+  height: 3em;
+  width: 3em;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.ingredient-checkbox {
+  margin: 0 1em 0 0
+}
+
 /* ########################################### */
 
 .shoppingList {
   font-size: 1em;
   text-align: left;
   list-style-type: disc;
+  padding: 0 0 0 1em
 }
 
 .shoppingList-title{
