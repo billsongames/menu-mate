@@ -14,6 +14,7 @@ import RecipesByRegionContainer from "./Components/RecipeContainers/RecipesByReg
 import RecipesVegetarianContainer from "./Components/RecipeContainers/RecipesVegetarianContainer";
 import RecipesVeganContainer from "./Components/RecipeContainers/RecipesVeganContainer";
 import RecipesDairyFreeContainer from "./Components/RecipeContainers/RecipesDairyFreeContainer";
+import RecipesGlutenFreeContainer from "./Components/RecipeContainers/RecipesGlutenFreeContainer";
 import RecipesLessThan600CaloriesContainer from "./Components/RecipeContainers/RecipesLessThan600CaloriesContainer";
 import IngredientsSummaryContainer from "./Components/Ingredients/IngredientsSummaryContainer";
 
@@ -38,6 +39,7 @@ const App = () => {
               <Route path="/recipes/vegetarian" element={<RecipesVegetarianContainer />} />
               <Route path="/recipes/vegan" element={<RecipesVeganContainer />} />
               <Route path="/recipes/dairy-free" element={<RecipesDairyFreeContainer />} />
+              <Route path="/recipes/gluten-free" element={<RecipesGlutenFreeContainer />} />
               <Route path="/recipes/less-than-600-calories" element={<RecipesLessThan600CaloriesContainer />} />
 
               <Route path="/ingredients-summary" element={<IngredientsSummaryContainer />} />

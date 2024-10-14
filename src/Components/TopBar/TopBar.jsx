@@ -86,6 +86,11 @@ const TopBar = () => {
     navigate("/recipes/dairy-free")
   }
 
+  const handleGlutenFreeNavClick = () => {
+    setAnchorElement(null)
+    navigate("/recipes/gluten-free")
+  }
+
 
   const handleLessThan600CaloriesNavClick = () => {
     setAnchorElement(null)
@@ -153,6 +158,10 @@ const TopBar = () => {
 
               <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleDairyFreeNavClick}>
                 <Button disableRipple={true} sx={menubuttonSX}>Dairy Free Recipes</Button>
+              </MenuItem>
+
+              <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleGlutenFreeNavClick}>
+                <Button disableRipple={true} sx={menubuttonSX}>Gluten Free Recipes</Button>
               </MenuItem>
 
               <MenuItem sx={menuItemSX} disableRipple={true} onClick={handleLessThan600CaloriesNavClick}>

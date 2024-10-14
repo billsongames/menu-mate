@@ -15,7 +15,7 @@ import PaginationButtons from "./PaginationButtons";
 
 import { paginationData } from "../../api/paginationData";
 
-const RecipesDairyFree = () => {
+const RecipesGlutenFree = () => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
@@ -42,7 +42,7 @@ const RecipesDairyFree = () => {
   const searchURL = 
 `https://api.edamam.com/search?
 q=
-&health=dairy-free
+&health=gluten-free
 &from=${from}
 &to=${to}
 &dishType=Main course
@@ -112,7 +112,7 @@ q=
               fontWeight: "bold"
             }
           }}>
-            Dairy-Free Recipes
+            Gluten-Free Recipes
           </Typography>
           Page {page} / 8
           <div className="recipe-selection-container">
@@ -133,4 +133,4 @@ q=
 
 
 
-export default RecipesDairyFree
+export default RecipesGlutenFree
