@@ -5,6 +5,7 @@ import { StickyShareButtons } from 'sharethis-reactjs';
 import { InlineFollowButtons } from 'sharethis-reactjs';
 
 const ShoppingListShareButtons = () => {
+
   return (
     <div>
       <InlineShareButtons
@@ -20,6 +21,7 @@ const ShoppingListShareButtons = () => {
           description: "tester"
         }}
       />
+      <a href="whatsapp://send?text= Tester" rel="nofollow noopener" target="_blank">Test share link</a>
     </div>
   )
 }
