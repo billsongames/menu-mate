@@ -21,7 +21,7 @@ import logo from "../../assets/logo/menumate-logo-256x64-light.png"
 const IngredientsShoppingList = () => {
 
   const { menuChoices } = useContext(MenuChoicesContext)
-  const [ingredientsJSX, setIngredientsJSX] = useState([])
+  const [recipeListJSX, setRecipeListJSX] = useState([])
   const [shoppingList, setShoppingList] = useState([])
   const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -29,11 +29,9 @@ const IngredientsShoppingList = () => {
 
   useEffect(() => {
     const jsxElements = []
-    const listArray = []
 
     menuChoices.map((choice) => {
       if (choice.complete === true) {
-        console.log(choice)
         const length = choice.recipe.ingredientLines.length
         const ingredientsJSX = []
 
@@ -54,23 +52,24 @@ const IngredientsShoppingList = () => {
         }
 
         jsxElements.push(
-          <Accordion slotProps={{ heading: { component: 'h6' } }}>
-            <AccordionSummary
-              expandIcon={<ArrowDownwardIcon />}
-            >
-              <img className="ingredients-list-slot-image" src={choice.recipe.image} />
-              <div className="ingredients-list-slot-title">{choice.recipe.label}</div>
-            </AccordionSummary>
-            <AccordionDetails>
-              {ingredientsJSX}
-            </AccordionDetails>
-          </Accordion>
+          <div className="accordion-entry" key={`${choice.recipe.label}`}>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ArrowDownwardIcon />}
+              >
+                <img className="ingredients-list-slot-image" src={choice.recipe.image} />
+                <div className="ingredients-list-slot-title">{choice.recipe.label}</div>
+              </AccordionSummary>
+              <AccordionDetails>
+                {ingredientsJSX}
+              </AccordionDetails>
+            </Accordion>
+          </div>
         )
       }
     })
 
-
-    setIngredientsJSX(jsxElements)
+    setRecipeListJSX(jsxElements)
 
   }, [menuChoices])
 
@@ -97,10 +96,10 @@ const IngredientsShoppingList = () => {
         TICK THE ONES YOU NEED
       </div>
 
-      {ingredientsJSX
+      {recipeListJSX
         ?
         <div>
-          {ingredientsJSX}
+          {recipeListJSX}
           <Button onClick={handleOpenShoppingList}>GENERATE SHOPPING LIST</Button>
         </div>
         :
@@ -116,7 +115,7 @@ const IngredientsShoppingList = () => {
       >
 
         <DialogContent>
-          <img src={logo} height="36px" />
+          <img src={logo} height="42em" />
           <div className="shoppingList-title">SHOPPING LIST</div>
           {shoppingList
             ?
