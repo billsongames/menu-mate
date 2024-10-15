@@ -137,7 +137,7 @@ const IngredientsShoppingList = () => {
             :
             <></>
           }
-          <ShoppingListShareButtons />
+          <ShoppingListShareButtons shoppingList={shoppingList}/>
         </DialogContent>
         <DialogActions>
         

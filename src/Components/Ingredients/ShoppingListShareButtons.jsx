@@ -4,24 +4,11 @@ import { InlineShareButtons } from 'sharethis-reactjs';
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { InlineFollowButtons } from 'sharethis-reactjs';
 
-const ShoppingListShareButtons = () => {
+const ShoppingListShareButtons = (shoppingList) => {
 
   return (
     <div>
-      <InlineShareButtons
-        config={{
-          alignment: "left",
-          enabled: true,
-          networks: [
-            "whatsapp"
-          ],
-          size: 40,
-          radius: 4,
-
-          description: "tester"
-        }}
-      />
-      <a href="whatsapp://send?text= Tester" rel="nofollow noopener" target="_blank">Test share link</a>
+      <a href={`whatsapp://send?text= ${shoppingList}`} rel="nofollow noopener" target="_blank">Test share link</a>
     </div>
   )
 }
