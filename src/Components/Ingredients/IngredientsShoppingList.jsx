@@ -80,6 +80,7 @@ const IngredientsShoppingList = () => {
   }
 
   const handleOpenShoppingList = () => {
+    console.log(shoppingList)
     setDialogOpen(true)
   }
 
