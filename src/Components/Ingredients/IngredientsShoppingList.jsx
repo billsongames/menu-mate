@@ -14,9 +14,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { MenuChoicesContext } from "../../context/MenuChoicesContext";
 
-import { filteredFoodCategories } from "../../data/filteredFoodCategories";
-
 import logo from "../../assets/logo/menumate-logo-256x64-light.png"
+
+import ShoppingListShareButtons from "./ShoppingListShareButtons";
 
 const IngredientsShoppingList = () => {
 
@@ -119,6 +119,7 @@ const IngredientsShoppingList = () => {
           <div className="shoppingList-title">SHOPPING LIST</div>
           {shoppingList
             ?
+            <>
             <ul className="shoppingList">
               {shoppingList.map((ingredient, index) => {
                 return (
@@ -131,11 +132,15 @@ const IngredientsShoppingList = () => {
                 )
               })}
             </ul>
+            
+            </>
             :
             <></>
           }
+          <ShoppingListShareButtons />
         </DialogContent>
         <DialogActions>
+        
           <Button size="small" onClick={handleCloseShoppingList}>CLOSE</Button>
         </DialogActions>
       </Dialog>
