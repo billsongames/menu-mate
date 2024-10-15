@@ -66,6 +66,10 @@
   padding: 0 0 1em 0
 }
 
+.accordion-entry{
+  margin: 0.5em 0
+}
+
 .ingredients-list-slot-title{
   font-size: 0.75em;
   font-weight: bold;
