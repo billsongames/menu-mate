@@ -8,7 +8,6 @@ function DisplayModeProvider(props) {
 
   const toggleDisplayMode = (value) => {
     setDisplayMode(`${value}`)
-    console.log(value)
   }
 
   return (
