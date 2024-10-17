@@ -102,8 +102,8 @@
 .shoppingList {
   font-size: 1em;
   text-align: left;
-  list-style-type: disc;
-  padding: 0 0 0 1em
+  list-style-type: none;
+  padding: 0
 }
 
 .shoppingList-title{
@@ -115,10 +115,20 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 0.75em;
-  text-align: left;
   padding: 0.25em;
   list-style-type: disc;
 }
+
+.list-checkbox:checked + label{
+  text-decoration: line-through;
+  color: grey;
+}
+
+.shoppingList-item-name {
+  font-size: 0.75em;
+  text-align: left;
+}
+
+
 
 

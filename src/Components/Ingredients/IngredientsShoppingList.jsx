@@ -25,8 +25,6 @@ const IngredientsShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([])
   const [dialogOpen, setDialogOpen] = useState(false)
 
-
-
   useEffect(() => {
     const jsxElements = []
 
@@ -80,7 +78,6 @@ const IngredientsShoppingList = () => {
   }
 
   const handleOpenShoppingList = () => {
-    console.log(shoppingList)
     setDialogOpen(true)
   }
 
@@ -126,7 +123,12 @@ const IngredientsShoppingList = () => {
                 return (
                   <li key={index}>
                     <div className="shoppingList-item">
-                      {ingredient}
+                      <input
+                        type="checkbox"
+                        className="list-checkbox"
+                        value={ingredient}
+                      />  
+                      <label htmlFor={ingredient} className="shoppingList-item-name">{ingredient}</label>                      
                     </div>
 
                   </li>

@@ -50,6 +50,7 @@ q=${ingredient}
 &from=${from}
 &to=${to}
 &dishType=Main course
+&excluded=head
 &time=1%2B
 &app_id=${appID}
 &app_key=${appKey}`
