@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div>
-        <img src={imageData[1].img} className="home-image" />
+        <img src={imageData[0].img} className="home-image" />
         <div id="home-text">
           <div>Add the recipes</div>
           <div>Create the menu</div>
