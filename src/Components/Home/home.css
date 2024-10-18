@@ -4,7 +4,14 @@
 }
 
 .home-image {
-  width: 100%
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100vh;
+  object-fit: cover;
 }
 
 #home-text {
@@ -13,7 +20,7 @@
   left: 15%;
   width: 70%;
   font-size: 3em;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
