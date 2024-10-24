@@ -118,7 +118,7 @@ const MenuChoices = () => {
               </div>
             ))}
             <Button onClick={toggleDrawer} sx={buttonSX}>
-              MENU
+              MY MENU
             </Button>
           </div>
           :
@@ -127,7 +127,7 @@ const MenuChoices = () => {
       </div>
 
       <div className="menuChoices-mobile">
-        <Button onClick={toggleDrawer} sx={buttonSX}>MENU</Button>
+        <Button onClick={toggleDrawer} sx={buttonSX}>MY MENU</Button>
       </div>
 
 
@@ -213,7 +213,7 @@ const MenuChoices = () => {
                 fontWeight: "bold"
               }}
             >
-              MENU
+              MY MENU
             </Typography>
 
 

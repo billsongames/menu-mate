@@ -15,6 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
 import CheckIcon from '@mui/icons-material/Check';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import { recipeLookUp } from "../../api/requests";
 
@@ -202,6 +203,17 @@ const RecipeCard = ({ recipe }) => {
                   <RecipeChoiceLessThan600Cal calorieCount={Math.round((recipeChoiceDetails.totalNutrients.ENERC_KCAL.quantity) / (recipeChoiceDetails.yield))} />
                 </div>
               </div>
+              <Button
+                size="small"
+                href={`${recipeChoiceDetails.url}`}
+                target="_blank"
+                sx={{
+                  padding: "1em 0"
+                }}
+              >
+                <MenuBookIcon sx={{ padding: "0 0.25em 0 0" }} />RECIPE AT {recipeChoiceDetails.source}
+              </Button>
+
               {/*               <RecipeChoiceDietLabels dietLabels={recipeChoiceDetails.dietLabels} /> */}
               <RecipeChoiceIngredients ingredients={recipeChoiceDetails.ingredientLines} ingredientImages={recipeChoiceDetails.ingredients} />
               <RecipeChoiceNutrients nutrients={recipeChoiceDetails.totalNutrients} />
