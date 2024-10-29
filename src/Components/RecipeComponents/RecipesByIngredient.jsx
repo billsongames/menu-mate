@@ -31,7 +31,9 @@ const RecipesByIngredient = () => {
 
   const [page, setPage] = React.useState(1);
   const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+  const [listEnd, setListEnd] = useState(12)
+/*   const [to, setTo] = useState(96) */
+  const [pageCount, setPageCount] = useState()
 
   const handlePageChange = (event, value) => {
     setPage(value)
@@ -84,6 +86,8 @@ q=${ingredient}
     setListEnd(12)
     setPage(1)
     setRecipeList([])
+    setPageCount(8)
+
     async function getRecipeList() {
       setRecipeList([])
       setResultCount(false)
@@ -94,12 +98,19 @@ q=${ingredient}
           setRecipeList(response.data.hits)
           setResultCount(response.data.count)
           setIngredientHeading(ingredient)
+/*           setTo(response.data.hits.length) */
+          
+/*           if (response.data.hits.length < 96) {
+            setPageCount((response.data.hits.length % 12) + 1)
+          } */
+
         })
         .catch((error) => {
           console.log(error)
         })
     }
     getRecipeList()
+
   }, [ingredient])
 
   useEffect(() => {
@@ -133,7 +144,7 @@ q=${ingredient}
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
+          <PaginationButtons count={pageCount} page={page} onPageChange={handlePageChange} />
         </React.Fragment>
 
         : resultCount === 0
