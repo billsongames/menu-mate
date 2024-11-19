@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 
 import { ThemeProvider, createTheme, makeStyles } from "@mui/material";
 
+import edamam_badge from "../../assets/logo/Edamam_Badge_Transparent.png"
+
 const PaginationButtons = ({ count, page, onPageChange }) => {
 
   const sx_paginationStack = {
@@ -33,6 +35,7 @@ const PaginationButtons = ({ count, page, onPageChange }) => {
 
 
   return (
+    <div>
 
     <Stack sx={sx_paginationStack} spacing={2}>
       <Pagination
@@ -44,7 +47,14 @@ const PaginationButtons = ({ count, page, onPageChange }) => {
         onChange={onPageChange}
       />
     </Stack >
+    <div>
+      <a href="https://www.edamam.com/" target="_blank">
+        <img src = {edamam_badge} width= "200px" />
+      </a> 
+    </div>
 
+    
+  </div>  
   )
 }
 

@@ -45,7 +45,7 @@ function MenuChoicesProvider(props) {
   const addToMenuChoices = (event) => {
     event.preventDefault()
 
-    const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+    const choiceData = (JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
     const targetIndex = choiceData.findIndex(choice => choice.complete === false)
 
     if (targetIndex === -1) {
@@ -55,13 +55,13 @@ function MenuChoicesProvider(props) {
       choiceData[targetIndex].complete = true
 
       setMenuChoices(choiceData)
-      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
+      sessionStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
     }
   }
 
   const removeMenuChoice = (event) => {
     event.preventDefault()
-    const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+    const choiceData = (JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
     const targetIndex = choiceData.findIndex(choice => choice.recipe.uri === event.target.dataset.recipeuri)
 
     if (targetIndex === -1) {
@@ -71,18 +71,18 @@ function MenuChoicesProvider(props) {
       choiceData.push(menuChoiceDefaultEntry)
 
       setMenuChoices(choiceData)
-      localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
+      sessionStorage.setItem("MenuMate_MenuChoices", JSON.stringify(choiceData))
 
     }
   }
 
     useEffect(() => {
-      if (localStorage.getItem("MenuMate_MenuChoices") === null) {
+      if (sessionStorage.getItem("MenuMate_MenuChoices") === null) {
         setMenuChoices(menuChoicesDefault)
-        localStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
+        sessionStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
       }
       else {
-        setMenuChoices(JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+        setMenuChoices(JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
       }
     }, [])
 
