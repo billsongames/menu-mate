@@ -4,21 +4,28 @@
 }
 
 .home-image {
-  width: 100%
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100vh;
+  object-fit: cover;
 }
 
 #home-text {
+  padding: 1em 0;
   position: absolute;
-  top: 5%;
-  left: 15%;
-  width: 70%;
+  width: 100%;
   font-size: 3em;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
 .beginButton {
   margin: 0.25em;
+  padding: 0 1em;
   width: auto;
   height: 2em;
   border-radius: 8px;
@@ -34,7 +41,7 @@
 
 @media only screen and (max-width: 480px) {
   #home-text {
-    font-size: 1em
+    font-size: 1.5em
   }
 }
 
@@ -46,18 +53,18 @@
 
 @media only screen and (min-width: 768px) {
   #home-text {
-    font-size: 3em
+    font-size: 2em
   }
 }
 
-/* @media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   #home-text {
-    font-size: 4em
+    font-size: 3em
   }
 }
 
 @media only screen and (min-width: 1200px) {
   #home-text {
-    font-size: 4em
+    font-size: 3em
   }
-} */
+}
