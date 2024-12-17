@@ -1,6 +1,37 @@
-# MenuMate
+![logo](https://github.com/billsongames/menu-mate/raw/main/public/readme_logo.png) 
 
-![logo]() 
+### [https://menumate.onrender.com/](https://menumate.onrender.com/ "MenuMate")
+
+### Add the recipes, Create the menu, Hassle free shopping
+
+Plan your weeks menu by searching for recipes and adding them to a schedule. This creates a list of ingredients, some of which you will most likely already have loitering in the food cupboard. Tick them off to get a slimmed down shopping list and then pop to your favourite supermarche. Easy!
+
+### App features:
+- Integration with the Edamam API to access 1000's of recipes
+- Search for recipes by region, ingredient and recipe type
+- Create custom shopping lists to prevent unnecessary purchases
+
+### Written using React, JavaScript, HTML and CSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
