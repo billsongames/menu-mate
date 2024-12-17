@@ -10,6 +10,7 @@ Plan your weeks menu by searching for recipes and adding them to a schedule. Thi
 - Integration with the Edamam API to access 1000's of recipes
 - Search for recipes by region, ingredient and recipe type
 - Create custom shopping lists to prevent unnecessary purchases
+- Responsive design
 
 ### Written using React, JavaScript, HTML and CSS
 
