@@ -20,7 +20,16 @@
   grid-template-rows: 60% 30% 10%;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 320px) {
+  .recipe-selection-container{
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(1, 300px);
+  }
+}
+
+@media only screen and (min-width: 375px) {
   .recipe-selection-container{
     display: grid;
     justify-items: center;
