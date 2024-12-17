@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoaderButton = ( {onLoaderClick} ) => {
+const LoaderButton = ({ onLoaderClick }) => {
 
 
   return (

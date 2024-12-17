@@ -50,34 +50,33 @@
   border-radius: 4px;
   text-align: left;
   width: 100%
-
 }
 
-.ingredients-list-title{
+.ingredients-list-title {
   font-size: 1em;
   font-weight: bold;
   text-align: left;
 }
 
-.ingredients-list-subtitle{
+.ingredients-list-subtitle {
   font-size: 0.75em;
   font-weight: bold;
   text-align: left;
   padding: 0 0 1em 0
 }
 
-.accordion-entry{
+.accordion-entry {
   margin: 0.5em 0
 }
 
-.ingredients-list-slot-title{
+.ingredients-list-slot-title {
   font-size: 0.75em;
   font-weight: bold;
   text-align: left;
   padding: 0 1em
 }
 
-.ingredients-list-slot-list-item{
+.ingredients-list-slot-list-item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -106,7 +105,7 @@
   padding: 0
 }
 
-.shoppingList-title{
+.shoppingList-title {
   font-size: 1em;
   font-weight: bold;
 }
@@ -119,7 +118,7 @@
   list-style-type: disc;
 }
 
-.list-checkbox:checked + label{
+.list-checkbox:checked+label {
   text-decoration: line-through;
   color: grey;
 }
@@ -128,7 +127,3 @@
   font-size: 0.75em;
   text-align: left;
 }
-
-
-
-

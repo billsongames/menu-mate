@@ -5,7 +5,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import "./progressDisplay.css"
 
-const ProgressDisplay = ( error ) => {
+const ProgressDisplay = (error) => {
 
   const [resultError, setResultError] = useState(false)
   const progressSx = {

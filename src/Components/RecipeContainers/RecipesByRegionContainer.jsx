@@ -8,11 +8,11 @@ import TopBar from "../TopBar/TopBar";
 
 const RecipesByRegionContainer = () => {
 
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("recipes")
-  },[])
+  }, [])
 
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-.navBarRegion-container-desktop{
+.navBarRegion-container-desktop {
   margin: auto;
   display: none;
 }
@@ -18,7 +18,7 @@
   background-color: #8FBA74
 }
 
-.regionsDrawer{
+.regionsDrawer {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -26,7 +26,7 @@
   width: 300px
 }
 
-.regionsDrawer-button-container{
+.regionsDrawer-button-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -66,21 +66,17 @@
 }
 
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 480px) {}
 
-}
-
-@media only screen and (min-width: 768px) {
-
-}
+@media only screen and (min-width: 768px) {}
 
 @media only screen and (min-width: 1024px) {
-  .navBarRegion-container-mobile{
+  .navBarRegion-container-mobile {
     display: none;
   }
 
 
-  .navBarRegion-container-desktop{
+  .navBarRegion-container-desktop {
     display: block;
   }
 }
@@ -90,4 +86,3 @@
     width: 12em;
   }
 }
-

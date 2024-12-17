@@ -12,7 +12,7 @@ import "./searchBar.css";
 
 
 
-const SearchBar = ()  => {
+const SearchBar = () => {
 
   const navigate = useNavigate()
 

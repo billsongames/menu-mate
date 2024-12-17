@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const IngredientsSummaryContainer = () => {
 
-  const navigate = useNavigate()  
+  const navigate = useNavigate()
 
   const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
@@ -35,9 +35,9 @@ const IngredientsSummaryContainer = () => {
         <Button onClick={handleBackToRecipesClick}>BACK TO RECIPES</Button>
       </div>
       <div className="ingredients-summary-container">
-{/*         <IngredientsMenuDisplay /> */}
+        {/*         <IngredientsMenuDisplay /> */}
         <IngredientsShoppingList />
-        
+
       </div>
 
 

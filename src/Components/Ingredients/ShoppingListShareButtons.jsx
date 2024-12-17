@@ -8,7 +8,7 @@ const ShoppingListShareButtons = (shoppingList) => {
 
   return (
     <div>
-     {/*  <a href={`whatsapp://send?text= ${shoppingList}`} rel="nofollow noopener" target="_blank">Test share link</a> */}
+      {/*  <a href={`whatsapp://send?text= ${shoppingList}`} rel="nofollow noopener" target="_blank">Test share link</a> */}
     </div>
   )
 }

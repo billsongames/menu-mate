@@ -7,11 +7,11 @@ import HeaderContainer from "../Header/HeaderContainer";
 import RecipesVegan from "../RecipeComponents/RecipesVegan";
 
 const RecipesVeganContainer = () => {
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("recipes")
-  },[])
+  }, [])
 
   return (
     <React.Fragment>

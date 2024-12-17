@@ -76,15 +76,15 @@ function MenuChoicesProvider(props) {
     }
   }
 
-    useEffect(() => {
-      if (sessionStorage.getItem("MenuMate_MenuChoices") === null) {
-        setMenuChoices(menuChoicesDefault)
-        sessionStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
-      }
-      else {
-        setMenuChoices(JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
-      }
-    }, [])
+  useEffect(() => {
+    if (sessionStorage.getItem("MenuMate_MenuChoices") === null) {
+      setMenuChoices(menuChoicesDefault)
+      sessionStorage.setItem("MenuMate_MenuChoices", JSON.stringify(menuChoicesDefault))
+    }
+    else {
+      setMenuChoices(JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
+    }
+  }, [])
 
   return (
     <MenuChoicesContext.Provider value={{ menuChoices, setMenuChoices, addToMenuChoices, removeMenuChoice }}>

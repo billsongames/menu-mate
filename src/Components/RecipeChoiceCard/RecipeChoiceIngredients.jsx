@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 const RecipeChoiceIngredients = ({ ingredients }) => {
   return (
     <div className="recipe-choice-ingredient-nutrients-container">
-{/*       <Typography variant="h6" fontWeight="bold" >Ingredients</Typography>
+      {/*       <Typography variant="h6" fontWeight="bold" >Ingredients</Typography>
       {ingredients.map((ingredient) => (
         <div key={ingredient} className="recipe-choice-ingredient-row">
           {ingredient}

@@ -14,14 +14,14 @@
   flex-grow: 2;
 }
 
-.recipe-selection-details-container{
+.recipe-selection-details-container {
   height: 18em;
   display: grid;
   grid-template-rows: 60% 30% 10%;
 }
 
 @media only screen and (min-width: 320px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@
 }
 
 @media only screen and (min-width: 375px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     justify-content: center;
@@ -39,7 +39,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(2, 340px);
@@ -47,7 +47,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     justify-content: center;
@@ -56,7 +56,7 @@
 }
 
 @media only screen and (min-width: 1440px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     justify-content: center;
@@ -65,11 +65,10 @@
 }
 
 @media only screen and (min-width: 2560px) {
-  .recipe-selection-container{
+  .recipe-selection-container {
     display: grid;
     justify-items: center;
     justify-content: center;
     grid-template-columns: repeat(6, 340px);
   }
 }
-  

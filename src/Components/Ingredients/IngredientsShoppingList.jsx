@@ -118,32 +118,32 @@ const IngredientsShoppingList = () => {
           {shoppingList
             ?
             <>
-            <ul className="shoppingList">
-              {shoppingList.map((ingredient, index) => {
-                return (
-                  <li key={index}>
-                    <div className="shoppingList-item">
-                      <input
-                        type="checkbox"
-                        className="list-checkbox"
-                        value={ingredient}
-                      />  
-                      <label htmlFor={ingredient} className="shoppingList-item-name">{ingredient}</label>                      
-                    </div>
+              <ul className="shoppingList">
+                {shoppingList.map((ingredient, index) => {
+                  return (
+                    <li key={index}>
+                      <div className="shoppingList-item">
+                        <input
+                          type="checkbox"
+                          className="list-checkbox"
+                          value={ingredient}
+                        />
+                        <label htmlFor={ingredient} className="shoppingList-item-name">{ingredient}</label>
+                      </div>
 
-                  </li>
-                )
-              })}
-            </ul>
-            
+                    </li>
+                  )
+                })}
+              </ul>
+
             </>
             :
             <></>
           }
-          <ShoppingListShareButtons shoppingList={shoppingList}/>
+          <ShoppingListShareButtons shoppingList={shoppingList} />
         </DialogContent>
         <DialogActions>
-        
+
           <Button size="small" onClick={handleCloseShoppingList}>CLOSE</Button>
         </DialogActions>
       </Dialog>

@@ -1,5 +1,4 @@
-.menuChoices-mobile {
-}
+.menuChoices-mobile {}
 
 .menuChoices-container {
   display: flex;
@@ -48,7 +47,8 @@
   cursor: pointer;
 }
 
-.menuChoices-clearButton:hover, .menuChoices-drawer-clearButton:hover {
+.menuChoices-clearButton:hover,
+.menuChoices-drawer-clearButton:hover {
   background-color: lightgray;
 }
 
@@ -147,9 +147,7 @@
   cursor: pointer;
 }
 
-.menu
-
-.menuChoices-drawer-info {
+.menu .menuChoices-drawer-info {
   margin: 0 0.5em;
   display: flex;
   flex-direction: column;
@@ -188,24 +186,26 @@
 
 
 @media only screen and (max-width: 480px) {
-  .menuChoices-desktop{
-      display: none;
+  .menuChoices-desktop {
+    display: none;
   }
 }
 
 @media only screen and (min-width: 480px) {
-  .menuChoices-desktop{
+  .menuChoices-desktop {
     display: none;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .menuChoices-mobile{
+  .menuChoices-mobile {
     display: none;
   }
-  .menuChoices-desktop{
+
+  .menuChoices-desktop {
     display: block
   }
+
   .menuChoices-slot>img {
     height: 3em;
     width: 3em;
@@ -213,19 +213,18 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .menuChoices-mobile{
+  .menuChoices-mobile {
     display: none;
   }
-  .menuChoices-desktop{
+
+  .menuChoices-desktop {
     display: block
   }
+
   .menuChoices-slot>img {
     height: 4em;
     width: 4em;
   }
 }
 
-@media only screen and (min-width: 1200px) {
-
-
-}
+@media only screen and (min-width: 1200px) {}

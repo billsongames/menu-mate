@@ -39,8 +39,8 @@ const RecipesVegetarian = () => {
   const [recipeList, setRecipeList] = useState({})
 
   /* const searchURL = `https://api.edamam.com/api/recipes/v2/?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegetarian` */
-  const searchURL = 
-`https://api.edamam.com/search?
+  const searchURL =
+    `https://api.edamam.com/search?
 q=
 &health=vegetarian
 &from=${from}
@@ -117,7 +117,7 @@ q=
           </Typography>
           Page {page} / 8
           <div className="recipe-selection-container">
-          {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>

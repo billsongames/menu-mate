@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-items: left;
   align-items: center;
-  position:sticky;
+  position: sticky;
   top: 0;
   z-index: 1;
   background-color: #8FBA74;
@@ -26,33 +26,34 @@
 
 
 @media only screen and (min-width: 480px) {
-  .topbar-container{
+  .topbar-container {
     height: 3em
   }
-  .topbar-logo{
+
+  .topbar-logo {
     height: 2em
   }
 
 }
 
 @media only screen and (min-width: 768px) {
-  .topbar-container{
+  .topbar-container {
     height: 4em
   }
-  .topbar-logo{
+
+  .topbar-logo {
     height: 3em
   }
 
 }
 
 @media only screen and (min-width: 1024px) {
-  .topbar-container{
+  .topbar-container {
     height: 5em
   }
-  .topbar-logo{
+
+  .topbar-logo {
     height: 4em
   }
 
 }
-
-

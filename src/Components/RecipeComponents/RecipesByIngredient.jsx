@@ -32,7 +32,7 @@ const RecipesByIngredient = () => {
   const [page, setPage] = React.useState(1);
   const [listStart, setListStart] = useState(0)
   const [listEnd, setListEnd] = useState(12)
-/*   const [to, setTo] = useState(96) */
+  /*   const [to, setTo] = useState(96) */
   const [pageCount, setPageCount] = useState()
 
   const handlePageChange = (event, value) => {
@@ -98,11 +98,11 @@ q=${ingredient}
           setRecipeList(response.data.hits)
           setResultCount(response.data.count)
           setIngredientHeading(ingredient)
-/*           setTo(response.data.hits.length) */
-          
-/*           if (response.data.hits.length < 96) {
-            setPageCount((response.data.hits.length % 12) + 1)
-          } */
+          /*           setTo(response.data.hits.length) */
+
+          /*           if (response.data.hits.length < 96) {
+                      setPageCount((response.data.hits.length % 12) + 1)
+                    } */
 
         })
         .catch((error) => {
@@ -118,7 +118,7 @@ q=${ingredient}
   }, [page]);
 
 
-  
+
 
   return (
     <section>
@@ -155,14 +155,14 @@ q=${ingredient}
                 color: "#8FBA74",
                 width: 80,
                 height: 80
-                }}
+              }}
               />
             </div>
             <div>
               <Typography>
                 Sorry, no results
               </Typography>
-              
+
             </div>
           </>
           :

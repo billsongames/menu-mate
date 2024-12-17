@@ -24,9 +24,6 @@ const RecipeChoiceNutrients = ({ nutrients }) => {
           </div>
         </div>
         <Divider />
-
-
-
       </React.Fragment>
     )
   }

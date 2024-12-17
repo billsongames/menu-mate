@@ -26,35 +26,27 @@ const PaginationButtons = ({ count, page, onPageChange }) => {
 
 
 
-
-
-
-
-
-
-
-
   return (
     <div>
 
-    <Stack sx={sx_paginationStack} spacing={2}>
-      <Pagination
-        count={count}
-        size="small"
-        page={page}
-        showFirstButton
-        showLastButton
-        onChange={onPageChange}
-      />
-    </Stack >
-    <div>
-      <a href="https://www.edamam.com/" target="_blank">
-        <img src = {edamam_badge} width= "200px" />
-      </a> 
-    </div>
+      <Stack sx={sx_paginationStack} spacing={2}>
+        <Pagination
+          count={count}
+          size="small"
+          page={page}
+          showFirstButton
+          showLastButton
+          onChange={onPageChange}
+        />
+      </Stack >
+      <div>
+        <a href="https://www.edamam.com/" target="_blank">
+          <img src={edamam_badge} width="200px" />
+        </a>
+      </div>
 
-    
-  </div>  
+
+    </div>
   )
 }
 

@@ -9,11 +9,11 @@ import RecipesLessThan600Calories from "../RecipeComponents/RecipesLessThan600Ca
 import TopBar from "../TopBar/TopBar";
 
 const RecipesLessThan600CaloriesContainer = () => {
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("recipes")
-  },[])
+  }, [])
 
   return (
     <React.Fragment>

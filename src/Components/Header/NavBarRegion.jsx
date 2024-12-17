@@ -123,7 +123,7 @@ const NavBarRegion = () => {
       <nav className="navBarRegion-container-mobile">
         <Button sx={buttonSX} onClick={toggleRegionDrawer}>RECIPES BY REGION</Button>
         <Drawer open={drawerOpen} anchor="left" onClose={toggleRegionDrawer}>
-          <Card sx={{ height: "100%", width:"300px", backgroundColor: "#8FBA74"}} scroll="paper">
+          <Card sx={{ height: "100%", width: "300px", backgroundColor: "#8FBA74" }} scroll="paper">
             <div className="regionsDrawer">
               <div className="regionsDrawer-header">
 

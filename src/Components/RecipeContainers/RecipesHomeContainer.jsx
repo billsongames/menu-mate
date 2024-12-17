@@ -8,11 +8,11 @@ import TopBar from "../TopBar/TopBar";
 import Menu from "../MenuChoices/MenuChoices";
 
 const RecipesHomeContainer = () => {
-  const {displayMode, toggleDisplayMode} = useContext(DisplayModeContext)
+  const { displayMode, toggleDisplayMode } = useContext(DisplayModeContext)
 
   useEffect(() => {
     toggleDisplayMode("recipes")
-  },[])
+  }, [])
 
 
   return (
