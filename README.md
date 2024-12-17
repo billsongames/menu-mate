@@ -1,6 +1,6 @@
 # MenuMate
 
-[logo] 
+![logo]() 
 
 
 
