@@ -55,7 +55,7 @@ const RecipeCard = ({ recipe }) => {
     setDialogOpen(false)
   }
 
-  const choiceData = (JSON.parse(localStorage.getItem("MenuMate_MenuChoices")))
+  const choiceData = (JSON.parse(sessionStorage.getItem("MenuMate_MenuChoices")))
 
   const targetIndex = choiceData.findIndex(choice => choice.recipe.uri === recipe.recipe.uri)
 
