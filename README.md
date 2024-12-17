@@ -1,4 +1,4 @@
-![logo](https://github.com/billsongames/menu-mate/raw/main/public/readme_logo.png) 
+![logo](public/readme_logo.png) 
 
 ### [https://menumate.onrender.com/](https://menumate.onrender.com/ "MenuMate")
 
@@ -13,6 +13,17 @@ Plan your weeks menu by searching for recipes and adding them to a schedule. Thi
 
 ### Written using React, JavaScript, HTML and CSS
 
+![screenshot_1](public/screenshots/01.png)
+
+![screenshot_2](public/screenshots/02.png)
+
+![screenshot_3](public/screenshots/03.png)
+
+![screenshot_4](public/screenshots/04.png)
+
+![screenshot_5](public/screenshots/05.png)
+
+![screenshot_6](public/screenshots/06.png)
 
 
 
@@ -35,7 +46,7 @@ Plan your weeks menu by searching for recipes and adding them to a schedule. Thi
 
 
 
-# Getting Started with Create React App
+# Getting Started with MenuMate
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
