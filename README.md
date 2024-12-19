@@ -12,7 +12,8 @@ Plan your weeks menu by searching for recipes and adding them to a schedule. Thi
 - Create custom shopping lists to prevent unnecessary purchases
 - Responsive design
 
-### Written using React, JavaScript, HTML and CSS
+### MenuMate was written using React, JavaScript, HTML and CSS
+
 
 ![screenshot_1](public/screenshots/01.png)
 
