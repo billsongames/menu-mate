@@ -13,9 +13,6 @@ import "./recipeComponents.css";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
-import PaginationButtons from "./PaginationButtons";
-
-import { paginationData } from "../../api/paginationData";
 
 
 const RecipesByIngredient = () => {
@@ -23,45 +20,19 @@ const RecipesByIngredient = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const from = 0
-  const to = 96
-
-  const recipesPerLoad = 12
   const [resultCount, setResultCount] = useState()
 
-  const [page, setPage] = React.useState(1);
-  const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(12)
-/*   const [to, setTo] = useState(96) */
-  const [pageCount, setPageCount] = useState()
-
-  const handlePageChange = (event, value) => {
-    setPage(value)
-    setListStart(paginationData[value].listStart)
-    setListEnd(paginationData[value].listEnd)
-  }
+  const [nextURL, setNextURL] = useState()
 
   const { ingredient } = useParams()
   const [ingredientHeading, setIngredientHeading] = useState(null)
 
+  const defaultSearchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}`
 
-  /*   const searchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&q=${ingredient}` */
-  const searchURL =
-    `https://api.edamam.com/search?
-q=${ingredient}
-&from=${from}
-&to=${to}
-&dishType=Main course
-&excluded=head
-&time=1%2B
-&app_id=${appID}
-&app_key=${appKey}`
-
+  const [searchURL, setSearchURL] = useState(defaultSearchURL)
 
   const [recipeList, setRecipeList] = useState([])
-
   const [open, setOpen] = useState(false)
-
   const descriptionElementRef = useRef(null)
 
   const sx_title = {
@@ -80,17 +51,37 @@ q=${ingredient}
   }, [open])
 
 
-
   useEffect(() => {
-    setListStart(0)
-    setListEnd(12)
-    setPage(1)
     setRecipeList([])
-    setPageCount(8)
 
     async function getRecipeList() {
       setRecipeList([])
       setResultCount(false)
+      setNextURL("")
+
+      axios
+        .get(defaultSearchURL)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
+          setIngredientHeading(ingredient)
+          setNextURL(response.data._links.next.href)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getRecipeList()
+  }, [ingredient])
+
+
+  useEffect(() => {
+    setRecipeList([])
+
+    async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+      setNextURL("")
 
       axios
         .get(searchURL)
@@ -98,12 +89,7 @@ q=${ingredient}
           setRecipeList(response.data.hits)
           setResultCount(response.data.count)
           setIngredientHeading(ingredient)
-/*           setTo(response.data.hits.length) */
-          
-/*           if (response.data.hits.length < 96) {
-            setPageCount((response.data.hits.length % 12) + 1)
-          } */
-
+          setNextURL(response.data._links.next.href)
         })
         .catch((error) => {
           console.log(error)
@@ -111,14 +97,13 @@ q=${ingredient}
     }
     getRecipeList()
 
-  }, [ingredient])
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
+  }, [searchURL])
 
 
-  
+  const handleNextClick = () => {
+    setSearchURL(nextURL)
+  }
+
 
   return (
     <section>
@@ -138,14 +123,14 @@ q=${ingredient}
           }}>
             {ingredientHeading.charAt(0).toUpperCase() + ingredientHeading.slice(1)} recipes
           </Typography>
-          Page {page} / 8
           <div className="recipe-selection-container">
-            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <PaginationButtons count={pageCount} page={page} onPageChange={handlePageChange} />
+          <Button onClick={handleNextClick}>Next Page</Button>
         </React.Fragment>
+
 
         : resultCount === 0
           ?
@@ -155,14 +140,14 @@ q=${ingredient}
                 color: "#8FBA74",
                 width: 80,
                 height: 80
-                }}
+              }}
               />
             </div>
             <div>
               <Typography>
                 Sorry, no results
               </Typography>
-              
+
             </div>
           </>
           :
@@ -173,7 +158,6 @@ q=${ingredient}
     </section>
   )
 }
-
 
 
 export default RecipesByIngredient

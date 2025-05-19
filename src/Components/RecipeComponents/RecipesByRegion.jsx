@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
@@ -20,46 +21,20 @@ const RecipesByRegion = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const from = 0
-  const to = 96
-
-  const recipesPerLoad = 12
   const [resultCount, setResultCount] = useState()
-
-  const [page, setPage] = React.useState(1);
-  const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
-
-  const handlePageChange = (event, value) => {
-    setPage(value)
-    setListStart(paginationData[value].listStart)
-    setListEnd(paginationData[value].listEnd)
-  }
+  const [nextURL, setNextURL] = useState()
 
   const { region } = useParams()
 
-  const searchURL =
-    `https://api.edamam.com/search?
-q=
-&from=${from}
-&to=${to}
-&dishType=Main course
-&excluded=octopus
-&excluded=head
-&time=1%2B
-&cuisineType=${region}
-&app_id=${appID}
-&app_key=${appKey}`
+  const defaultSearchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&&cuisineType=${region}`
+
+  const [searchURL, setSearchURL] = useState(defaultSearchURL)
 
   const [recipeList, setRecipeList] = useState([])
 
   const [open, setOpen] = useState(false)
 
   const descriptionElementRef = useRef(null)
-
-
-
-
 
   useEffect(() => {
     if (open) {
@@ -71,19 +46,19 @@ q=
   }, [open])
 
   useEffect(() => {
-    setListStart(0)
-    setListEnd(12)
-    setPage(1)
     setRecipeList([])
+
     async function getRecipeList() {
       setRecipeList([])
       setResultCount(false)
+      setNextURL("")
 
       axios
-        .get(searchURL)
+        .get(defaultSearchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
           setResultCount(response.data.count)
+          setNextURL(response.data._links.next.href)
         })
         .catch((error) => {
           console.log(error)
@@ -92,11 +67,32 @@ q=
     getRecipeList()
   }, [region])
 
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
+    setRecipeList([])
 
+    async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+      setNextURL("")
 
+      axios
+        .get(searchURL)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
+          setNextURL(response.data._links.next.href)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getRecipeList()
+  }, [searchURL])
+
+  const handleNextClick = () => {
+    setSearchURL(nextURL)
+  }
 
 
   return (
@@ -116,23 +112,15 @@ q=
           }}
           >
             {region} recipes</Typography>
-            Page {page} / 8
           <div>
 
-
-            {/*             {next < recipeList.length && (
-              <Button onClick={handleLoadMoreRecipes}>Load more</Button>
-            )} */}
           </div>
           <div className="recipe-selection-container">
-
-
-            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
-
+          <Button onClick={handleNextClick}>Next Page</Button>
         </React.Fragment>
         :
         <ProgressDisplay />

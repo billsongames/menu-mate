@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useMediaQuery } from "@mui/material";
 
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
@@ -10,9 +9,7 @@ import axios from "axios";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
-import PaginationButtons from "./PaginationButtons";
 
-import { paginationData } from "../../api/paginationData";
 
 import "../RecipeChoiceCard/recipeChoiceCard.css";
 import "./recipeComponents.css";
@@ -23,43 +20,22 @@ const RecipesVegan = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const from = 0
-  const to = 96
-
-  const recipesPerLoad = 12
   const [resultCount, setResultCount] = useState()
 
-  const [page, setPage] = React.useState(1);
-  const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+  const [nextURL, setNextURL] = useState()
 
-  const handlePageChange = (event, value) => {
-    setPage(value)
-    setListStart(paginationData[value].listStart)
-    setListEnd(paginationData[value].listEnd)
-  }
+  const defaultSearchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&health=vegan`
 
-  const [recipeList, setRecipeList] = useState({})
+  const [searchURL, setSearchURL] = useState(defaultSearchURL)
 
-  const searchURL =
-    `https://api.edamam.com/search?
-q=
-&health=vegan
-&from=${from}
-&to=${to}
-&dishType=Main course
-&excluded=head
-&time=1%2B
-&app_id=${appID}
-&app_key=${appKey}`
-
+  const [recipeList, setRecipeList] = useState([])
   const [open, setOpen] = useState(false)
-
   const descriptionElementRef = useRef(null)
 
   const sx_title = {
     color: "black",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: "2em"
   }
 
   useEffect(() => {
@@ -72,13 +48,34 @@ q=
   }, [open])
 
   useEffect(() => {
-    setListStart(0)
-    setListEnd(12)
-    setPage(1)
     setRecipeList([])
+
     async function getRecipeList() {
       setRecipeList([])
       setResultCount(false)
+      setNextURL("")
+
+      axios
+        .get(defaultSearchURL)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
+          setNextURL(response.data._links.next.href)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getRecipeList()
+  }, [])
+
+  useEffect(() => {
+    setRecipeList([])
+
+    async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+      setNextURL("")
 
       axios
         .get(searchURL)
@@ -91,13 +88,11 @@ q=
         })
     }
     getRecipeList()
-  }, [])
+  }, [searchURL])
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
-
-
+  const handleNextClick = () => {
+    setSearchURL(nextURL)
+  }
 
   return (
     <section>
@@ -105,8 +100,7 @@ q=
         ?
         <React.Fragment>
           <Typography sx={{
-
-            "@media screen and (max-width:480px)": {
+            "@media screen and (max-width:768px)": {
               fontSize: "1.5em",
               fontWeight: "bold"
             },
@@ -114,17 +108,15 @@ q=
               fontSize: "2em",
               fontWeight: "bold"
             }
-          }}
-          >
+          }}>
             Vegan Recipes
           </Typography>
-          Page {page} / 8
           <div className="recipe-selection-container">
-            {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
+          <Button onClick={handleNextClick}>Next Page</Button>
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>
