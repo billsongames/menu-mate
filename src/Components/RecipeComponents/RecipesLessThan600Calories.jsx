@@ -11,9 +11,7 @@ import "./recipeComponents.css";
 
 import RecipeCard from "./RecipeCard";
 import ProgressDisplay from "./ProgressDisplay";
-import PaginationButtons from "./PaginationButtons";
 
-import { paginationData } from "../../api/paginationData";
 
 
 const RecipesLessThan600Calories = () => {
@@ -21,38 +19,16 @@ const RecipesLessThan600Calories = () => {
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
 
-  const from = 0
-  const to = 96
-
-  const recipesPerLoad = 12
   const [resultCount, setResultCount] = useState()
 
-  const [page, setPage] = React.useState(1);
-  const [listStart, setListStart] = useState(0)
-  const [listEnd, setListEnd] = useState(to / recipesPerLoad)
+  const [nextURL, setNextURL] = useState()
 
-  const handlePageChange = (event, value) => {
-    setPage(value)
-    setListStart(paginationData[value].listStart)
-    setListEnd(paginationData[value].listEnd)
-  }
+  const defaultSearchURL = `https://api.edamam.com/api/recipes/v2?type=public&time=1%2B&dishType=Main%20course&app_id=${appID}&app_key=${appKey}&&calories=600`
 
-  const [recipeList, setRecipeList] = useState({})
+  const [searchURL, setSearchURL] = useState(defaultSearchURL)
 
-  const searchURL = 
-`https://api.edamam.com/search?
-q=
-&calories=600
-&from=${from}
-&to=${to}
-&dishType=Main course
-&excluded=head
-&time=1%2B
-&app_id=${appID}
-&app_key=${appKey}`
-
+  const [recipeList, setRecipeList] = useState([])
   const [open, setOpen] = useState(false)
-
   const descriptionElementRef = useRef(null)
 
   const sx_title = {
@@ -72,11 +48,18 @@ q=
 
   useEffect(() => {
     setRecipeList([])
+
     async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+      setNextURL("")
+
       axios
-        .get(searchURL)
+        .get(defaultSearchURL)
         .then((response) => {
           setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
+          setNextURL(response.data._links.next.href)
         })
         .catch((error) => {
           console.log(error)
@@ -86,9 +69,29 @@ q=
   }, [])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
+    setRecipeList([])
 
+    async function getRecipeList() {
+      setRecipeList([])
+      setResultCount(false)
+      setNextURL("")
+
+      axios
+        .get(searchURL)
+        .then((response) => {
+          setRecipeList(response.data.hits)
+          setResultCount(response.data.count)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getRecipeList()
+  }, [searchURL])
+
+  const handleNextClick = () => {
+    setSearchURL(nextURL)
+  }
 
   return (
     <section>
@@ -107,13 +110,12 @@ q=
           }}>
             Less than 600 calories
           </Typography>
-          Page {page} / 8
           <div className="recipe-selection-container">
-          {recipeList.slice(listStart, listEnd).map((recipe, index) => (
+            {recipeList.map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
           </div>
-          <PaginationButtons count={to / recipesPerLoad} page={page} onPageChange={handlePageChange} />
+          <Button onClick={handleNextClick}>Next Page</Button>
         </React.Fragment>
         :
         <Box sx={{ margin: 'auto' }}>

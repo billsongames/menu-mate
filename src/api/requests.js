@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const recipeByIngredientSearch = (recipeSearchText) => {
+export const recipesByIngredientSearch = (recipeSearchText) => {
 
   const appID = process.env.REACT_APP_APPID
   const appKey = process.env.REACT_APP_APPKEY
